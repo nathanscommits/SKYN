@@ -8,15 +8,15 @@ app.set('view engine', 'ejs')
 //const router = require('./router')
 app.use(bodyParser.urlencoded({extended: true})) 
 app.use(bodyParser.json())
-  
+let bodyData
 app.post('/endpoint', (req, res) => {
-    console.log(req.body)
+    bodyData = req
 })
 app.get('/', function (req, res){
     res.send('home page!')
 })
 app.get('/endpoint', (req, res) => {
-    res.send('reply from the server')
+    res.send(bodyData)
 })
 
 
