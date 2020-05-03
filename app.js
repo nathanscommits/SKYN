@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: false}))
 //app.use(bodyParser.json())
 
 app.post('/endpoint', (req, res) => {
-    let bodyData = req
-    res.send(bodyData)
+    let bodyData = req.body
+    res.send(req)
 })
 app.get('/', function (req, res){
     res.send('home page!')
