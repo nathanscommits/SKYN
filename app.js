@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: false}))
 //app.use(bodyParser.json())
 
 app.post('/endpoint', (req, res) => {
-    let bodyData = req.body
-    res.send(req.body)
+    let bodyData = req.X-Secondlife-Owner-Name
+    res.send(req.X-Secondlife-Owner-Name)
     console.log(req);
 })
 app.get('/', function (req, res){
