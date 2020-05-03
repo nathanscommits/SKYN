@@ -47,8 +47,8 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                 voice: bodyData.voice,
                 temp: bodyData.temp,
                 features: bodyData.features
-            }}, function() {
-                res.send("Entry Update Success")
+            }}, function(err, data) {
+                res.send(JSON.stringify(data))
             })
         }
         else{
