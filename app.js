@@ -28,23 +28,30 @@ app.post('/endpoint', (req, res) => {
     //res.send(bodyData)
     console.log(req);
 
-    db.collection('userdata').findOneAndUpdate({UUID: req.query.UUID}, {$set: {
-        //UUID: req.query.UUID,
-        fitness: req.query.fitness,
-        coins: req.query.coins,
-        hair: req.query.hair,
-        fat: req.query.fat,
-        tan: req.query.tan,
-        voice: req.query.voice,
-        temp: req.query.temp,
-        features: req.query.features
-    }}, function() {
-        res.send("Success")
-    })
+    if(db.collection('userdata').findOne(UUID: req.query.UUID))
+    {
+        db.collection('userdata').findOneAndUpdate({UUID: req.query.UUID}, {$set: {
+            //UUID: req.query.UUID,
+            fitness: req.query.fitness,
+            coins: req.query.coins,
+            hair: req.query.hair,
+            fat: req.query.fat,
+            tan: req.query.tan,
+            voice: req.query.voice,
+            temp: req.query.temp,
+            features: req.query.features
+        }}, function() {
+            res.send("Success")
+        })
+    }
 
-    /*db.collection('userdata').insertOne(req.query, function(){
-        res.send(bodyData)
-    })*/
+    else {
+        db.collection('userdata').insertOne(req.query, function(){
+            res.send(bodyData)
+        })
+    }
+
+    
 })
 app.get('/', function (req, res){
     res.send('home page!')
