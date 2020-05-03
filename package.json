@@ -4,7 +4,6 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "app.js",
     "watch": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
