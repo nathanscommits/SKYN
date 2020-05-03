@@ -13,7 +13,9 @@ app.use(express.urlencoded({extended: false}))
 
 app.post('/endpoint', (req, res) => {
     let bodyData = req.query
-    res.send(bodyData)
+    let agentName = req.headers.x-secondlife-owner-name
+    let agentKey = req.headers.x-secondlife-owner-key
+    res.send(bodyData, agentName, agentKey)
     console.log(req);
 })
 app.get('/', function (req, res){
@@ -24,7 +26,7 @@ app.get('/endpoint', (req, res) => {
    // console.log(res);
 })
 
-
+//[21:03] Gayngel: At least with a POST to Google you can also do request.postData.getDataAsString()... There might be some command like that with heroku...
 
 app.use(express.json())
 app.use(express.static('public'))
