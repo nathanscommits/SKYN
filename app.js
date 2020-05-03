@@ -26,18 +26,20 @@ app.use(express.urlencoded({extended: false}))
 app.post('/endpoint', (req, res) => {
     let bodyData = req.query
     //res.send(bodyData)
-    console.log(req);
+    
 
     db.collection('userdata').findOne({UUID: req.query.UUID}, function(err, document)
     {
         if(err)
         {
+            console.log(err);
             db.collection('userdata').insertOne(req.query, function(){
                 res.send(bodyData)
             })
         }
         else
         {
+            console.log(document);
             db.collection('userdata').findOneAndUpdate({UUID: req.query.UUID}, {$set: {
                 //UUID: req.query.UUID,
                 fitness: req.query.fitness,
