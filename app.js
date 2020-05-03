@@ -2,19 +2,18 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 
+app.set('views','views')
+app.set('view engine', 'ejs')
+
 //const router = require('./router')
-
-
-
-app.use(bodyParser.urlencoded({extended: true}))
-  
+app.use(bodyParser.urlencoded({extended: true})) 
 app.use(bodyParser.json())
   
 app.post('/endpoint', (req, res) => {
     console.log(req.body.todo)
 })
 app.get('/', function (req, res){
-    res.send('home page')
+    res.render('home-guest')
 })
 //app.get('/endpoint', (req, res) => {
  //   res.send('reply from the server')
@@ -25,8 +24,8 @@ app.get('/', function (req, res){
 //app.use(express.json())
 
 //app.use(express.static('public'))
-//app.set('views','views')
-//app.set('view engine', 'ejs')
+
+
 
 //app.use('/', router)
 
