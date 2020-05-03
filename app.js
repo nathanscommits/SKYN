@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: false}))
 //app.use(bodyParser.json())
 
 app.post('/endpoint', (req, res) => {
-    let bodyData = req.body
+    let bodyData = req.headers
     res.send(bodyData)
     console.log(req);
 })
