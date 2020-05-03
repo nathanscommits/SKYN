@@ -36,7 +36,10 @@ app.get('/', function (req, res){
     res.send('home page!')
 })
 app.get('/endpoint', (req, res) => {
-    res.send(bodyData)
+    db.collection('userdata').find().toArray(function(err, data){
+        res.send(data)
+    })
+   
    // console.log(res);
 })
 //{useNewUrlParser: true, useUnifiedTopology: true}
