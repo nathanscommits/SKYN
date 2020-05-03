@@ -25,32 +25,32 @@ app.use(express.urlencoded({extended: false}))
 //app.use(bodyParser.json())
 
 app.post('/endpoint', (req, res) => {
-    let bodyData = req.query
+    let bodyData = JSON.parse(req.query)
     //res.send(bodyData)
    
     //update
-    db.collection('userdata').findOne({UUID: req.query.UUID}, function(err, user)
+    db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, user)
     {
             console.log(user);
         if(user)
         {
-            db.collection('userdata').findOneAndUpdate({UUID: req.query.UUID}, {$set: {
-                //UUID: req.query.UUID,
-                fitness: req.query.fitness,
-                coins: req.query.coins,
-                hair: req.query.hair,
-                fat: req.query.fat,
-                tan: req.query.tan,
-                voice: req.query.voice,
-                temp: req.query.temp,
-                features: req.query.features
+            db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
+                //UUID: bodyData.UUID,
+                fitness: bodyData.fitness,
+                coins: bodyData.coins,
+                hair: bodyData.hair,
+                fat: bodyData.fat,
+                tan: bodyData.tan,
+                voice: bodyData.voice,
+                temp: bodyData.temp,
+                features: bodyData.features
             }}, function() {
                 res.send("Entry Update Success")
             })
         }
         else{
             //new entry
-            db.collection('userdata').insertOne(req.query, function(){
+            db.collection('userdata').insertOne(bodyData, function(){
                 res.send("New user added")
             })
         }
@@ -62,7 +62,7 @@ app.get('/', function (req, res){
 })
 app.get('/endpoint', (req, res) => {
     db.collection('userdata').find().toArray(function(err, data){
-        res.send(data)
+        res.send(JSON.stringify(data))
     })
    
    // console.log(res);
