@@ -13,11 +13,7 @@ app.use(express.urlencoded({extended: false}))
 
 app.post('/endpoint', (req, res) => {
     let bodyData = req.query
-    let headersData = req.headers
-    let agentName = headersData.x-secondlife-owner-name
-    let agentKey = headersData.x-secondlife-owner-key
-    let result = bodyData + agentName + agentKey
-    res.send(result)
+    res.send(bodyData)
     console.log(req);
 })
 app.get('/', function (req, res){
