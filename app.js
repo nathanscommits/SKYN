@@ -12,16 +12,16 @@ app.use(express.urlencoded({extended: false}))
 //app.use(bodyParser.json())
 
 app.post('/endpoint', (req, res) => {
-    let bodyData = req.X-Secondlife-Owner-Name
-    res.send(req.X-Secondlife-Owner-Name)
+    let bodyData = req('X-Secondlife-Owner-Name')
+    res.send(bodyData)
     console.log(req);
 })
 app.get('/', function (req, res){
     res.send('home page!')
 })
 app.get('/endpoint', (req, res) => {
-    console.log(res);
     res.send(bodyData)
+    console.log(res);
 })
 
 
