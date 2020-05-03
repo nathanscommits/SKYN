@@ -25,6 +25,7 @@ app.use(express.urlencoded({extended: false}))
 //app.use(bodyParser.json())
 
 app.post('/endpoint', (req, res) => {
+    console.log(req);
     let bodyData = req.query
     //res.send(bodyData)
    
