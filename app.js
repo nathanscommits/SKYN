@@ -1,6 +1,7 @@
 const express = require('express')
 //const bodyParser = require('body-parser')'
 const mongodb = require('mongodb')
+const validator = require('validator')
 const app = express()
 let db
 let connectionString = 'mongodb+srv://sharky:L293nShoTQPODgLi@cluster0-xivcd.gcp.mongodb.net/SKYN_HUD?retryWrites=true&w=majority'
@@ -26,20 +27,13 @@ app.use(express.urlencoded({extended: false}))
 app.post('/endpoint', (req, res) => {
     let bodyData = req.query
     //res.send(bodyData)
-    
-
-    db.collection('userdata').findOne({UUID: req.query.UUID}, function(err, document)
+   
+    //update
+    db.collection('userdata').findOne({UUID: req.query.UUID}, function(err, user)
     {
-        if(err)
+            console.log(user);
+        if(user)
         {
-            console.log(err);
-            db.collection('userdata').insertOne(req.query, function(){
-                res.send(bodyData)
-            })
-        }
-        else
-        {
-            console.log(document);
             db.collection('userdata').findOneAndUpdate({UUID: req.query.UUID}, {$set: {
                 //UUID: req.query.UUID,
                 fitness: req.query.fitness,
@@ -53,9 +47,16 @@ app.post('/endpoint', (req, res) => {
             }}, function() {
                 res.send("Success")
             })
-        } 
+        }
+        else{
+            //new entry
+            console.log(err);
+            db.collection('userdata').insertOne(req.query, function(){
+                res.send(bodyData)
+            })
+        }
     })
-
+  
   
         
 
