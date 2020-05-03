@@ -20,12 +20,11 @@ app.set('view engine', 'ejs')
 
 //const router = require('./router')
 app.use(express.urlencoded({extended: true}))
-
-//app.use(bodyParser.json())
+app.use(express.json())
 
 app.post('/endpoint', (req, res) => {
-    console.log(req);
-    let bodyData = req.query
+    console.log(req.body);
+    let bodyData = req.body
     //res.send(bodyData)
    
     //update
@@ -70,7 +69,7 @@ app.get('/endpoint', (req, res) => {
 //{useNewUrlParser: true, useUnifiedTopology: true}
 //[21:03] Gayngel: At least with a POST to Google you can also do request.postData.getDataAsString()... There might be some command like that with heroku...
 
-app.use(express.json())
+
 app.use(express.static('public'))
 
 
