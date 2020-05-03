@@ -19,10 +19,13 @@ app.set('views','views')
 app.set('view engine', 'ejs')
 
 //const router = require('./router')
+
+//json parsers
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-app.post('/endpoint', (req, res) => {
+//recieve POST requests
+app.post('/jShf8Sh37dSb3', (req, res) => {
     console.log(req.body);
     let bodyData = req.body
     //res.send(bodyData)
@@ -35,6 +38,7 @@ app.post('/endpoint', (req, res) => {
         {
             db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
                 //UUID: bodyData.UUID,
+                name: bodyData.name,
                 fitness: bodyData.fitness,
                 coins: bodyData.coins,
                 hair: bodyData.hair,
@@ -59,7 +63,7 @@ app.post('/endpoint', (req, res) => {
 app.get('/', function (req, res){
     res.send('home page!')
 })
-app.get('/endpoint', (req, res) => {
+app.get('/jShf8Sh37dSb3', (req, res) => {
     db.collection('userdata').find().toArray(function(err, data){
         res.send(JSON.stringify(data))
     })
