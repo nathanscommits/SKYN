@@ -4,6 +4,8 @@ const app = express()
 
 //const router = require('./router')
 
+
+
 app.use(bodyParser.urlencoded({extended: true}))
   
 app.use(bodyParser.json())
@@ -11,14 +13,13 @@ app.use(bodyParser.json())
 app.post('/endpoint', (req, res) => {
     console.log(req.body.todo)
 })
-
-app.get('/endpoint', (req, res) => {
-    res.send('reply from the server')
+app.get('/', function (req, res){
+    res.send('home page')
 })
+//app.get('/endpoint', (req, res) => {
+ //   res.send('reply from the server')
+//})
 
-app.get('/', (req, res) => {
-    res.send('homepage')
-})
 
 //app.use(express.urlencoded({extended: false}))
 //app.use(express.json())
@@ -33,3 +34,5 @@ let port = process.env.PORT
 if(port == null || port == '') {
   port = 3000
 }
+
+app.listen(port)
