@@ -1,28 +1,31 @@
 const express = require('express')
-const bodyParser = require('body-parser')
+//const bodyParser = require('body-parser')
 const app = express()
 
 app.set('views','views')
 app.set('view engine', 'ejs')
 
 //const router = require('./router')
-app.use(bodyParser.urlencoded({extended: true})) 
-app.use(bodyParser.json())
-let bodyData
+//app.use(bodyParser.urlencoded({extended: true})) 
+app.use(express.urlencoded({extended: false}))
+
+//app.use(bodyParser.json())
+
 app.post('/endpoint', (req, res) => {
-    bodyData = req.body
+    let bodyData = req.body
+    res.send(bodyData)
 })
 app.get('/', function (req, res){
     res.send('home page!')
 })
 app.get('/endpoint', (req, res) => {
     res.send(bodyData)
+    console.log(JSON.stringify(bodyData, null, 4));
 })
 
 
-//app.use(express.urlencoded({extended: false}))
-app.use(express.json())
 
+app.use(express.json())
 app.use(express.static('public'))
 
 
