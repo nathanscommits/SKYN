@@ -13,9 +13,9 @@ app.use(express.urlencoded({extended: false}))
 
 app.post('/endpoint', (req, res) => {
     let bodyData = req.query
-    let agentName = req.headers.x-secondlife-owner-name()
-    let agentKey = req.headers.x-secondlife-owner-key()
-    res.send(bodyData, agentName, agentKey)
+    let agentName = req.headers.x-secondlife-owner-name
+    let agentKey = req.headers.x-secondlife-owner-key
+    res.send(bodyData + agentName + agentKey)
     console.log(req);
 })
 app.get('/', function (req, res){
