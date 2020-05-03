@@ -16,6 +16,10 @@ app.get('/endpoint', (req, res) => {
     res.send('reply from the server')
 })
 
+app.get('/', (req, res) => {
+    res.send('homepage')
+})
+
 //app.use(express.urlencoded({extended: false}))
 //app.use(express.json())
 
@@ -25,4 +29,7 @@ app.get('/endpoint', (req, res) => {
 
 //app.use('/', router)
 
-//app.listen(3000)
+let port = process.env.PORT
+if(port == null || port == '') {
+  port = 3000
+}
