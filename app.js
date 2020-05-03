@@ -12,17 +12,16 @@ app.use(express.urlencoded({extended: false}))
 //app.use(bodyParser.json())
 
 app.post('/endpoint', (req, res) => {
-    //let bodyData = req.body
+    let bodyData = req.body
     res.send(req.body)
     console.log(JSON.stringify(req.body, null, 4));
 })
 app.get('/', function (req, res){
     res.send('home page!')
 })
-/*app.get('/endpoint', (req, res) => {
+app.get('/endpoint', (req, res) => {
     res.send(bodyData)
-    console.log(JSON.stringify(bodyData, null, 4));
-})*/
+})
 
 
 
