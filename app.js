@@ -19,8 +19,7 @@ app.set('views','views')
 app.set('view engine', 'ejs')
 
 //const router = require('./router')
-//app.use(bodyParser.urlencoded({extended: true})) 
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: true}))
 
 //app.use(bodyParser.json())
 
