@@ -45,22 +45,17 @@ app.post('/endpoint', (req, res) => {
                 temp: req.query.temp,
                 features: req.query.features
             }}, function() {
-                res.send("Success")
+                res.send("Entry Update Success")
             })
         }
         else{
             //new entry
-            console.log(err);
             db.collection('userdata').insertOne(req.query, function(){
-                res.send(bodyData)
+                res.send("New user added")
             })
         }
     })
-  
-  
-        
-
-    
+     
 })
 app.get('/', function (req, res){
     res.send('home page!')
