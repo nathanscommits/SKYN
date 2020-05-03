@@ -29,7 +29,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
     console.log(req.body);
     let bodyData = req.body
     //res.send(bodyData)
-   if(bodyData.update==TRUE)
+   if(bodyData.update=="TRUE")
    {
         db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
             res.send(JSON.stringify(data))
