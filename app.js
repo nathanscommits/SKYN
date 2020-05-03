@@ -29,35 +29,42 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
     console.log(req.body);
     let bodyData = req.body
     //res.send(bodyData)
-   
+   if(bodyData.update==TRUE)
+   {
+        db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
+            res.send(JSON.stringify(data))
+        })
+   }
     //update
-    db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, user)
-    {
-            console.log(user);
-        if(user)
+    else{
+        db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, user)
         {
-            db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
-                //UUID: bodyData.UUID,
-                name: bodyData.name,
-                fitness: bodyData.fitness,
-                coins: bodyData.coins,
-                hair: bodyData.hair,
-                fat: bodyData.fat,
-                tan: bodyData.tan,
-                voice: bodyData.voice,
-                temp: bodyData.temp,
-                features: bodyData.features
-            }}, function(err, data) {
-                res.send(JSON.stringify(data))
-            })
-        }
-        else{
-            //new entry
-            db.collection('userdata').insertOne(bodyData, function(){
-                res.send("New user added")
-            })
-        }
-    })
+                console.log(user);
+            if(user)
+            {
+                db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
+                    //UUID: bodyData.UUID,
+                    name: bodyData.name,
+                    fitness: bodyData.fitness,
+                    coins: bodyData.coins,
+                    hair: bodyData.hair,
+                    fat: bodyData.fat,
+                    tan: bodyData.tan,
+                    voice: bodyData.voice,
+                    temp: bodyData.temp,
+                    features: bodyData.features
+                }}, function(err, data) {
+                    res.send("New update made")
+                })
+            }
+            else{
+                //new entry
+                db.collection('userdata').insertOne(bodyData, function(){
+                    res.send("New user added")
+                })
+            }
+        })
+    }
      
 })
 app.get('/', function (req, res){
