@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 let bodyData
 app.post('/endpoint', (req, res) => {
-    bodyData = req
+    bodyData = req.body
 })
 app.get('/', function (req, res){
     res.send('home page!')
