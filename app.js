@@ -9,9 +9,9 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true})) 
 app.use(bodyParser.json())
   
-app.post('/endpoint', (req, res) => {
-    console.log(req.body.todo)
-})
+//app.post('/endpoint', (req, res) => {
+//    console.log(req.body.todo)
+//})
 app.get('/', function (req, res){
     res.render('home-guest')
 })
@@ -23,7 +23,7 @@ app.get('/', function (req, res){
 //app.use(express.urlencoded({extended: false}))
 //app.use(express.json())
 
-//app.use(express.static('public'))
+app.use(express.static('public'))
 
 
 
