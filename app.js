@@ -21,7 +21,7 @@ app.get('/', function (req, res){
 })
 app.get('/endpoint', (req, res) => {
     res.send(bodyData)
-    console.log(res);
+   // console.log(res);
 })
 
 
