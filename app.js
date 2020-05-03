@@ -28,7 +28,7 @@ app.post('/endpoint', (req, res) => {
     //res.send(bodyData)
     console.log(req);
 
-    db.collection('items').insertOne({text: req.query.Name}, function(){
+    db.collection('userdata').insertOne(req.query, function(){
         res.send(bodyData)
     })
 })
