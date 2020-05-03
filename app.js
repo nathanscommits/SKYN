@@ -24,6 +24,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+let currentVersion = "0.5.1"
 //recieve POST requests
 app.post('/jShf8Sh37dSb3', (req, res) => {
     console.log(req.body);
@@ -57,7 +58,15 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     temp: bodyData.temp,
                     features: bodyData.features
                 }}, function(err, data) {
-                    res.send("New update made")
+                    
+                    if(user.version!=currentVersion)
+                    {
+                        res.send("New update available")
+                    }
+                    else
+                    {
+                        res.send("New update made")
+                    }
                 })
             }
             else{
