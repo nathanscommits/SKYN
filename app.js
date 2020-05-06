@@ -1,7 +1,5 @@
 const express = require('express')
-//const bodyParser = require('body-parser')'
 const mongodb = require('mongodb')
-const validator = require('validator')
 const app = express()
 let db
 let connectionString = 'mongodb+srv://sharky:L293nShoTQPODgLi@cluster0-xivcd.gcp.mongodb.net/SKYN_HUD?retryWrites=true&w=majority'
@@ -80,7 +78,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
      
 })
 app.get('/', function (req, res){
-    res.send('home page!')
+    res.render('home-guest')
 })
 app.get('/jShf8Sh37dSb3', (req, res) => {
     db.collection('userdata').find().toArray(function(err, data){
