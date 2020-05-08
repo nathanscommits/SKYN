@@ -80,6 +80,9 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
 app.get('/', function (req, res){
     res.render('home-guest')
 })
+app.get('/HUD_guide', function (req, res){
+    res.render('HUD_guide')
+})
 app.get('/jShf8Sh37dSb3', (req, res) => {
     db.collection('userdata').find().toArray(function(err, data){
         res.send(JSON.stringify(data))
