@@ -75,6 +75,8 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                         let userdata = db.collection('userdata')
                         userdata.sort((a,b) => a - b)
                         console.log(userdata)
+
+                        console.log(db.collection('userdata'))
                     }
                 })
             }
