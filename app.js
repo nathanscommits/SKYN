@@ -72,6 +72,9 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     else
                     {
                         res.send("New update made")
+                        let userdata = db.collection('userdata')
+                        userdata.sort((a,b) => a - b)
+                        console.log(userdata)
                     }
                 })
             }
