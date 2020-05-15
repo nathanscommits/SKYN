@@ -64,19 +64,25 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     sleep: bodyData.sleep,
                     health: bodyData.health
                 }}, function(err, data) {
-                    
+
+                    let userdata = db.collection('userdata')
                     if(user.version!=currentVersion)
                     {
                         res.send("New update available")
-
-                        let userdata = db.collection('userdata')
-                        userdata.sort((a,b) => a - b)
-                        console.log(userdata)
+                        let sortable = []
+                        for (let score in userdata)
+                        {
+                            sortable.push([score, userdata[score]])
+                        }
+                        sortable.sort(function(a,b) {
+                            return a[1] - b[1]
+                        })
+                        //userdata.sort((a,b) => a - b)
+                        console.log(sortable)
                     }
                     else
                     {
                         res.send("New update made")
-                        let userdata = db.collection('userdata')
                         userdata.sort((a,b) => a - b)
                         console.log(userdata)
                     }
