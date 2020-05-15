@@ -65,26 +65,20 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     health: bodyData.health
                 }}, function(err, data) {
 
-                    let userdata = db.collection('userdata')
+                    let highscores = { coins: 1 }
+                    db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
+                        if(err) throw err;
+                        console.log(result)
+                    })
+
+
                     if(user.version!=currentVersion)
                     {
                         res.send("New update available")
-                        let sortable = []
-                        for (let score in userdata)
-                        {
-                            sortable.push([score, userdata[score]])
-                        }
-                        sortable.sort(function(a,b) {
-                            return a[1] - b[1]
-                        })
-                        //userdata.sort((a,b) => a - b)
-                        console.log(sortable)
                     }
                     else
                     {
                         res.send("New update made")
-                        userdata.sort((a,b) => a - b)
-                        console.log(userdata)
                     }
                 })
             }
