@@ -22,7 +22,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-let currentVersion = "0.5.1"
+let currentVersion = "0.7.4"
 //recieve POST requests
 app.post('/jShf8Sh37dSb3', (req, res) => {
     console.log(req.body);
@@ -54,7 +54,15 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     tan: bodyData.tan,
                     voice: bodyData.voice,
                     temp: bodyData.temp,
-                    features: bodyData.features
+                    features: bodyData.features,
+                    timeAlive: bodyData.timeAlive,
+                    cItems: bodyData.cItems,
+                    cDumbbells: bodyData.cDumbbells,
+                    hunger: bodyData.hunger,
+                    thirst: bodyData.thirst,
+                    calories: bodyData.calories,
+                    sleep: bodyData.sleep,
+                    health: bodyData.health
                 }}, function(err, data) {
                     
                     if(user.version!=currentVersion)
