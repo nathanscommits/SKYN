@@ -46,6 +46,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
             {
                 db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
                     //UUID: bodyData.UUID,
+                    version: bodyData.version,
                     name: bodyData.name,
                     fitness: bodyData.fitness,
                     coins: bodyData.coins,
