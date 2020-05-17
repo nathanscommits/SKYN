@@ -70,15 +70,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
                        if(err) throw err;
 
-                       function searchStringInArray (str, strArray) {
-                            for (let j=0; j<strArray.length; j++) {
-                                if (strArray[j].match(str)) return j;
-                            }
-                            return -1;
-                        }
-
-                       console.log(searchStringInArray('name',result))
-                    })
+                       console.log(result.filter(el => el === 'name'))
 
                     if(user.version!=currentVersion)
                     {
