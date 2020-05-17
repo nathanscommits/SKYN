@@ -71,7 +71,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                        if(err) throw err;
 
                        function searchStringInArray (str, strArray) {
-                            for (var j=0; j<strArray.length; j++) {
+                            for (let j=0; j<strArray.length; j++) {
                                 if (strArray[j].match(str)) return j;
                             }
                             return -1;
