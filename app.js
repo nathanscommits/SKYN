@@ -102,7 +102,7 @@ app.get('/HUD_guide', function (req, res){
 })
 app.get('/leaderboard', function (req, res){
    // res.render('HUD_guide')
-   res.print('Leaderboard')
+   res.render('leaderboard')
    let highscores = { coins: -1 }
    db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
     if(err) throw err;
