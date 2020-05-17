@@ -11,8 +11,8 @@
         <h1 class="display-4 text-center py-1">Leaderboard</h1>
       <script type="text/javascript">
         let rank = <%- JSON.stringify(data) %>;
-        let rank1 = rank.substring(rank.indexOf("rank", 5), rank.indexOf("rank", rank.indexOf("rank", 5)));
-        document.write(rank1);
+        let rank1 = rank.substring(rank.indexOf("rank: 0"), rank.indexOf("rank: 1"));
+        document.write(rank);
       </script>
         <img src="logos.svg" alt="SKYN logo" style="display: block;margin: auto;">
     </div>

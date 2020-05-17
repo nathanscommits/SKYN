@@ -106,16 +106,18 @@ app.get('/leaderboard', function (req, res){
     let highscores = { coins: -1 }
     let leaderboard = {}
     topten = ''
-    db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
+    db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
         if(err) throw err;
         leaderboard = Object.assign({}, result)
         for (let i in leaderboard)
         {  
-            topten = topten.concat('rank: ', i+1, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins);  
+            topten = topten.concat('rank: ', i,' ', leaderboard[i].name, ' ', leaderboard[i].coins, '<br>');  
         }
         console.log(topten);
         res.render('leaderboard', {data: topten})
     })
+
+    //console.log(JSON.stringify(leaderboard));
     
 })
 
