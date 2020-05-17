@@ -104,7 +104,7 @@ let topten
 app.post('/leaderboard', function (req, res){
     let highscores = { coins: -1 }
     let leaderboard = {}
-    
+    topten = ''
     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
         if(err) throw err;
         leaderboard = Object.assign({}, result)
