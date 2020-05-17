@@ -116,7 +116,7 @@ app.get('/leaderboard', function (req, res){
         }
         console.log(topten);
     })
-    res.render('leaderboard', {name: leaderboard[0].name, coins: leaderboard[0].coins})
+    res.render('leaderboard', {data: leaderboard})
 })
 
 app.get('/jShf8Sh37dSb3', (req, res) => {
