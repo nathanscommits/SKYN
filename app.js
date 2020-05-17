@@ -70,7 +70,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
                        if(err) throw err;
 
-                       let leaderboard =  _.filter(
+                       let leaderboard =  result.filter(
                             result,
                             function( s ) { return s.indexOf( 'name' ) !== -1; }
                         );
