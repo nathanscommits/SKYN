@@ -100,7 +100,7 @@ app.get('/', function (req, res){
 app.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
 })
-app.get('/leaderboard', function (req, res){
+app.post('/leaderboard', function (req, res){
     let highscores = { coins: -1 }
     let leaderboard = {}
     let topten
