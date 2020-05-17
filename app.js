@@ -66,12 +66,11 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     health: bodyData.health
                 }}, function(err, data) {
 
-                   // let highscores = { coins: 1 }
-                    //db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
-                   //     if(err) throw err;
-                    //    console.log(result)
-                    //})
-
+                    let highscores = { coins: -1 }
+                    db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
+                       if(err) throw err;
+                       console.log(result.name + result.coins)
+                    })
 
                     if(user.version!=currentVersion)
                     {
