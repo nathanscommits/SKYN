@@ -111,9 +111,10 @@ app.get('/leaderboard', function (req, res){
         leaderboard = Object.assign({}, result)
         for (let i in leaderboard)
         {  
-            topten = topten.concat('rank: ', i,' ', leaderboard[i].name, ' ', leaderboard[i].coins, '<br>');  
+            let rank = parseInt(i)+1;
+            topten = topten.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].coins), '</th></tr>');  
         }
-        console.log(topten);
+        //console.log(topten);
         res.render('leaderboard', {data: topten})
     })
 
