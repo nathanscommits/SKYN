@@ -70,7 +70,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
                        if(err) throw err;
                        let leaderboard = Object.assign({}, result)
-                       console.log(leaderboard[0].name)
+                       console.log('Name: ', leaderboard[0].name, ' Coins: ', leaderboard[0].coins)
                        console.log('new ranking')
                     })
 
