@@ -66,13 +66,13 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     health: bodyData.health
                 }}, function(err, data) {
 
-                    let highscores = { coins: -1 }
+                    /*let highscores = { coins: -1 }
                     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
                        if(err) throw err;
                        let leaderboard = Object.assign({}, result)
                        console.log('Name: ', leaderboard[0].name, ' Coins: ', leaderboard[0].coins)
                        console.log('new ranking')
-                    })
+                    }) */
 
                     if(user.version!=currentVersion)
                     {
@@ -99,6 +99,16 @@ app.get('/', function (req, res){
 })
 app.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
+})
+app.get('/leaderboard', function (req, res){
+   // res.render('HUD_guide')
+   let highscores = { coins: -1 }
+   db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
+    if(err) throw err;
+    let leaderboard = Object.assign({}, result)
+    for (let i; i<10; i++)
+        console.log('Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins)
+ })
 })
 app.get('/jShf8Sh37dSb3', (req, res) => {
     db.collection('userdata').find().toArray(function(err, data){
