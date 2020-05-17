@@ -108,9 +108,11 @@ app.get('/leaderboard', function (req, res){
         if(err) throw err;
         leaderboard = Object.assign({}, result)
         for (let i; i<10; i++)
-            topten += {rank: i,  name:  leaderboard[i].name,  coins:  leaderboard[i].coins}
+        {  //topten += {rank: i,  name:  leaderboard[i].name,  coins:  leaderboard[i].coins}
+            console.log('rank: ', i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins)
+            topten += 'rank: ', i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins
+        }
     })
-    console.log(topten)
     res.render('leaderboard', topten)
 })
 app.get('/jShf8Sh37dSb3', (req, res) => {
