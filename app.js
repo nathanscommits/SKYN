@@ -110,6 +110,7 @@ app.get('/leaderboard', function (req, res){
         for (let i; i<10; i++)
             topten += {rank: i,  name:  leaderboard[i].name,  coins:  leaderboard[i].coins}
     })
+    console.log(topten)
     res.render('leaderboard', topten)
 })
 app.get('/jShf8Sh37dSb3', (req, res) => {
