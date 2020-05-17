@@ -101,7 +101,8 @@ app.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
 })
 let topten
-app.post('/leaderboard', function (req, res){
+
+app.get('/leaderboard', function (req, res){
     let highscores = { coins: -1 }
     let leaderboard = {}
     topten = ''
@@ -114,9 +115,6 @@ app.post('/leaderboard', function (req, res){
             topten += 'rank: ', i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins
         }
     })
-    //res.render('leaderboard', topten)
-})
-app.get('/leaderboard', function (req, res){
     res.render('leaderboard', topten)
 })
 
