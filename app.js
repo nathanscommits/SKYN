@@ -101,15 +101,15 @@ app.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
 })
 app.get('/leaderboard', function (req, res){
-   // res.render('HUD_guide')
-   res.render('leaderboard')
-   let highscores = { coins: -1 }
-   db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
-    if(err) throw err;
-    let leaderboard = Object.assign({}, result)
-    for (let i; i<10; i++)
-        res.log(i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins)
- })
+    let highscores = { coins: -1 }
+    let leaderboard = {}
+    db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
+        if(err) throw err;
+        leaderboard = Object.assign({}, result)
+        //for (let i; i<10; i++)
+            //res.log(i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins)
+    })
+    res.render('leaderboard', leaderboard)
 })
 app.get('/jShf8Sh37dSb3', (req, res) => {
     db.collection('userdata').find().toArray(function(err, data){
