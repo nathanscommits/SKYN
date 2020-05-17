@@ -70,8 +70,8 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
                        if(err) throw err;
 
-                       Object.assign(result)
-                       console.log(Object.name)
+                       Object.assign(result, result)
+                       console.log(result.name)
                     })
 
                     if(user.version!=currentVersion)
