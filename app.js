@@ -69,9 +69,8 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     let highscores = { coins: -1 }
                     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
                        if(err) throw err;
-                       let leaderboard = {}
-                       leaderboard = Object.assign(leaderboard, result)
-                       console.log(leaderboard.name)
+                       let leaderboard = Object.assign({}, result)
+                       console.log(leaderboard)
                     })
 
                     if(user.version!=currentVersion)
