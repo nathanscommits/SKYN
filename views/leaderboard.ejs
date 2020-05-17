@@ -9,15 +9,19 @@
 <body>
     <style>
         th{
-            border: #aaaaaa 1px solid;
             padding: 5px;
+        }
+        tr{
+            border: #aaaaaa 1px;
+            border-style: solid hidden;
+            
         }
     </style>
     <div class="container">
         <h1 class="display-4 text-center py-1">Leaderboard</h1>
+        <h4 class="display-6 text-center py-1">SKYN COINS</h4>
       <script type="text/javascript">
         let rank = <%- JSON.stringify(data) %>;
-        let rank1 = rank.substring(rank.indexOf("rank: 0"), rank.indexOf("rank: 1"));
         document.write('<table style="width:100%;">', rank ,'</table>');
       </script>
         <img src="logos.svg" alt="SKYN logo" style="display: block;margin: auto;">
