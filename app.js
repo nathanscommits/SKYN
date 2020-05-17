@@ -109,10 +109,16 @@ app.get('/leaderboard', function (req, res){
     db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
         if(err) throw err;
         leaderboard = Object.assign({}, result)
+        let rank = 0;
         for (let i in leaderboard)
         {  
-            let rank = parseInt(i)+1;
-            topten = topten.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].coins), '</th></tr>');  
+            if(rank>9) break; 
+             if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+            {
+                rank ++;
+                topten = topten.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].coins), '</th></tr>');  
+            }
+            
         }
         //console.log(topten);
         res.render('leaderboard', {data: topten})
