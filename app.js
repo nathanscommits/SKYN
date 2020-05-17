@@ -111,9 +111,11 @@ app.get('/leaderboard', function (req, res){
         leaderboard = Object.assign({}, result)
         for (let i in leaderboard)
         {  //topten += {rank: i,  name:  leaderboard[i].name,  coins:  leaderboard[i].coins}
-            console.log('rank: ', i+1, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins);
+            //console.log('rank: ', i+1, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins);
             topten += 'rank: ', i+1, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins;
+           
         }
+        console.log(topten);
     })
     res.render('leaderboard', topten)
 })
