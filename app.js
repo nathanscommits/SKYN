@@ -100,10 +100,11 @@ app.get('/', function (req, res){
 app.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
 })
+let topten
 app.post('/leaderboard', function (req, res){
     let highscores = { coins: -1 }
     let leaderboard = {}
-    let topten
+    
     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
         if(err) throw err;
         leaderboard = Object.assign({}, result)
