@@ -107,7 +107,7 @@ app.get('/leaderboard', function (req, res){
     if(err) throw err;
     let leaderboard = Object.assign({}, result)
     for (let i; i<10; i++)
-        console.log('Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins)
+        console.log(i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins)
  })
 })
 app.get('/jShf8Sh37dSb3', (req, res) => {
