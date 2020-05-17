@@ -113,8 +113,12 @@ app.post('/leaderboard', function (req, res){
             topten += 'rank: ', i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins
         }
     })
+    //res.render('leaderboard', topten)
+})
+app.get('/leaderboard', function (req, res){
     res.render('leaderboard', topten)
 })
+
 app.get('/jShf8Sh37dSb3', (req, res) => {
     db.collection('userdata').find().toArray(function(err, data){
         res.send(JSON.stringify(data))
