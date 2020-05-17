@@ -103,13 +103,13 @@ app.get('/HUD_guide', function (req, res){
 let topten
 
 app.get('/leaderboard', function (req, res){
-    console.log(req);
     let highscores = { coins: -1 }
     let leaderboard = {}
     topten = ''
     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
         if(err) throw err;
         leaderboard = Object.assign({}, result)
+        console.log(' Name: ', leaderboard[0].name, ' Coins: ', leaderboard[0].coins);
         for (let i; i<10; i++)
         {  //topten += {rank: i,  name:  leaderboard[i].name,  coins:  leaderboard[i].coins}
             console.log('rank: ', i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins);
