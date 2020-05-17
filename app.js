@@ -69,7 +69,12 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     let highscores = { coins: -1 }
                     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
                        if(err) throw err;
-                       console.log(result.find(el => el = 'name'))
+
+                       let leaderboard =  _.filter(
+                            result,
+                            function( s ) { return s.indexOf( 'name' ) !== -1; }
+                        );
+                       console.log(leaderboard)
                     })
 
                     if(user.version!=currentVersion)
