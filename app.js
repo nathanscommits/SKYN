@@ -69,7 +69,15 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     let highscores = { coins: -1 }
                     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
                        if(err) throw err;
-                       console.log(result.indexOf('name'), result.indexOf('coins'))
+
+                       function searchStringInArray (str, strArray) {
+                            for (var j=0; j<strArray.length; j++) {
+                                if (strArray[j].match(str)) return j;
+                            }
+                            return -1;
+                        }
+
+                       console.log(searchStringInArray('name',result))
                     })
 
                     if(user.version!=currentVersion)
