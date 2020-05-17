@@ -103,6 +103,7 @@ app.get('/HUD_guide', function (req, res){
 let topten
 
 app.get('/leaderboard', function (req, res){
+    console.log(req);
     let highscores = { coins: -1 }
     let leaderboard = {}
     topten = ''
