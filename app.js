@@ -103,13 +103,14 @@ app.get('/HUD_guide', function (req, res){
 app.get('/leaderboard', function (req, res){
     let highscores = { coins: -1 }
     let leaderboard = {}
+    let topten
     db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
         if(err) throw err;
         leaderboard = Object.assign({}, result)
-        //for (let i; i<10; i++)
-            //res.log(i, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins)
+        for (let i; i<10; i++)
+            topten += {Rank: i,  Name:  leaderboard[i].name,  Coins:  leaderboard[i].coins}
     })
-    res.render('leaderboard', leaderboard)
+    res.render('leaderboard', topten)
 })
 app.get('/jShf8Sh37dSb3', (req, res) => {
     db.collection('userdata').find().toArray(function(err, data){
