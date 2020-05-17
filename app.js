@@ -115,8 +115,9 @@ app.get('/leaderboard', function (req, res){
             topten = topten.concat('rank: ', i+1, ' Name: ', leaderboard[i].name, ' Coins: ', leaderboard[i].coins);  
         }
         console.log(topten);
+        res.render('leaderboard', {data: topten})
     })
-    res.render('leaderboard', {data: leaderboard})
+    
 })
 
 app.get('/jShf8Sh37dSb3', (req, res) => {
