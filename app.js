@@ -22,7 +22,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-let currentVersion = "0.7.4"
+let currentVersion = "0.8.6"
 //recieve POST requests
 app.post('/jShf8Sh37dSb3', (req, res) => {
     console.log(req.body);
