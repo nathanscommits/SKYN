@@ -97,6 +97,9 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
 app.get('/', function (req, res){
     res.render('home-guest')
 })
+app.get('/tutorial', function (req, res){
+    res.render('tutorial')
+})
 app.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
 })
