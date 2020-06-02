@@ -44,45 +44,71 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                 console.log(user);
             if(user)
             {
-                db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
-                    //UUID: bodyData.UUID,
-                    version: bodyData.version,
-                    name: bodyData.name,
-                    fitness: bodyData.fitness,
-                    coins: bodyData.coins,
-                    hair: bodyData.hair,
-                    fat: bodyData.fat,
-                    tan: bodyData.tan,
-                    voice: bodyData.voice,
-                    temp: bodyData.temp,
-                    features: bodyData.features,
-                    timeAlive: bodyData.timeAlive,
-                    cItems: bodyData.cItems,
-                    cDumbbells: bodyData.cDumbbells,
-                    hunger: bodyData.hunger,
-                    thirst: bodyData.thirst,
-                    calories: bodyData.calories,
-                    sleep: bodyData.sleep,
-                    health: bodyData.health
-                }}, function(err, data) {
+                if(bodyData.fitness != "null")
+                    db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
+                        //UUID: bodyData.UUID,
+                        version: bodyData.version,
+                        name: bodyData.name,
+                        coins: bodyData.coins
+                    }}, function(err, data) {
 
-                    /*let highscores = { coins: -1 }
-                    db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
-                       if(err) throw err;
-                       let leaderboard = Object.assign({}, result)
-                       console.log('Name: ', leaderboard[0].name, ' Coins: ', leaderboard[0].coins)
-                       console.log('new ranking')
-                    }) */
+                        /*let highscores = { coins: -1 }
+                        db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
+                        if(err) throw err;
+                        let leaderboard = Object.assign({}, result)
+                        console.log('Name: ', leaderboard[0].name, ' Coins: ', leaderboard[0].coins)
+                        console.log('new ranking')
+                        }) */
 
-                    if(user.version!=currentVersion)
-                    {
-                        res.send("New update available")
-                    }
-                    else
-                    {
-                        res.send("New update made")
-                    }
-                })
+                        if(user.version!=currentVersion)
+                        {
+                            res.send("New update available")
+                        }
+                        else
+                        {
+                            res.send("New update made")
+                        }
+                    })
+                else
+                    db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
+                        //UUID: bodyData.UUID,
+                        version: bodyData.version,
+                        name: bodyData.name,
+                        coins: bodyData.coins,
+                        fitness: bodyData.fitness,
+                        hair: bodyData.hair,
+                        fat: bodyData.fat,
+                        tan: bodyData.tan,
+                        voice: bodyData.voice,
+                        temp: bodyData.temp,
+                        features: bodyData.features,
+                        timeAlive: bodyData.timeAlive,
+                        cItems: bodyData.cItems,
+                        cDumbbells: bodyData.cDumbbells,
+                        hunger: bodyData.hunger,
+                        thirst: bodyData.thirst,
+                        calories: bodyData.calories,
+                        sleep: bodyData.sleep,
+                        health: bodyData.health
+                    }}, function(err, data) {
+
+                        /*let highscores = { coins: -1 }
+                        db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
+                        if(err) throw err;
+                        let leaderboard = Object.assign({}, result)
+                        console.log('Name: ', leaderboard[0].name, ' Coins: ', leaderboard[0].coins)
+                        console.log('new ranking')
+                        }) */
+
+                        if(user.version!=currentVersion)
+                        {
+                            res.send("New update available")
+                        }
+                        else
+                        {
+                            res.send("New update made")
+                        }
+                    })
             }
             else{
                 //new entry
