@@ -81,7 +81,11 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                         thirst: bodyData.thirst,
                         calories: bodyData.calories,
                         sleep: bodyData.sleep,
-                        health: bodyData.health
+                        health: bodyData.health,
+                        slotPlays: bodyData.slotPlays,
+                        totalSlots: bodyData.totalSlots,
+                        totalCoins: bodyData.totalCoins,
+                        totalSpent: bodyData.totalSpent
                     }}, function(err, data) {
 
                         /*let highscores = { coins: -1 }
