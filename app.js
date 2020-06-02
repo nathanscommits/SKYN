@@ -41,7 +41,6 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
     else{
         db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, user)
         {
-                console.log(user);
             if(user)
             {
                 if(bodyData.coinUpdate == "TRUE")
