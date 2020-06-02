@@ -44,21 +44,13 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                 console.log(user);
             if(user)
             {
-                if(bodyData.fitness != "null")
+                if(bodyData.coinUpdate == "TRUE")
+                {
                     db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
-                        //UUID: bodyData.UUID,
                         version: bodyData.version,
                         name: bodyData.name,
                         coins: bodyData.coins
                     }}, function(err, data) {
-
-                        /*let highscores = { coins: -1 }
-                        db.collection('userdata').find().sort(highscores).toArray(function (err, result) {
-                        if(err) throw err;
-                        let leaderboard = Object.assign({}, result)
-                        console.log('Name: ', leaderboard[0].name, ' Coins: ', leaderboard[0].coins)
-                        console.log('new ranking')
-                        }) */
 
                         if(user.version!=currentVersion)
                         {
@@ -69,7 +61,9 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                             res.send("New update made")
                         }
                     })
+                }
                 else
+                {
                     db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
                         //UUID: bodyData.UUID,
                         version: bodyData.version,
@@ -85,7 +79,6 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                         timeAlive: bodyData.timeAlive,
                         cItems: bodyData.cItems,
                         cDumbbells: bodyData.cDumbbells,
-                        hunger: bodyData.hunger,
                         thirst: bodyData.thirst,
                         calories: bodyData.calories,
                         sleep: bodyData.sleep,
@@ -109,6 +102,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                             res.send("New update made")
                         }
                     })
+                }
             }
             else{
                 //new entry
