@@ -18,30 +18,13 @@
         }
     </style>
     <div class="container">
-
         <h1 class="display-4 text-center py-1">Leaderboard</h1>
-        <h4 class="display-6 text-center py-1">TIME ALIVE</h4>
-      <script type="text/javascript">
-        let rankta = <%- JSON.stringify(toptenta) %>;
-        document.write('<table style="width:100%;">', rankta ,'</table>');
-      </script>
-<br><br>
         <h4 class="display-6 text-center py-1">FITNESS</h4>
-      <script type="text/javascript">
-        let rankf = <%- JSON.stringify(toptenf) %>;
-        document.write('<table style="width:100%;">', rankf ,'</table>');
-      </script>
-<br><br>
-        <h4 class="display-6 text-center py-1">SKYN COINS</h4>
       <script type="text/javascript">
         let rank = <%- JSON.stringify(data) %>;
         document.write('<table style="width:100%;">', rank ,'</table>');
       </script>
         <img src="logos.svg" alt="SKYN logo" style="display: block;margin: auto;">
-
-        
-
-
     </div>
 </body>
 </html>

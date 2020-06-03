@@ -128,7 +128,10 @@ app.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
 })
 let topten
+let toptenta
+let toptenf
 
+//coin leaderboard + all others
 app.get('/leaderboard', function (req, res){
     let highscores = { coins: -1 }
     let leaderboard = {}
@@ -148,7 +151,103 @@ app.get('/leaderboard', function (req, res){
             
         }
         //console.log(topten);
-        res.render('leaderboard', {data: topten})
+        //res.render('leaderboard', {data: topten})
+    })
+
+    highscores = { timeAlive: -1 }
+    leaderboard = {}
+    toptenta = ''
+    db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+        if(err) throw err;
+        leaderboard = Object.assign({}, result)
+        let rank = 0;
+        for (let i in leaderboard)
+        {  
+            if(rank>9) break; 
+             if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+            {
+                rank ++;
+                toptenta = toptenta.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].timeAlive), '</th></tr>');  
+            }
+            
+        }
+        //console.log(topten);
+        //res.render('leaderboard', {data: toptenta})
+    })
+
+    highscores = { fitness: -1 }
+    leaderboard = {}
+    toptenf = ''
+    db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+        if(err) throw err;
+        leaderboard = Object.assign({}, result)
+        let rank = 0;
+        for (let i in leaderboard)
+        {  
+            if(rank>9) break; 
+             if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+            {
+                rank ++;
+                toptenf = toptenf.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].fitness), '</th></tr>');  
+            }
+            
+        }
+        //console.log(topten);
+        res.render('leaderboard', {toptenf: toptenf, toptenta: toptenta, data: topten})
+    })
+
+    //console.log(JSON.stringify(leaderboard));
+    
+})
+
+//time alive leaderboard
+app.get('/leaderboard-ta', function (req, res){
+    let highscores = { timeAlive: -1 }
+    let leaderboard = {}
+    topten = ''
+    db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+        if(err) throw err;
+        leaderboard = Object.assign({}, result)
+        let rank = 0;
+        for (let i in leaderboard)
+        {  
+            if(rank>9) break; 
+             if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+            {
+                rank ++;
+                topten = topten.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].timeAlive), '</th></tr>');  
+            }
+            
+        }
+        //console.log(topten);
+        res.render('leaderboard-ta', {data: topten})
+    })
+
+    //console.log(JSON.stringify(leaderboard));
+    
+})
+
+//fitness leaderboard
+app.get('/leaderboard-f', function (req, res){
+    let highscores = { fitness: -1 }
+    let leaderboard = {}
+    topten = ''
+    db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+        if(err) throw err;
+        leaderboard = Object.assign({}, result)
+        let rank = 0;
+        for (let i in leaderboard)
+        {  
+            if(rank>9) break; 
+             if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+            {
+                rank ++;
+                topten = topten.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].fitness), '</th></tr>');  
+            }
+            
+        }
+        //console.log(topten);
+        res.render('leaderboard-f', {data: topten})
     })
 
     //console.log(JSON.stringify(leaderboard));
