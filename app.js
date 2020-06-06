@@ -69,7 +69,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
                         if(data)
                         {
-                            prizeIDString = data.prizeID
+                            prizeIDString = JSON.stringify(data)
                         }
                     })
                     db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
