@@ -3,16 +3,18 @@ const mongodb = require('mongodb')
 const app = express()
 let db
 let connectionString = 'mongodb+srv://sharky:L293nShoTQPODgLi@cluster0-xivcd.gcp.mongodb.net/SKYN_HUD?retryWrites=true&w=majority'
+mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
+    db = client.db()
+    app.listen(port)
+})
+
 
 let port = process.env.PORT
 if(port == null || port == '') {
   port = 3000
 }
 
-mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client){
-    db = client.db()
-    app.listen(port)
-})
+
 app.set('views','views')
 app.set('view engine', 'ejs')
 
@@ -49,6 +51,32 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                         version: bodyData.version,
                         name: bodyData.name,
                         coins: bodyData.coins
+                    }}, function(err, data) {
+
+                        if(user.version!=currentVersion)
+                        {
+                            res.send("New update available")
+                        }
+                        else
+                        {
+                            res.send("New update made")
+                        }
+                    })
+                }
+                else if(bodyData.prizeUpdate == "TRUE")
+                {
+                    let prizeIDString
+                    db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
+                        if(data)
+                        {
+                            prizeIDString = data.prizeID
+                        }
+                    })
+                    db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
+                        version: bodyData.version,
+                        name: bodyData.name,
+                        coins: bodyData.coins,
+                        prizeID: concat(prizeIDString,bodyData.prizeID)
                     }}, function(err, data) {
 
                         if(user.version!=currentVersion)
