@@ -8,14 +8,30 @@
         </head>
         <body>
           <style>
-            a{
+            body{
+            background-color: #2f2f2f;
+            color: blanchedalmond;
+        }
+        a{
               text-align: center;
-              display: block;
+              display: inline-block;
+              padding: 25px;
               margin: auto;
               font-weight: bolder;
               text-decoration: underline;
-              color: black;
-              font-size: 40px;
+              color: #7f7f7f;
+              font-size: 20px;
+              text-decoration: none;
+              width: 19%;
+            }
+        a:hover{
+          text-decoration: none;
+          color: blanchedalmond;
+        }
+            nav{
+                margin: auto;
+                display: block;
+                padding-bottom: 50px;
             }
             img{
               padding: 25px;;
@@ -28,12 +44,18 @@
             }
           </style>
         <div class="container">
+            <nav>
+              <a href="/">Home</a>
+              <a href="/leaderboard">Leaderboards</a>
+              <a href="/prizes">Prizes</a>
+              <a href="/tutorial">Tutorial</a>
+              <a target="_blank" href="https://marketplace.secondlife.com/stores/157953">Store</a>
+          </nav>
+
         <h1 class="display-4 text-center py-1">PROJECT SKYN</h1>
         <p class="text-center">contact@projectskyn.com</p>
         <iframe style="display: block; margin: auto;width: 80%;height: 500px;" src="https://www.youtube.com/embed/g7EkghFwJHw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <a href="/leaderboard">Leaderboards</a>
-        <a href="/tutorial">Tutorial</a>
-        <a target="_blank" href="https://marketplace.secondlife.com/stores/157953">Store</a>
+  
           <img src="logos.svg" alt="SKYN logo" style="display: block;margin: auto;">
           <h2 class="">PATCH NOTES</h2>
           <p class="">
@@ -67,7 +89,9 @@
             -Increased how much a slap will wake you up, and made it only possible to gain fitness from slapping if you have enough energy for it.<br>
             -All messages from the HUD should have the HUDs title in front of them now (no more messages from energyIcon)<br>
             -The small icons at the top of the HUD now change what is displayed on the middle circle when clicked. Unless health is very low, then it will always show health.<br>
-            -Updated some text to reflect changes made in this patch
+            -Updated some text to reflect changes made in this patch<br>
+            -Fixed a problem with the leaderboard not loading correctly sometimes (maybe...)<br>
+-Updated the website colours and navigation
           </p>
           <p class="">
             0.8.5<br>

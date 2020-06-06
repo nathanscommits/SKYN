@@ -150,9 +150,15 @@ app.get('/HUD_guide', function (req, res){
 let topten
 let toptenta
 let toptenf
+let ttdeaths
+let ttspent
+let ttearned
+let ttplays
 
 //coin leaderboard + all others
 app.get('/leaderboard', function (req, res){
+
+    //skyncoins top ten
     let highscores = { coins: -1 }
     let leaderboard = {}
     topten = ''
@@ -170,53 +176,123 @@ app.get('/leaderboard', function (req, res){
             }
             
         }
-        //console.log(topten);
-        //res.render('leaderboard', {data: topten})
-    })
 
-    highscores = { timeAlive: -1 }
-    leaderboard = {}
-    toptenta = ''
-    db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
-        if(err) throw err;
-        leaderboard = Object.assign({}, result)
-        let rank = 0;
-        for (let i in leaderboard)
-        {  
-            if(rank>9) break; 
-             if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
-            {
-                rank ++;
-                toptenta = toptenta.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].timeAlive), '</th></tr>');  
+        //time alive top ten
+        highscores = { timeAlive: -1 }
+        leaderboard = {}
+        toptenta = ''
+        db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+            if(err) throw err;
+            leaderboard = Object.assign({}, result)
+            let rank = 0;
+            for (let i in leaderboard)
+            {  
+                if(rank>9) break; 
+                if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+                {
+                    rank ++;
+                    toptenta = toptenta.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].timeAlive), '</th></tr>');  
+                }
+                
             }
-            
-        }
-        //console.log(topten);
-        //res.render('leaderboard', {data: toptenta})
+            //fitness top ten
+            highscores = { fitness: -1 }
+            leaderboard = {}
+            toptenf = ''
+            db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+                if(err) throw err;
+                leaderboard = Object.assign({}, result)
+                let rank = 0;
+                for (let i in leaderboard)
+                {  
+                    if(rank>9) break; 
+                    if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+                    {
+                        rank ++;
+                        toptenf = toptenf.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].fitness), '</th></tr>');  
+                    }
+                    
+                }
+                //deaths top ten
+                highscores = { deathCount: -1 }
+                leaderboard = {}
+                ttdeaths = ''
+                db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+                    if(err) throw err;
+                    leaderboard = Object.assign({}, result)
+                    let rank = 0;
+                    for (let i in leaderboard)
+                    {  
+                        if(rank>9) break; 
+                        if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+                        {
+                            rank ++;
+                            ttdeaths = ttdeaths.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].deathCount), '</th></tr>');  
+                        }
+                        
+                    }
+                    //total spent top ten
+                    highscores = { totalSpent: -1 }
+                    leaderboard = {}
+                    ttspent = ''
+                    db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+                        if(err) throw err;
+                        leaderboard = Object.assign({}, result)
+                        let rank = 0;
+                        for (let i in leaderboard)
+                        {  
+                            if(rank>9) break; 
+                            if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+                            {
+                                rank ++;
+                                ttspent = ttspent.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].totalSpent), '</th></tr>');  
+                            }
+                            
+                        }
+                        //total plays top ten
+                        highscores = { totalSlots: -1 }
+                        leaderboard = {}
+                        ttplays = ''
+                        db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+                            if(err) throw err;
+                            leaderboard = Object.assign({}, result)
+                            let rank = 0;
+                            for (let i in leaderboard)
+                            {  
+                                if(rank>9) break; 
+                                if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+                                {
+                                    rank ++;
+                                    ttplays = ttplays.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].totalSlots), '</th></tr>');  
+                                }
+                            }
+                            //total earned top ten
+                            highscores = { totalCoins: -1 }
+                            leaderboard = {}
+                            ttearned = ''
+                            db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
+                                if(err) throw err;
+                                leaderboard = Object.assign({}, result)
+                                let rank = 0;
+                                for (let i in leaderboard)
+                                {  
+                                    if(rank>9) break; 
+                                    if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+                                    {
+                                        rank ++;
+                                        ttearned = ttearned.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].totalCoins), '</th></tr>');  
+                                    }
+                                }
+                                res.render('leaderboard', {toptenf: toptenf, toptenta: toptenta, data: topten, ttdeaths: ttdeaths, ttspent: ttspent, ttearned: ttearned, ttplays: ttplays})
+                            })
+                        })
+                    })
+                })
+                //console.log(topten);
+            })
+        })
+        
     })
-
-    highscores = { fitness: -1 }
-    leaderboard = {}
-    toptenf = ''
-    db.collection('userdata').find().sort(highscores).collation({locale: "en_US", numericOrdering: true}).toArray(function (err, result) {
-        if(err) throw err;
-        leaderboard = Object.assign({}, result)
-        let rank = 0;
-        for (let i in leaderboard)
-        {  
-            if(rank>9) break; 
-             if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
-            {
-                rank ++;
-                toptenf = toptenf.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].fitness), '</th></tr>');  
-            }
-            
-        }
-        //console.log(topten);
-        res.render('leaderboard', {toptenf: toptenf, toptenta: toptenta, data: topten})
-    })
-
-    //console.log(JSON.stringify(leaderboard));
     
 })
 

@@ -7,12 +7,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
-  <script type="text/javascript">
-    let rankta = <%- JSON.stringify(toptenta) %>;
-    let rankf = <%- JSON.stringify(toptenf) %>;
-    let rank = <%- JSON.stringify(data) %>;
-  </script>
     <style>
+      body{
+            background-color: #2f2f2f;
+            color: blanchedalmond;
+        }
+      a{
+              text-align: center;
+              display: inline-block;
+              padding: 25px;
+              margin: auto;
+              font-weight: bolder;
+              text-decoration: underline;
+              color: #7f7f7f;
+              font-size: 20px;
+              text-decoration: none;
+              width: 19%;
+            }
+        a:hover{
+          text-decoration: none;
+          color: blanchedalmond;
+        }
+        nav{
+            margin: auto;
+            display: block;
+           
+        }
         th{
             padding: 5px;
         }
@@ -23,26 +43,42 @@
         }
     </style>
     <div class="container">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/leaderboard">Leaderboards</a>
+        <a href="/prizes">Prizes</a>
+        <a href="/tutorial">Tutorial</a>
+        <a target="_blank" href="https://marketplace.secondlife.com/stores/157953">Store</a>
+    </nav>
+    <h1 class="display-4 text-center py-1">Leaderboard</h1>
 
-        <h1 class="display-4 text-center py-1">Leaderboard</h1>
-        <h4 class="display-6 text-center py-1">TIME ALIVE</h4>
-      <script type="text/javascript">
-        document.write('<table style="width:100%;">', rankta ,'</table>');
-      </script>
-<br><br>
-        <h4 class="display-6 text-center py-1">FITNESS</h4>
-      <script type="text/javascript">
-        document.write('<table style="width:100%;">', rankf ,'</table>');
-      </script>
-<br><br>
-        <h4 class="display-6 text-center py-1">TOTAL COINS EARNED</h4>
-      <script type="text/javascript">
-        document.write('<table style="width:100%;">', rank ,'</table>');
-      </script>
-        <img src="logos.svg" alt="SKYN logo" style="display: block;margin: auto;">
+    <h4 class="display-6 text-center py-1">CURRENT BALANCE</h4>
+    <table style="width:100%;"> <%- JSON.stringify(data) %> </table>
+    <br><br>
 
-        
+    <h4 class="display-6 text-center py-1">TOTAL COINS EARNED</h4>
+    <table style="width:100%;"> <%- JSON.stringify(ttearned) %> </table>
+    <br><br>
 
+    <h4 class="display-6 text-center py-1">TOTAL COINS SPENT</h4>
+    <table style="width:100%;"> <%- JSON.stringify(ttspent) %> </table>
+    <br><br>
+    
+    <h4 class="display-6 text-center py-1">TOTAL MACHINES PLAYED</h4>
+    <table style="width:100%;"> <%- JSON.stringify(ttplays) %> </table>
+    <br><br>
+
+    <h4 class="display-6 text-center py-1">TIME ALIVE</h4>
+    <table style="width:100%;"> <%- JSON.stringify(toptenta) %> </table>
+    <br><br>
+
+    <h4 class="display-6 text-center py-1">FITNESS</h4>
+    <table style="width:100%;"> <%- JSON.stringify(toptenf) %> </table>
+    <br><br>
+
+    <h4 class="display-6 text-center py-1">TOTAL DEATHS</h4>
+    <table style="width:100%;"> <%- JSON.stringify(ttdeaths) %> </table>
+    <img src="logos.svg" alt="SKYN logo" style="display: block;margin: auto;">
 
     </div>
 </body>
