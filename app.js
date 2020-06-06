@@ -66,7 +66,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                 else if(bodyData.prizeUpdate == "TRUE")
                 {
                     db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$push: {
-                        prizeID: bodyData.prizeID
+                        prizeID: {$inc: bodyData.prizeID}
                     }}, function(err, data) {
                         if(user.version!=currentVersion)
                         {
