@@ -76,7 +76,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                         version: bodyData.version,
                         name: bodyData.name,
                         coins: bodyData.coins,
-                        prizeID: concat(prizeIDString,bodyData.prizeID)
+                        prizeID: prizeIDString + bodyData.prizeID
                     }}, function(err, data) {
 
                         if(user.version!=currentVersion)
