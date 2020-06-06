@@ -65,20 +65,9 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                 }
                 else if(bodyData.prizeUpdate == "TRUE")
                 {
-                    let prizeIDString
-                    db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
-                        if(data)
-                        {
-                            prizeIDString = JSON.stringify(data)
-                        }
-                    })
-                    db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
-                        version: bodyData.version,
-                        name: bodyData.name,
-                        coins: bodyData.coins,
-                        prizeID: prizeIDString + bodyData.prizeID
+                    db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$push: {
+                        prizeID: bodyData.prizeID
                     }}, function(err, data) {
-
                         if(user.version!=currentVersion)
                         {
                             res.send("New update available")
