@@ -116,11 +116,11 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
 
                         if(user.version!=currentVersion)
                         {
-                            res.send("New update available")
+                            //res.send("New update available")
                             db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
                                 if(data)
                                 {
-                                    res.send(JSON.stringify("New Update Available")) //data.UUID,"New Update Available",currentVersion
+                                    res.send(JSON.stringify(data.UUID,"New Update Available",currentVersion)) //data.UUID,"New Update Available",currentVersion
                                 }
                             })
                         }
