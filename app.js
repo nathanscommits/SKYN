@@ -134,7 +134,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                             }
                         })
                     }
-                    return
+                    res.send("Wrong version")
                 }
             }
             else{
