@@ -46,7 +46,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
         {
             if(user)
             {
-                if(bodyData.coinUpdate == "TRUE")
+                if(bodyData.coinUpdate == "TRUE" && bodyData.version == currentVersion)
                 {
                     db.collection('userdata').findOneAndUpdate({UUID: bodyData.UUID}, {$set: {
                         version: bodyData.version,
@@ -134,6 +134,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                             }
                         })
                     }
+                    return
                 }
             }
             else{
