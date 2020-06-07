@@ -58,7 +58,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                             db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
                                 if(data)
                                 {
-                                    let sendstring = sendstring.concat(data.UUID,"New Update Available",currentVersion)
+                                    let sendstring = concat(data.UUID,"New Update Available",currentVersion)
                                     res.send(sendstring) //data.UUID,"New Update Available",currentVersion
                                 }
                             })
@@ -79,7 +79,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                             db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
                                 if(data)
                                 {
-                                    let sendstring = sendstring.concat(data.UUID,"New Update Available",currentVersion)
+                                    let sendstring = concat(data.UUID,"New Update Available",currentVersion)
                                     res.send(sendstring) //data.UUID,"New Update Available",currentVersion
                                 }
                             })
@@ -132,7 +132,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                             db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
                                 if(data)
                                 {
-                                    let sendstring = sendstring.concat(data.UUID,"New Update Available",currentVersion)
+                                    let sendstring = concat(data.UUID,"New Update Available",currentVersion)
                                     res.send(sendstring) //data.UUID,"New Update Available",currentVersion
                                 }
                             })
