@@ -24,7 +24,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-let currentVersion = "0.8.6"
+let currentVersion = "0.8.12"
 let sendstring 
 //recieve POST requests
 app.post('/jShf8Sh37dSb3', (req, res) => {
@@ -56,13 +56,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
 
                         if(user.version!=currentVersion)
                         {
-                            db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
-                                if(data)
-                                {
-                                    sendstring = data.UUID + "New Update Available" + currentVersion
-                                    res.send(sendstring) //data.UUID,"New Update Available",currentVersion
-                                }
-                            })
+                            res.send("New update made")
                         }
                         else
                         {
@@ -77,13 +71,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                     }}, function(err, data) {
                         if(user.version!=currentVersion)
                         {
-                            db.collection('userdata').findOne({UUID: bodyData.UUID}, function(err, data){
-                                if(data)
-                                {
-                                    sendstring = data.UUID + "New Update Available" + currentVersion
-                                    res.send(sendstring) //data.UUID,"New Update Available",currentVersion
-                                }
-                            })
+                            res.send("New update made")
                         }
                         else
                         {
