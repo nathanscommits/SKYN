@@ -24,7 +24,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-let currentVersion = "0.9.0"
+let currentVersion = "0.9.1"
 let sendstring 
 //recieve POST requests
 app.post('/jShf8Sh37dSb3', (req, res) => {
