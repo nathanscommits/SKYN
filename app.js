@@ -134,7 +134,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
                             }
                         })
                     }
-                    res.send("Wrong version")
+                   // res.send("Wrong version")
                     console.log("Wrong version caught")
                 }
             }
