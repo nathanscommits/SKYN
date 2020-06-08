@@ -29,7 +29,7 @@ app.post("/3489h40", (req, res) => {
     let headers = req.headers
     let r = body
 
-    console.log(body+headers)
+    console.log(req)
     res.send(JSON.stringify(r))
 })
 
