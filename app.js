@@ -26,12 +26,9 @@ app.use(express.json())
 
 app.post("/3489h40", (req, res) => {
     let body = req.body
-    let headers = req.headers
-    let name = req.headers.x-secondlife-owner-name
-    let uuid = req.headers.x-secondlife-owner-key
     let r = body
 
-    console.log(name+" "+uuid)
+    console.log(r)
     res.send(JSON.stringify(r))
 })
 
