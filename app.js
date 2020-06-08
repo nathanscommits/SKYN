@@ -24,6 +24,15 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+app.post("/3489h40", (req, res) => {
+    let body = req.body
+    let headers = req.headers
+    let r = body
+
+    console.log(body+headers)
+    res.send(JSON.stringify(r))
+})
+
 let currentVersion = "0.9.1"
 let sendstring 
 //recieve POST requests
