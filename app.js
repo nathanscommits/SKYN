@@ -28,6 +28,55 @@ app.post("/3489h40", (req, res) => {
     let body = req.body
     let r = body
 
+    let userdata
+    db.collection('userdata').findOne({UUID: body.UUID}, function(err, data){
+        if(data)
+        {
+            userdata=data
+        }
+    })
+
+    let sleep = userdata.sleep
+    let energy = userdata.energy
+    let fitness = userdata.fitness
+
+    let action = body.action
+    if(action.substring(0, 0)==1) //sitting
+    {
+        sleep--; //check if sleep mode first?
+        energy+=(fitness/50); //resting
+
+    }
+    if(action.substring(1, 1)==1) //flying
+    {
+        energy-=4;
+    }
+    if(action.substring(2, 2)==1) //running
+    {
+        energy-=2;
+    }
+    if(action.substring(3, 3)==1) //walking/running
+    {
+        energy--;
+    }
+    if(action.substring(4, 4)==1) //jumping
+    {
+        energy-=4;
+    }
+    if(action.substring(0,4)=="00000") //standing
+    {
+        energy+=(fitness/100); //regain energy while idle
+    }
+
+   
+
+    if(action.substring(5, 5)==1) //underwater
+
+    if(action.substring(6, 6)==1) //in sun
+
+    if(sleep<0) sleep=0;
+    if(energy<0) energy=0;
+
     console.log(r)
     res.send(JSON.stringify(r))
 })
