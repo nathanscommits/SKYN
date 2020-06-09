@@ -4,7 +4,7 @@ const logic = require('../modules/logic')
 exports.hudUpdate = function (req, res) {
     let body = req.body
     let response
-    response.UUID = body.UUID
+    response.uuid = body.UUID
     //read ud
     db.findOne({UUID: body.UUID}, function(err, ud){
 
