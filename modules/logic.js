@@ -1,6 +1,8 @@
 
 exports.values = function(ud, body, response) {
-    let consumed //= JSON.parse(body.consumed)
+    let consumed = {} //= JSON.parse(body.consumed)
+    consumed = JSON.parse(body.consumed)
+    
     let action = body.action
     console.log(action)
     if(action.substring(0, 1)=="1") //sitting
@@ -70,7 +72,7 @@ exports.values = function(ud, body, response) {
     //if(action.substring(6, 6)==1) //in sun
 
     //consumables
-    /*
+    
     if(consumed.type != "food") 
     {
         ud.hunger-=0.1; //ud.hunger loss when not eating
@@ -91,7 +93,7 @@ exports.values = function(ud, body, response) {
         if(consumed.sleep) ud.sleep+=consumed.sleep
         if(consumed.thirst) ud.thirst+=consumed.thirst
         if(consumed.health) ud.health+=consumed.health
-    }*/
+    }
 
     //ud.health
     if(ud.hunger>=100) ud.health-=0.5
