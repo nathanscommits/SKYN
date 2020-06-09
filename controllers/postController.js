@@ -25,9 +25,9 @@ exports.hudUpdate = function (req, res) {
         }}, function(err, data) {
     
             //send response
-            response.UUID = ud.UUID
+            response.UUID = data.UUID
             response.osay = "You died!"
-            
+
             console.log(response)
             res.send(response)
         })
