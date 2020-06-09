@@ -3,7 +3,7 @@ const router = express.Router()
 const userController = require('./controllers/userController')
 const postController = require('./controllers/postController')
 
-const db = require('./db').collection('userdata')
+const db = require('./db')
 
 router.get('/', function (req, res){
     res.render('home-guest')

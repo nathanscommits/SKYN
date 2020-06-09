@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const db = require('./db')
-db = client.db('userdata')
 
 app.set('views','views')
 app.set('view engine', 'ejs')
