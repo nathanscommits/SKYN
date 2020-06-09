@@ -125,8 +125,8 @@ exports.values = function(ud, body, response) {
         if(ud.hunger>=100) ud.coins+=0.01;
         if(ud.thirst>=100) ud.coins+=0.01;
         if(ud.fitness>=100) ud.coins+=(ud.fitness/10000);
-        if(ud.energy<ud.fitness) ud.coins+=(ud.fitness-ud.energy/100000);
-        if(ud.sleep<100) ud.coins+=(100-ud.sleep/10000);
+        if(ud.energy<ud.fitness) ud.coins+=((ud.fitness-ud.energy)/100000);
+        if(ud.sleep<100) ud.coins+=((100-ud.sleep)/10000);
     }
     else //dieing
     {
