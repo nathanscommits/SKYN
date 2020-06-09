@@ -13,17 +13,13 @@ exports.values = function(ud, body) {
 
             if(action.substring(5,5)==1) //ground sleeping
             {
-                response+= {
-                    anim: "sleeping",
-                    sound: "snoring"
-                }
+                response.anim = "sleeping"
+                response.sound = "snoring"
             }
             else //chair sleeping
             {
-                response+= {
-                    anim: "sleeping_chair",
-                    sound: "snoring"
-                }
+                response.anim = "sleeping_chair"
+                response.sound = "snoring"
             }
             
         }
@@ -53,10 +49,8 @@ exports.values = function(ud, body) {
         ud.energy-=4;
     }
     if(ud.energy<=0){
-        response+= {
-            anim: "exhausted",
-            sound: "breathing"
-        }
+        response.anim = "exhausted"
+        response.sound = "breathing"
     }
     if(action.substring(0,4)=="00000") //standing
     {
@@ -138,11 +132,9 @@ exports.values = function(ud, body) {
         ud.hunger=0
         ud.thirst=0
         ud.sleep=0
-        response+= {
-            osay: "You died!",
-            anim: "death",
-            sound: "dieing"
-        }
+        response.osay = "You died!"
+        response.anim = "death"
+        response.sound = "dieing" 
     }
 
     //if(ud.fitness>1000) ud.fitness=1000; //ud.fitness cap
