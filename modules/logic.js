@@ -33,7 +33,7 @@ exports.values = function(ud, body) {
         ud.sleep+=0.1; //not sitting, get ud.sleepy! you could do 1/ud.energy to make it based off of ud.energy loss
     }
     
-    if(action.substring(1, 1)=="1") //flying
+    if(action.substring(1, 2)=="1") //flying
     {
         ud.energy-=4;
         console.log('flying')
