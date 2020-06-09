@@ -1,6 +1,6 @@
 
 exports.values = function(ud, body) {
-    let consumed = JSON.parse(body.consumed)
+    let consumed //= JSON.parse(body.consumed)
 
     let action = body.action
     if(action.substring(0, 0)==1) //sitting
