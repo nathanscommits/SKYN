@@ -4,6 +4,7 @@ const logic = require('../modules/logic')
 exports.hudUpdate = function (req, res) {
     let body = req.body
     let response
+    response.UUID = body.UUID
     //read ud
     db.findOne({UUID: body.UUID}, function(err, ud){
 
@@ -25,7 +26,7 @@ exports.hudUpdate = function (req, res) {
         }}, function(err, data) {
     
             //send response
-            response.UUID = body.UUID
+            
             response.osay = "You died!"
 
             console.log(response)
