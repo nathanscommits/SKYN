@@ -25,12 +25,13 @@ exports.hudUpdate = function (req, res) {
         }}, function(err, data) {
     
             //send response
-            response+= {
+            response = {
             osay: "You died!",
             anim: "death",
             sound: "dieing"
             }
-            res.send(JSON.stringify(response))
+            console.log(response)
+            res.send(response)
         })
     })
 
