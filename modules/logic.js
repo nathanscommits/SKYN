@@ -1,7 +1,7 @@
 
 exports.values = function(ud, body) {
     let consumed //= JSON.parse(body.consumed)
-
+    if(!ud.energy) ud.energy = 100;
     let action = body.action
     if(action.substring(0, 0)==1) //sitting
     {
