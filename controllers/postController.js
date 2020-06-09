@@ -14,7 +14,7 @@ exports.hudUpdate = function (req, res) {
         logic.values(ud, body)
 
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
-            version: ud.version,
+            version: body.version,
             coins: ud.coins,
             fitness: ud.fitness,
             fat: ud.fat,
@@ -28,8 +28,13 @@ exports.hudUpdate = function (req, res) {
             deathCount: ud.deathCount
         }}, function(err, data) {
     
-               //send response
-                res.send(JSON.stringify(ud))
+            //send response
+            response+= {
+            osay: "You died!",
+            anim: "death",
+            sound: "dieing"
+            }
+            res.send(JSON.stringify(response))
         })
     })
 
