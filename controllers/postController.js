@@ -11,7 +11,7 @@ exports.hudUpdate = function (req, res) {
         console.log(data)
         ud=data
 
-        logic.values(ud, body)
+        //logic.values(ud, body)
 
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
             version: ud.version,
