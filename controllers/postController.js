@@ -5,14 +5,14 @@ exports.hudUpdate = function (req, res) {
     let body = req.body
     let response
     //read ud
-    
-    async function ud_pop() {
-        db.findOne({UUID: body.UUID}, function(err, data){
+    console.log(body)
+    async function ud_pop(x) {
+        db.findOne({UUID: x.UUID}, function(err, data){
             return data
         })
     }
 
-    let ud = ud_pop()
+    let ud = ud_pop(req.body)
 
     console.log(ud)
     //change values
