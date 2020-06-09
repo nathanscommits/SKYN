@@ -3,6 +3,9 @@ const router = express.Router()
 const userController = require('./controllers/userController')
 const postController = require('./controllers/postController')
 
+router.use(express.urlencoded({extended: true}))
+router.use(express.json())
+
 const db = require('./db')
 
 router.get('/', function (req, res){
