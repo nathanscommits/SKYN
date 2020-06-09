@@ -1,7 +1,7 @@
 
 exports.values = function(ud, body) {
     let consumed //= JSON.parse(body.consumed)
-    if(!ud.energy) ud.energy = 100;
+    ud.energy =
     let action = body.action
     if(action.substring(0, 0)==1) //sitting
     {
@@ -53,7 +53,7 @@ exports.values = function(ud, body) {
     {
         ud.energy-=4;
     }
-    if(energy<=0){
+    if(ud.energy<=0){
         response+= {
             anim: "exhausted",
             sound: "breathing"
