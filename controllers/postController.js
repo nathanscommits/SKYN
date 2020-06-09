@@ -20,14 +20,14 @@ exports.hudUpdate = function (req, res) {
             hunger: ud.hunger,
             sleep: ud.sleep,
             health: ud.health,
-            pimples: 100,
-            energy: 100,
+            pimples: ud.pimples,
+            energy: ud.energy,
             deathCount: ud.deathCount
         }}, function(err, data) {
     
             //send response
             
-            response.osay = "You died!"
+            response.osay = ud.energy
 
             console.log(response)
             res.send(response)
