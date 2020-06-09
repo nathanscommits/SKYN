@@ -93,6 +93,7 @@ exports.values = function(ud, body, response) {
         if(consumed.sleep) ud.sleep+=consumed.sleep
         if(consumed.thirst) ud.thirst+=consumed.thirst
         if(consumed.health) ud.health+=consumed.health
+        if(consumed.coins) ud.coins+=consumed.coins
     }
 
     //ud.health
