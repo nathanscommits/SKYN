@@ -2,6 +2,7 @@
 exports.values = function(ud, body) {
     let consumed //= JSON.parse(body.consumed)
     let action = body.action
+    console.log(action)
     if(action.substring(0, 0)==1) //sitting
     {
         ud.energy+=(ud.fitness/50); //resting
