@@ -73,7 +73,7 @@ exports.values = function(ud, body) {
     //if(action.substring(6, 6)==1) //in sun
 
     //consumables
-
+    /*
     if(consumed.type != "food") 
     {
         ud.hunger-=0.1; //ud.hunger loss when not eating
@@ -94,7 +94,7 @@ exports.values = function(ud, body) {
         if(consumed.sleep) ud.sleep+=consumed.sleep
         if(consumed.thirst) ud.thirst+=consumed.thirst
         if(consumed.health) ud.health+=consumed.health
-    }
+    }*/
 
     //ud.health
     if(ud.hunger>=100) ud.health-=0.5
