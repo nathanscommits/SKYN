@@ -7,7 +7,7 @@ exports.values = function(ud, body) {
     {
         ud.energy+=(ud.fitness/50); //resting
 
-        if(action.substring(5, 5)>="1") //ud.sleeping on ground =1 on object =2
+        if(action.substring(5, 5)=="1") //ud.sleeping on ground =1 on object =2
         {
             ud.sleep--;
             ud.energy+=(ud.fitness/20); //resting even more
@@ -36,6 +36,7 @@ exports.values = function(ud, body) {
     if(action.substring(1, 1)=="1") //flying
     {
         ud.energy-=4;
+        console.log('flying')
     }
     if(action.substring(2, 2)=="1") //running
     {
