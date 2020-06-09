@@ -30,7 +30,7 @@ exports.hudUpdate = function (req, res) {
     }}, function(err, data) {
 
            //send response
-            res.send(ud)
+            res.send(JSON.stringify(ud))
     })
 
     
