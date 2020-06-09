@@ -57,6 +57,8 @@ exports.values = function(ud, body, response) {
     {
         ud.energy+=(ud.fitness/100); //regain ud.energy while idle
         ud.fitness-=0.01; //passive ud.fitness loss
+
+        console.log("standing")
     }
     if(ud.energy<ud.fitness)
     {
