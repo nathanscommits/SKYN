@@ -5,14 +5,18 @@ exports.hudUpdate = function (req, res) {
     let body = req.body
     let response
     //read ud
-
     
+    async function ud_pop() {
+        db.findOne({UUID: body.UUID}, function(err, data){
+            return data
+        })
+    }
+
+    let ud = ud_pop()
 
     console.log(ud)
     //change values
-    logic.values(db.findOne({UUID: body.UUID}, function(err, data){
-        if(data) return data
-    }), body)
+    logic.values(ud, body)
 
     //save ud
     db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
