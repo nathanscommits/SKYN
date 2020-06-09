@@ -96,9 +96,9 @@ exports.values = function(ud, body, response) {
     }
 
     //ud.health
-    if(ud.hunger>=100) ud.health-=0.5
-    if(ud.thirst>=100) ud.health-=0.5
-    else if(ud.hunger<100) ud.health+=0.1 //passive ud.health regain
+    if(ud.hunger<=0) ud.health-=0.5
+    if(ud.thirst<=0) ud.health-=0.5
+    else if(ud.hunger>0) ud.health+=0.1 //passive ud.health regain
 
     //value min/max's
     if(ud.energy<0) ud.energy=0;
@@ -122,8 +122,8 @@ exports.values = function(ud, body, response) {
     if(ud.health>0)
     {
         ud.timeAlive++;
-        if(ud.hunger>=100) ud.coins+=0.01;
-        if(ud.thirst>=100) ud.coins+=0.01;
+        if(ud.hunger>0) ud.coins+=(ud.hunger/1000);
+        if(ud.thirst>0) ud.coins+=(ud.thirst/1000);
         if(ud.fitness>=100) ud.coins+=(ud.fitness/10000);
         if(ud.energy<ud.fitness) ud.coins+=((ud.fitness-ud.energy)/100000);
         if(ud.sleep<100) ud.coins+=((100-ud.sleep)/10000);
@@ -134,8 +134,8 @@ exports.values = function(ud, body, response) {
         ud.timeAlive = 0;
         ud.coins-= (ud.coins/10)
         ud.health = 100
-        ud.hunger=0
-        ud.thirst=0
+        ud.hunger=100
+        ud.thirst=100
         ud.sleep=0
         response.osay = "You died!"
         response.anim = "death"
