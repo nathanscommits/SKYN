@@ -1,4 +1,4 @@
-const db = require('../db').collection('ud')
+const db = require('../db').collection('userdata')
 const logic = require('../modules/logic')
 
 exports.hudUpdate = function (req, res) {
@@ -28,7 +28,7 @@ exports.hudUpdate = function (req, res) {
         energy: ud.energy,
         deathCount: ud.deathCount
     }}, function(err, data) {
-        
+
            //send response
             res.send(JSON.stringify(response))
     })
