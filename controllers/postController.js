@@ -4,12 +4,8 @@ const logic = require('../modules/logic')
 exports.hudUpdate = function (req, res) {
     let body = req.body
     let response
-    let ud
     //read ud
-    console.log(body)
-    db.findOne({UUID: body.UUID}, function(err, data){
-        console.log(data)
-        ud=data
+    db.findOne({UUID: body.UUID}, function(err, ud){
 
         logic.values(ud, body)
 
