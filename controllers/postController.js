@@ -6,10 +6,12 @@ exports.hudUpdate = function (req, res) {
     let response
     //read ud
     let ud
+
     db.findOne({UUID: body.UUID}, function(err, data){
         if(data) ud=data
     })
 
+    console.log(ud)
     //change values
     logic.values(ud, body)
 
