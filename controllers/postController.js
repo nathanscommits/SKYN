@@ -7,7 +7,7 @@ exports.hudUpdate = function (req, res) {
     let ud
     //read ud
     console.log(body)
-    db.findOne({UUID: x.UUID}, function(err, data){
+    db.findOne({UUID: body.UUID}, function(err, data){
         console.log(data)
         ud=data
     })
