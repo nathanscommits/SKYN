@@ -23,8 +23,8 @@ exports.hudUpdate = function (req, res) {
             hunger: ud.hunger,
             sleep: ud.sleep,
             health: ud.health,
-            pimples: ud.pimples,
-            energy: ud.energy,
+            pimples: 100,
+            energy: 100,
             deathCount: ud.deathCount
         }}, function(err, data) {
     
