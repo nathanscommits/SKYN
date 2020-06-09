@@ -1,4 +1,4 @@
-const db = require('../db').collection('userdata')
+const db = require('../db')
 
 exports.leaderboard = function (req, res) {
     let topten = ''

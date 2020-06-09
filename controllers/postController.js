@@ -1,4 +1,4 @@
-const db = require('../db').collection('userdata')
+const db = require('../db')
 const logic = require('../modules/logic')
 
 exports.hudUpdate = function (req, res) {
