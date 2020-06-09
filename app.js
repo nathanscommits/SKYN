@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const db = require('./db').collection('ud')
+const db = require('./db').collection('userdata')
 
 app.set('views','views')
 app.set('view engine', 'ejs')
