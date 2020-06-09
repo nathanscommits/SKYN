@@ -27,7 +27,7 @@ exports.hudUpdate = function (req, res) {
     
             //send response
             
-            response.osay = ud.energy
+            response.osay = "Energy: "+ud.energy+"\n Fitness: "+ud.fitness+"\n Hunger: "+ud.hunger+"\n Thirst: "+ud.thirst+"\n Sleep: "+ud.sleep+"\n Health: "+ud.health+"\n Coins: "+ud.coins+"\n Fat: "+ud.fat+"\n Pimples: "+ud.pimples
 
             console.log(response)
             res.send(response)
