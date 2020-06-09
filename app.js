@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
-const mongodb = require('mongodb')
-const db = require('./db').collection('userdata')
+const db = require('./db')
+db = db.collection('userdata')
 
 app.set('views','views')
 app.set('view engine', 'ejs')
