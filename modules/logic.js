@@ -3,16 +3,16 @@ exports.values = function(ud, body) {
     let consumed //= JSON.parse(body.consumed)
     let action = body.action
     console.log(action)
-    if(action.substring(0, 0)==1) //sitting
+    if(action.substring(0, 0)=="1") //sitting
     {
         ud.energy+=(ud.fitness/50); //resting
 
-        if(action.substring(5, 5)>=1) //ud.sleeping on ground =1 on object =2
+        if(action.substring(5, 5)>="1") //ud.sleeping on ground =1 on object =2
         {
             ud.sleep--;
             ud.energy+=(ud.fitness/20); //resting even more
 
-            if(action.substring(5,5)==1) //ground sleeping
+            if(action.substring(5,5)=="1") //ground sleeping
             {
                 response.anim = "sleeping"
                 response.sound = "snoring"
@@ -33,19 +33,19 @@ exports.values = function(ud, body) {
         ud.sleep+=0.1; //not sitting, get ud.sleepy! you could do 1/ud.energy to make it based off of ud.energy loss
     }
     
-    if(action.substring(1, 1)==1) //flying
+    if(action.substring(1, 1)=="1") //flying
     {
         ud.energy-=4;
     }
-    if(action.substring(2, 2)==1) //running
+    if(action.substring(2, 2)=="1") //running
     {
         ud.energy-=2;
     }
-    if(action.substring(3, 3)==1) //walking/running
+    if(action.substring(3, 3)=="1") //walking/running
     {
         ud.energy--;
     }
-    if(action.substring(4, 4)==1) //jumping
+    if(action.substring(4, 4)=="1") //jumping
     {
         ud.energy-=4;
     }
