@@ -8,7 +8,7 @@ exports.hudUpdate = function (req, res) {
     //read ud
     db.findOne({UUID: body.UUID}, function(err, ud){
 
-        logic.values(ud, body)
+        logic.values(ud, body, response)
 
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
             version: body.version,
