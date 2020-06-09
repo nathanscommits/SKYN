@@ -1,7 +1,7 @@
 
 exports.values = function(ud, body, response) {
     let consumed = {} //= JSON.parse(body.consumed)
-    consumed = JSON.parse(body.consumed) //body.consumed
+    consumed = body.consumed
     
     let action = body.action
     console.log(action)
