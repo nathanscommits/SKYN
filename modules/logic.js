@@ -181,7 +181,7 @@ exports.values = function(ud, body, response) {
     }
 
     //sleep
-    if(ud.sleep>=75 && ud.sleepSwitch!=2)
+    if(ud.sleep>=75 && && ud.sleep<100 && ud.sleepSwitch!=2)
 	{
 		response.osay = "@attachover:"+essr_folder+"~SKYN_sleep001=force";
 		ud.sleepSwitch=2;
@@ -220,6 +220,16 @@ exports.values = function(ud, body, response) {
     {
         ud.sweatSwitch=0;
         response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
+    }
+    else if(ud.sweatSwitch!=4 && ud.energy<=0)
+    {
+        response.osay = "@fly=n,temprun=n,alwaysrun=n";
+        ud.fatigueSwitch=1;
+    }
+    else if(ud.sweatSwitch!=5 && ud.energy>(ud.energy/8))
+    {
+        response.osay = "@fly=y,temprun=y,alwaysrun=y";
+        ud.fatigueSwitch=2;
     }
     //Death
 
