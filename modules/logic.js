@@ -1,5 +1,6 @@
 
 exports.values = function(ud, body, response) {
+    let essr_folder = "~SKYN ESSR DLC/"
     let consumed = {} //= JSON.parse(body.consumed)
     consumed = body.consumed
     
@@ -87,7 +88,7 @@ exports.values = function(ud, body, response) {
     if(consumed) //consumed effects
     {
         if(consumed.hunger) ud.hunger+=consumed.hunger
-        if(consumed.fat) ud.fat += consumed.fat
+        if(consumed.fat) ud.fat+=consumed.fat
         if(consumed.pimples) ud.pimples+=consumed.pimples
         if(consumed.energy) ud.energy+=consumed.energy
         if(consumed.sleep) ud.sleep+=consumed.sleep
@@ -131,17 +132,95 @@ exports.values = function(ud, body, response) {
     }
     else //dieing
     {
-        ud.deathCount++
-        ud.timeAlive = 0;
-        ud.coins-= (ud.coins/10)
-        ud.health = 100
-        ud.hunger=100
-        ud.thirst=100
-        ud.sleep=0
-        response.osay = "You died!"
-        response.anim = "death"
-        response.sound = "dieing" 
+        ud.deathCount++;
+        ud.timeAlive=0;
+        ud.coins-=(ud.coins/10);
+        ud.health=100;
+        ud.hunger=100;
+        ud.thirst=100;
+        ud.sleep=0;
+        response.osay = "@sit:00000000-0000-0000-0000-000000000000=force";
+        response.anim = "death";
+        response.sound = "dieing"; 
     }
 
     //if(ud.fitness>1000) ud.fitness=1000; //ud.fitness cap
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //RLV commands
+
+    //shape
+    let shape_changed = ud.shape;
+    if(ud.fat<12 && ud.shape!=1) // Super Skinny
+        ud.shape=1;
+    else if(ud.fat>=12 && ud.fat<25 && ud.shape!=2) // Skinny
+        ud.shape=2;
+    else if(ud.fat>=25 && ud.fat<37 && ud.shape!=3) // Average SKinny
+        ud.shape=3;
+    else if(ud.fat>=37 && ud.fat<62 && ud.shape!=4) // Average
+        ud.shape=4;
+    else if(ud.fat>=62 && ud.fat<75 && ud.shape!=5) // Average ud.fat
+        ud.shape=5;
+    else if(ud.fat>=75 && ud.fat<87 && ud.shape!=6) // ud.fat
+        ud.shape=6;
+    else if(ud.fat>=87 && ud.shape!=7) // super ud.fat
+        ud.shape=7;
+    if(shape_changed!=ud.shape)
+        response.osay = "@attach:"+essr_folder+"shape00" + ud.shape + "=force"
+
+    //pimples
+    if(ud.pimples>=50 && ud.pimpleStage!=2)
+    {
+        response.osay = "@attachover:"+essr_folder+"~SKYN_Pimples001=force";
+        ud.pimpleStage=2;
+    }
+    else if(ud.pimples<50 && ud.pimpleStage!=1)
+    {
+        response.osay = "@detach:"+essr_folder+"~SKYN_Pimples001=force";
+        ud.pimpleStage=1;
+    }
+
+    //sleep
+    if(ud.sleep>=75 && ud.sleepSwitch!=2)
+	{
+		response.osay = "@attachover:"+essr_folder+"~SKYN_sleep001=force";
+		ud.sleepSwitch=2;
+		response.sound = "yawn";
+		//llSay(ch, "yawn");
+	}
+	else if(ud.sleep<75 && ud.sleepSwitch!=1)
+	{
+		response.osay = "@detach:"+essr_folder+"~SKYN_sleep001=force";
+		ud.sleepSwitch=1;
+    }
+	else if(ud.sleep>=100 && ud.sleepSwitch!=4)
+	{
+		response.osay = "@sit:00000000-0000-0000-0000-000000000000=force";
+		//ud.sleepMode=TRUE;
+		ud.sleepSwitch=4;
+    }
+    
+    //sweat
+    if(ud.sweatSwitch!=1 && ud.energy<=((fitness/4)*3) && ud.energy>(fitness/2))
+    {
+        response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
+        ud.sweatSwitch=1;
+    }
+    else if(ud.sweatSwitch!=2 && ud.energy>(fitness/4) && ud.energy<=(fitness/2))
+    {
+        response.osay = "@detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
+        ud.sweatSwitch=2;
+    }
+    else if(ud.sweatSwitch!=3 && ud.energy<=(fitness/4))
+    {
+        response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
+        ud.sweatSwitch=3;
+    } 
+    else if (ud.sweatSwitch!=0 && ud.energy>=fitness) 
+    {
+        ud.sweatSwitch=0;
+        response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
+    }
+    //Death
+
 }
