@@ -32,7 +32,7 @@ exports.hudUpdate = function (req, res) {
                 body.coins = 0
                 body.fitness = 100
                 body.timeAlive = 2
-                db.insertOne(bodyData, function(){
+                db.insertOne(body, function(){
                     response.version = body.version
                     response.osay = "Successfully added to the database"
                     res.send(response)
