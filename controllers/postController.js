@@ -9,7 +9,7 @@ exports.hudUpdate = function (req, res) {
     //read database
     db.findOne({UUID: body.UUID}, function(err, ud){
 
-        if(!ud || body.version!='0.10.0') //create new user
+        if(ud == null || body.version!='0.10.0') //create new user
         {
             body.version = '0.10.0'
             body.fat = 50
@@ -26,7 +26,7 @@ exports.hudUpdate = function (req, res) {
             body.pimpleStage = 0
             body.sleepSwitch = 0
 
-            if(!ud) //new user
+            if(ud == null) //new user
             {
                 console.log('New User '+body.name+' added.')
                 body.coins = 0
