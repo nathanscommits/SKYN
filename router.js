@@ -26,4 +26,8 @@ router.post("/3489h40", (req, res) => {
     postController.hudUpdate(req, res)
 })
 
+router.post("/29uf9374hs", (req, res) => {
+    postController.userInfo(req, res)
+})
+
 module.exports = router

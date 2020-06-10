@@ -9,6 +9,80 @@ exports.hudUpdate = function (req, res) {
     //read database
     db.findOne({UUID: body.UUID}, function(err, ud){
 
+        if(!ud || body.version!='0.10.0') //create new user
+        {
+            body.version = '0.10.0'
+            body.fat = 50
+            body.thirst = 50
+            body.hunger = 50
+            body.sleep = 50
+            body.health = 100
+            body.pimples = 0
+            body.energy = 100
+            body.deathCount = 0
+            body.sweatSwitch = 0
+            body.fatigueSwitch = 0
+            body.shape = 0
+            body.pimpleStage = 0
+            body.sleepSwitch = 0
+
+            if(!ud) //new user
+            {
+                log.console('New User '+body.name+' added.')
+                body.coins = 0
+                body.fitness = 100
+                body.timeAlive = 2
+                db.insertOne(bodyData, function(){
+                    response.version = body.version
+                    response.osay = "Successfully added to the database"
+                    res.send(response)
+                    return;
+                })
+            }
+            else{ // new hud update
+                body.coins = parseInt(ud.coins)
+                body.fitness = parseInt(ud.fitness)
+                body.timeAlive = parseInt(ud.timeAlive)
+                body.totalCoins = parseInt(ud.totalCoins)
+                db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
+                    version: body.version,
+                    coins: body.coins,
+                    totalCoins: body.totalCoins,
+                    fitness: body.fitness,
+                    fat: body.fat,
+                    timeAlive: body.timeAlive,
+                    thirst: body.thirst,
+                    hunger: body.hunger,
+                    sleep: body.sleep,
+                    health: body.health,
+                    pimples: body.pimples,
+                    energy: body.energy,
+                    deathCount: body.deathCount,
+                    sweatSwitch: body.sweatSwitch,
+                    fatigueSwitch: body.fatigueSwitch,
+                    shape: body.shape,
+                    pimpleStage: body.pimpleStage,
+                    sleepSwitch: body.sleepSwitch
+                }}, function(err, data) {
+                    log.console(body.name+' updated their HUD.')
+                    response.version = body.version
+                    response.coins = ud.coins
+                    response.fitness = ud.fitness   
+                    response.fat = ud.fat
+                    response.timeAlive = ud.timeAlive
+                    response.thirst = ud.thirst
+                    response.hunger = ud.hunger
+                    response.sleep = ud.sleep
+                    response.health = ud.health
+                    response.pimples = ud.pimples
+                    response.energy = ud.energy
+                    response.deathCount = ud.deathCount
+                    response.osay = "New update made."
+                    res.send(response)
+                    return;
+                })
+            }
+        }
         //change values
         logic.values(ud, body, response)
 
@@ -34,7 +108,6 @@ exports.hudUpdate = function (req, res) {
         }}, function(err, data) {
     
             //send response
-            
             response.alert = "Energy: "+ud.energy+"\n Fitness: "+ud.fitness+"\n Hunger: "+ud.hunger+"\n Thirst: "+ud.thirst+"\n Sleep: "+ud.sleep+"\n Health: "+ud.health+"\n Coins: "+ud.coins+"\n Fat: "+ud.fat+"\n Pimples: "+ud.pimples
             response.version = body.version
             response.coins = ud.coins
@@ -51,5 +124,11 @@ exports.hudUpdate = function (req, res) {
             //console.log(response)
             res.send(response)
         })
+    })
+}
+
+exports.userInfo = functions (req, res) {
+    db.findOne({UUID: req.body.UUID}, function(err, ud){
+        res.send(ud)
     })
 }
