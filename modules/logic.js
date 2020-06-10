@@ -201,22 +201,22 @@ exports.values = function(ud, body, response) {
     }
     
     //sweat
-    if(ud.sweatSwitch!=1 && ud.energy<=((fitness/4)*3) && ud.energy>(fitness/2))
+    if(ud.sweatSwitch!=1 && ud.energy<=((ud.fitness/4)*3) && ud.energy>(ud.fitness/2))
     {
         response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
         ud.sweatSwitch=1;
     }
-    else if(ud.sweatSwitch!=2 && ud.energy>(fitness/4) && ud.energy<=(fitness/2))
+    else if(ud.sweatSwitch!=2 && ud.energy>(ud.fitness/4) && ud.energy<=(ud.fitness/2))
     {
         response.osay = "@detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
         ud.sweatSwitch=2;
     }
-    else if(ud.sweatSwitch!=3 && ud.energy<=(fitness/4))
+    else if(ud.sweatSwitch!=3 && ud.energy<=(ud.fitness/4))
     {
         response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
         ud.sweatSwitch=3;
     } 
-    else if (ud.sweatSwitch!=0 && ud.energy>=fitness) 
+    else if (ud.sweatSwitch!=0 && ud.energy>=ud.fitness) 
     {
         ud.sweatSwitch=0;
         response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
