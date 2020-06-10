@@ -221,7 +221,8 @@ exports.values = function(ud, body, response) {
         ud.sweatSwitch=0;
         response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
     }
-    else if(ud.fatigueSwitch!=1 && ud.energy<=0)
+    
+    if(ud.fatigueSwitch!=1 && ud.energy<=0)
     {
         response.osay = "@fly=n,temprun=n,alwaysrun=n";
         ud.fatigueSwitch=1;
