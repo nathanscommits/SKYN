@@ -48,7 +48,7 @@ exports.hudUpdate = function (req, res) {
             response.pimples = ud.pimples
             response.energy = ud.energy
             response.deathCount = ud.deathCount
-            console.log(response)
+            //console.log(response)
             res.send(response)
         })
     })

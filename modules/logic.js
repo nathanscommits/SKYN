@@ -139,7 +139,8 @@ exports.values = function(ud, body, response) {
         ud.hunger=100;
         ud.thirst=100;
         ud.sleep=0;
-        response.osay = "@sit:00000000-0000-0000-0000-000000000000=force";
+        if(response.osay.substring(0,1) == "@") response.osay += ",sit:00000000-0000-0000-0000-000000000000=force";
+        else response.osay += "@sit:00000000-0000-0000-0000-000000000000=force";
         response.anim = "death";
         response.sound = "dieing"; 
     }
@@ -166,36 +167,42 @@ exports.values = function(ud, body, response) {
     else if(ud.fat>=87 && ud.shape!=7) // super ud.fat
         ud.shape=7;
     if(shape_changed!=ud.shape)
-        response.osay = "@attach:"+essr_folder+"shape00" + ud.shape + "=force"
+        if(response.osay.substring(0,1) == "@") response.osay += ",attach:"+essr_folder+"shape00" + ud.shape + "=force"
+        else response.osay += "@attach:"+essr_folder+"shape00" + ud.shape + "=force"
 
     //pimples
     if(ud.pimples>=50 && ud.pimpleStage!=2)
     {
-        response.osay = "@attachover:"+essr_folder+"~SKYN_Pimples001=force";
+        if(response.osay.substring(0,1) == "@") response.osay += ",attachover:"+essr_folder+"~SKYN_Pimples001=force";
+        else response.osay += "@attachover:"+essr_folder+"~SKYN_Pimples001=force";
         ud.pimpleStage=2;
     }
     else if(ud.pimples<50 && ud.pimpleStage!=1)
     {
-        response.osay = "@detach:"+essr_folder+"~SKYN_Pimples001=force";
+        if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Pimples001=force";
+        else response.osay += "@detach:"+essr_folder+"~SKYN_Pimples001=force";
         ud.pimpleStage=1;
     }
 
     //sleep
     if(ud.sleep>=75 && ud.sleep<100 && ud.sleepSwitch!=2)
 	{
-		response.osay = "@attachover:"+essr_folder+"~SKYN_sleep001=force";
+		if(response.osay.substring(0,1) == "@") response.osay += ",attachover:"+essr_folder+"~SKYN_sleep001=force";
+        else response.osay += "@attachover:"+essr_folder+"~SKYN_sleep001=force";
 		ud.sleepSwitch=2;
 		response.sound = "yawn";
 		//llSay(ch, "yawn");
 	}
 	else if(ud.sleep<75 && ud.sleepSwitch!=1)
 	{
-		response.osay = "@detach:"+essr_folder+"~SKYN_sleep001=force";
+		if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_sleep001=force";
+        else response.osay += "@detach:"+essr_folder+"~SKYN_sleep001=force";
 		ud.sleepSwitch=1;
     }
 	else if(ud.sleep>=100 && ud.sleepSwitch!=4)
 	{
-		response.osay = "@sit:00000000-0000-0000-0000-000000000000=force";
+		if(response.osay.substring(0,1) == "@") response.osay += ",sit:00000000-0000-0000-0000-000000000000=force";
+        else response.osay += "@sit:00000000-0000-0000-0000-000000000000=force";
 		//ud.sleepMode=TRUE;
 		ud.sleepSwitch=4;
     }
@@ -203,33 +210,39 @@ exports.values = function(ud, body, response) {
     //sweat
     if(ud.sweatSwitch!=1 && ud.energy<=((ud.fitness/4)*3) && ud.energy>(ud.fitness/2))
     {
-        response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
+        if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
+        else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
         ud.sweatSwitch=1;
     }
     else if(ud.sweatSwitch!=2 && ud.energy>(ud.fitness/4) && ud.energy<=(ud.fitness/2))
     {
-        response.osay = "@detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
+        if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
+        else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
         ud.sweatSwitch=2;
     }
     else if(ud.sweatSwitch!=3 && ud.energy<=(ud.fitness/4))
     {
-        response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
+        if(response.osay.substring(0,1) == "@")  response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
+        else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
         ud.sweatSwitch=3;
     } 
     else if (ud.sweatSwitch!=0 && ud.energy>=ud.fitness) 
     {
         ud.sweatSwitch=0;
-        response.osay = "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
+        if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
+        else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
     }
     
     if(ud.fatigueSwitch!=1 && ud.energy<=0)
     {
-        response.osay = "@fly=n,temprun=n,alwaysrun=n";
+        if(response.osay.substring(0,1) == "@") response.osay += ",fly=n,temprun=n,alwaysrun=n";
+        else response.osay += "@fly=n,temprun=n,alwaysrun=n";
         ud.fatigueSwitch=1;
     }
     else if(ud.fatigueSwitch!=2 && ud.energy>(ud.energy/8))
     {
-        response.osay = "@fly=y,temprun=y,alwaysrun=y";
+        if(response.osay.substring(0,1) == "@") response.osay += ",fly=y,temprun=y,alwaysrun=y";
+        else response.osay += "@fly=y,temprun=y,alwaysrun=y";
         ud.fatigueSwitch=2;
     }
     //Death
