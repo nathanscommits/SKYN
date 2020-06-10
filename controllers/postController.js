@@ -127,7 +127,7 @@ exports.hudUpdate = function (req, res) {
     })
 }
 
-exports.userInfo = functions (req, res) {
+exports.userInfo = function (req, res) {
     db.findOne({UUID: req.body.UUID}, function(err, ud){
         res.send(ud)
     })
