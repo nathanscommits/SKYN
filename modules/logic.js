@@ -181,7 +181,7 @@ exports.values = function(ud, body, response) {
     }
 
     //sleep
-    if(ud.sleep>=75 && && ud.sleep<100 && ud.sleepSwitch!=2)
+    if(ud.sleep>=75 && ud.sleep<100 && ud.sleepSwitch!=2)
 	{
 		response.osay = "@attachover:"+essr_folder+"~SKYN_sleep001=force";
 		ud.sleepSwitch=2;
