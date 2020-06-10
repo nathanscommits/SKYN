@@ -4,6 +4,7 @@ const logic = require('../modules/logic')
 exports.hudUpdate = function (req, res) {
     let body = req.body
     let response = {}
+    response.osay = "";
     response.UUID = body.UUID
     //read database
     db.findOne({UUID: body.UUID}, function(err, ud){
@@ -24,7 +25,12 @@ exports.hudUpdate = function (req, res) {
             health: ud.health,
             pimples: ud.pimples,
             energy: ud.energy,
-            deathCount: ud.deathCount
+            deathCount: ud.deathCount,
+            sweatSwitch: ud.sweatSwitch,
+            fatigueSwitch: ud.fatigueSwitch,
+            shape: ud.shape,
+            pimpleStage: ud.pimpleStage,
+            sleepSwitch: ud.sleepSwitch
         }}, function(err, data) {
     
             //send response
