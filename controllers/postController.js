@@ -28,7 +28,7 @@ exports.hudUpdate = function (req, res) {
 
             if(!ud) //new user
             {
-                log.console('New User '+body.name+' added.')
+                console.log('New User '+body.name+' added.')
                 body.coins = 0
                 body.fitness = 100
                 body.timeAlive = 2
@@ -64,7 +64,7 @@ exports.hudUpdate = function (req, res) {
                     pimpleStage: body.pimpleStage,
                     sleepSwitch: body.sleepSwitch
                 }}, function(err, data) {
-                    log.console(body.name+' updated their HUD.')
+                    console.log(body.name+' updated their HUD.')
                     response.version = body.version
                     response.coins = ud.coins
                     response.fitness = ud.fitness   
