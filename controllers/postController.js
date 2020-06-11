@@ -140,3 +140,6 @@ exports.userInfo = function (req, res) {
         res.send(ud)
     })
 }
+
+
+	
