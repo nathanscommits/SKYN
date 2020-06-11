@@ -38,28 +38,28 @@ exports.values = function(ud, body, response) {
     
     if(action.substring(1, 2)=="1") //flying
     {
-        ud.energy-=4;
+        ud.energy-=8;
     }
     if(action.substring(2, 3)=="1") //running
     {
-        ud.energy-=2;
+        ud.energy-=4;
     }
     if(action.substring(3, 4)=="1") //walking/running
     {
-        ud.energy--;
+        ud.energy-=2;
     }
     if(action.substring(4, 5)=="1") //jumping
     {
-        ud.energy-=4;
+        ud.energy-=8;
     }
     if(ud.energy<=0){
         response.anim = "exhausted"
-        response.sound = "breathing"
+        response.sound = "breathing"   
     }
     if(action.substring(0,5)=="00000") //standing
     {
         ud.energy+=(ud.fitness/100); //regain ud.energy while idle
-        ud.fitness-=0.01; //passive ud.fitness loss
+        ud.fitness-=0.02; //passive ud.fitness loss
 
         console.log("standing")
     }
