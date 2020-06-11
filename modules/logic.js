@@ -143,7 +143,8 @@ exports.values = function(ud, body, response) {
     let essr_folder = "~SKYN ESSR DLC/"
     let consumed = {} //= JSON.parse(body.consumed)
     consumed = body.consumed
-    let listen = body.listen
+    let listen = {}
+    listen = body.listen
     
     let action = body.action
     //console.log(action)
@@ -215,21 +216,24 @@ exports.values = function(ud, body, response) {
 
     
     //listen
-    if(action.substring(5, 6)=="0") //not sleeping
+    if(listen)
     {
-        if(listen.includes("eatCalories:")) consumable("food", 20, 0, 15, 5, 20, 5, 0, 0, 0);
-        if(listen.includes("dietPill:")) consumable("pills", 20, -20, 20, 20, -20, -10, 0, 0, -10);
-        if(listen.includes("drinkCalories:")) consumable("drink", 0, 20, 10, -10, 20, 0, 0, 0, 0);
-        if(listen.includes("cham_tea Calories:")) consumable("drink", 0, 10, -10, 20, 0, 0, 25, 0, 0);
-        if(listen.includes("fruit Calories:")) consumable("food", 10, 0, 5, 0, 10, 2, 0, 0, 0);
-        if(listen.includes("salad Calories:")) consumable("food", 10, 5, -20, 0, 10, 0, 0, 0, 0);
-        if(listen.includes("coffee Calories:")) consumable("drink", 0, 5, 0, -25, 50, 0, 0, 0, 0);
-        if(listen.includes("facemask Calories:")) consumable("item", 0, 0, -100, 0, 0, 0, 0, 0, 0);
-        if(listen.includes("water Calories:")) consumable("drink", 0, 25, 0, 0, 0, 0, 0, 0, 0);
-        if(listen.includes("fitness:")) consumable("action", -5, -5, 0, -5, -20, 0, 0, 0, 10);
+        if(action.substring(5, 6)=="0") //not sleeping
+        {
+            if(listen.includes("eatCalories:")) consumable("food", 20, 0, 15, 5, 20, 5, 0, 0, 0);
+            if(listen.includes("dietPill:")) consumable("pills", 20, -20, 20, 20, -20, -10, 0, 0, -10);
+            if(listen.includes("drinkCalories:")) consumable("drink", 0, 20, 10, -10, 20, 0, 0, 0, 0);
+            if(listen.includes("cham_tea Calories:")) consumable("drink", 0, 10, -10, 20, 0, 0, 25, 0, 0);
+            if(listen.includes("fruit Calories:")) consumable("food", 10, 0, 5, 0, 10, 2, 0, 0, 0);
+            if(listen.includes("salad Calories:")) consumable("food", 10, 5, -20, 0, 10, 0, 0, 0, 0);
+            if(listen.includes("coffee Calories:")) consumable("drink", 0, 5, 0, -25, 50, 0, 0, 0, 0);
+            if(listen.includes("facemask Calories:")) consumable("item", 0, 0, -100, 0, 0, 0, 0, 0, 0);
+            if(listen.includes("water Calories:")) consumable("drink", 0, 25, 0, 0, 0, 0, 0, 0, 0);
+            if(listen.includes("fitness:")) consumable("action", -5, -5, 0, -5, -20, 0, 0, 0, 10);
+        }
+        if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0);
+        if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1);
     }
-    if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0);
-    if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1);
 
     //consumables
     
