@@ -36,8 +36,9 @@ exports.hudUpdate = function (req, res) {
                     response.version = body.version
                     response.osay = "Successfully added to the database"
                     res.send(response)
-                    return;
                 })
+                
+                return;
             }
             else{ // new hud update
                 body.coins = parseInt(ud.coins)
@@ -79,8 +80,9 @@ exports.hudUpdate = function (req, res) {
                     response.deathCount = ud.deathCount
                     response.osay = "New update made."
                     res.send(response)
-                    return;
+                   
                 })
+                return;
             }
         }
         //change values
