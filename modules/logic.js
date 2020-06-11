@@ -133,7 +133,7 @@ exports.values = function(ud, body, response) {
     consumed = body.consumed
     
     let action = body.action
-    console.log(action)
+    //console.log(action)
     if(action.substring(0, 1)=="1") //sitting
     {
         ud.energy+=(ud.fitness/50); //resting
@@ -189,7 +189,7 @@ exports.values = function(ud, body, response) {
         ud.energy+=(ud.fitness/100); //regain ud.energy while idle
         ud.fitness-=0.02; //passive ud.fitness loss
 
-        console.log("standing")
+        //console.log("standing")
     }
     if(ud.energy<ud.fitness)
     {
