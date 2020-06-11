@@ -217,23 +217,30 @@ exports.values = function(ud, body, response) {
 
     
     //listen
+    
     if(listen)
     {
-        if(action.substring(5, 6)=="0") //not sleeping
+        let count = (listen.match(/is/g) || []).length;
+        let i = 0;
+        while(i < count)
         {
-            if(listen.includes("eatCalories:")) consumable("food", 20, 0, 15, 5, 20, 5, 0, 0, 0);
-            if(listen.includes("dietPill:")) consumable("pills", 20, -20, 20, 20, -20, -10, 0, 0, -10);
-            if(listen.includes("drinkCalories:")) consumable("drink", 0, 20, 10, -10, 20, 0, 0, 0, 0);
-            if(listen.includes("cham_tea Calories:")) consumable("drink", 0, 10, -10, 20, 0, 0, 25, 0, 0);
-            if(listen.includes("fruit Calories:")) consumable("food", 10, 0, 5, 0, 10, 2, 0, 0, 0);
-            if(listen.includes("salad Calories:")) consumable("food", 10, 5, -20, 0, 10, 0, 0, 0, 0);
-            if(listen.includes("coffee Calories:")) consumable("drink", 0, 5, 0, -25, 50, 0, 0, 0, 0);
-            if(listen.includes("pimpleAlter")) consumable("item", 0, 0, -100, 0, 0, 0, 0, 0, 0);
-            if(listen.includes("water Calories:")) consumable("drink", 0, 25, 0, 0, 0, 0, 0, 0, 0);
-            if(listen.includes("fitness:")) consumable("action", -5, -5, 0, -5, -20, 0, 0, 0, 10);
+            if(action.substring(5, 6)=="0") //not sleeping
+            {
+                if(listen.includes("eatCalories:")) consumable("food", 20, 0, 15, 5, 20, 5, 0, 0, 0);
+                if(listen.includes("dietPill:")) consumable("pills", 20, -20, 20, 20, -20, -10, 0, 0, -10);
+                if(listen.includes("drinkCalories:")) consumable("drink", 0, 20, 10, -10, 20, 0, 0, 0, 0);
+                if(listen.includes("cham_tea Calories:")) consumable("drink", 0, 10, -10, 20, 0, 0, 25, 0, 0);
+                if(listen.includes("fruit Calories:")) consumable("food", 10, 0, 5, 0, 10, 2, 0, 0, 0);
+                if(listen.includes("salad Calories:")) consumable("food", 10, 5, -20, 0, 10, 0, 0, 0, 0);
+                if(listen.includes("coffee Calories:")) consumable("drink", 0, 5, 0, -25, 50, 0, 0, 0, 0);
+                if(listen.includes("pimpleAlter")) consumable("item", 0, 0, -100, 0, 0, 0, 0, 0, 0);
+                if(listen.includes("water Calories:")) consumable("drink", 0, 25, 0, 0, 0, 0, 0, 0, 0);
+                if(listen.includes("fitness:")) consumable("action", -5, -5, 0, -5, -20, 0, 0, 0, 10);
+            }
+            if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0);
+            if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1);
+            i++;
         }
-        if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0);
-        if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1);
     }
 
     //consumables
