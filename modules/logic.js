@@ -10,7 +10,7 @@ exports.values = function(ud, body, response) {
     {
         ud.energy+=(ud.fitness/50); //resting
 
-        if(action.substring(5, 6)=="1") //ud.sleeping on ground =1 on object =2
+        if(parseInt(action.substring(5, 6))>=1) //ud.sleeping on ground =1 on object =2
         {
             ud.sleep--;
             ud.energy+=(ud.fitness/20); //resting even more
@@ -123,7 +123,7 @@ exports.values = function(ud, body, response) {
     //ud.coins
     if(ud.health>0)
     {
-        ud.timeAlive++;
+        ud.timeAlive+2;
         if(ud.hunger>0) ud.coins+=(ud.hunger/1000);
         if(ud.thirst>0) ud.coins+=(ud.thirst/1000);
         if(ud.fitness>=100) ud.coins+=(ud.fitness/10000);
