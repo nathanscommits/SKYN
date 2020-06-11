@@ -1,24 +1,25 @@
 const express = require('express')
 const app = express()
 const db = require('./db')
+const router = require('./router')
 
 app.set('views','views')
 app.set('view engine', 'ejs')
 
-
-const router = require('./router')
-//const db = require('./db')
 //json parsers
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+
 //gets
 app.use("/", router)
 app.use("/prizes", router)
 app.use("/tutorial", router)
 app.use("/HUD_guide", router)
 app.use("/leaderboard", router)
+
 //posts
 app.use('/3489h40', router)
+app.use('/29uf9374hs', router)
 let currentVersion = "0.9.1"
 let sendstring 
 
@@ -144,9 +145,6 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
     }
      
 })
-
-//{useNewUrlParser: true, useUnifiedTopology: true}
-//[21:03] Gayngel: At least with a POST to Google you can also do request.postData.getDataAsString()... There might be some command like that with heroku...
 
 app.use(express.static('public'))
 
