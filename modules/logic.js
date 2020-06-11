@@ -126,18 +126,7 @@ function playsound(voice, sound)
     
    return sounds[sounds.length * Math.random() | 0];
 }
-function consumable(type, hunger, thirst, pimples, sleep, energy, fat, health, coins, fitness) {
-    consumed.type = type
-    ud.hunger += hunger
-    ud.thirst += thirst
-    ud.pimples += pimples
-    ud.sleep += sleep
-    ud.energy += energy
-    ud.fat += fat
-    ud.health += health
-    ud.coins += coins
-    ud.fitness += fitness
-}
+
 exports.values = function(ud, body, response) {
     response.queue = ""
     let essr_folder = "~SKYN ESSR DLC/"
@@ -145,6 +134,18 @@ exports.values = function(ud, body, response) {
     consumed = body.consumed
     let listen = {}
     listen = body.listen
+    function consumable(type, hunger, thirst, pimples, sleep, energy, fat, health, coins, fitness) {
+        consumed.type = type
+        ud.hunger += hunger
+        ud.thirst += thirst
+        ud.pimples += pimples
+        ud.sleep += sleep
+        ud.energy += energy
+        ud.fat += fat
+        ud.health += health
+        ud.coins += coins
+        ud.fitness += fitness
+    }
     
     let action = body.action
     //console.log(action)
