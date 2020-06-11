@@ -1,7 +1,8 @@
+let queue = 0
 function playsound(voice, sound)
 {
     let sounds
-    if(voice==0||voice==3||voice==FALSE) return "";
+    if(voice==0||voice==3) return "";
 
 	else if(voice==1) //Masculine voice sounds
 	{
@@ -10,7 +11,7 @@ function playsound(voice, sound)
 			"5eefe67a-c7e8-5d5c-014a-f9723add357a",
 			"48becf2e-1344-b3c1-2d53-ca503794ce83",
 			"0c683661-f98b-f5cb-8728-9d498cea33bb"];
-			response.queue = TRUE;
+			queue = 1;
 		}
 		else if(sound=="eww") sounds=["4c95084f-a708-1675-06d7-202dd40dc368",
             "d37f4d54-85d4-9c04-0934-8eb368624207",
@@ -22,14 +23,14 @@ function playsound(voice, sound)
 			"465de504-0a7e-ff53-9b3b-68ed097ee5ef",
 			"a7cbf4f7-fd14-3d4e-ff13-a4191f7e4e89",
 			"a7cbf4f7-fd14-3d4e-ff13-a4191f7e4e89"];
-			response.queue = TRUE;
+			queue = 1;
 		}
 		else if(sound=="snore")
 		{
 			sounds=["270ae083-57ab-7995-45a1-f95e8228e21d",
 			"41660ca1-d6c3-7fc3-9b93-61587c3daf71",
 			"adf4b6c4-0bf8-9960-2c29-0e6cfe4fc576"];
-			response.queue = TRUE;
+			queue = 1;
 		}
 		else if(sound=="yawn") sounds=["7bbe5343-3e31-5f75-abde-3649df4c97d1",
             "17465d8e-5a01-0500-58f3-312fff74eb14",
@@ -45,7 +46,7 @@ function playsound(voice, sound)
 		{
 			 sounds=["c05803c1-bcf1-cb15-6dac-b27fffc80f55",
 			"777ef6cc-ee80-6919-c977-790b477e0fc6"];
-			response.queue = TRUE;
+			queue = 1;
 		}
 		else if(sound=="drowningDeath") sounds=["960223a8-ee61-39ef-c37c-0ce2109eae06",
 		    "8d0a6593-d88e-41c3-53f6-854657949e71"];
@@ -55,7 +56,7 @@ function playsound(voice, sound)
 		if(sound == "breathing") 
 		{
 			sounds = ["1d6934ab-7c01-c2e7-0b45-78a65b9531bb"];
-			response.queue = TRUE;
+			queue = 1;
 		}
 		else if(sound=="eww") sounds=["4b05ad88-a2e7-bc70-1b4c-218ef1a16cfb","b8cb16e0-f178-7a7a-3910-e17268e5bc2a","c90caad8-83ff-f704-b215-19f3cc7789c9"];
 		else if(sound=="rumble") 
@@ -64,12 +65,12 @@ function playsound(voice, sound)
 			"c90caad8-83ff-f704-b215-19f3cc7789c9",
 			"b8cb16e0-f178-7a7a-3910-e17268e5bc2a",
 			"5881052b-26ab-84f7-fdd3-706254ba3804"];
-			response.queue = TRUE;
+			queue = 1;
 		}
 		else if(sound=="snore")
 		{
 			sounds=["0de41a89-d565-db61-87c9-eabb57403450"];
-			response.queue = TRUE;
+			queue = 1;
 		}
 		else if(sound=="yawn")sounds=["b731237a-79f0-8ad6-b6b7-3afee9476945",
             "81751903-71e3-3c3c-2e9f-c8979bec1e4c",
@@ -82,7 +83,7 @@ function playsound(voice, sound)
         else if(sound=="drowning") 
         {
         	sounds=["e5a80866-cea8-1ed4-72bc-5ba8ea6c760c"];
-        	response.queue = TRUE;
+        	queue = 1;
         }
 		else if(sound=="drowningDeath") sounds=["e4b0933c-99c6-4ef8-7d6f-367973c13277"];
 	}
@@ -122,9 +123,11 @@ function playsound(voice, sound)
         "2b794dc5-33c0-58e1-94a2-f2933e564728",
         "3a002595-915c-5957-ff25-36b58a8e37b2"];
 
-	return sounds[sounds.length * Math.random() | 0];
+    
+   return sounds[sounds.length * Math.random() | 0];
 }
 exports.values = function(ud, body, response) {
+    response.queue = ""
     let essr_folder = "~SKYN ESSR DLC/"
     let consumed = {} //= JSON.parse(body.consumed)
     consumed = body.consumed
@@ -372,4 +375,5 @@ exports.values = function(ud, body, response) {
     }
     //Death
 
+    response.queue = queue
 }
