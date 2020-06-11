@@ -18,12 +18,12 @@ exports.values = function(ud, body, response) {
             if(action.substring(5,6)=="1") //ground sleeping
             {
                 response.anim = "sleeping"
-                response.sound = "snoring"
+                response.sound = "snore"
             }
             else //chair sleeping
             {
                 response.anim = "sleeping_chair"
-                response.sound = "snoring"
+                response.sound = "snore"
             }
             
         }
@@ -123,7 +123,7 @@ exports.values = function(ud, body, response) {
     //ud.coins
     if(ud.health>0)
     {
-        ud.timeAlive+2;
+        ud.timeAlive+=2;
         if(ud.hunger>0) ud.coins+=(ud.hunger/1000);
         if(ud.thirst>0) ud.coins+=(ud.thirst/1000);
         if(ud.fitness>=100) ud.coins+=(ud.fitness/10000);
@@ -141,7 +141,7 @@ exports.values = function(ud, body, response) {
         ud.sleep=0;
         if(response.osay.substring(0,1) == "@") response.osay += ",sit:00000000-0000-0000-0000-000000000000=force";
         else response.osay += "@sit:00000000-0000-0000-0000-000000000000=force";
-        response.anim = "death";
+        response.anim = "sleeping";
         response.sound = "dieing"; 
     }
 

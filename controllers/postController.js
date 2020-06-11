@@ -9,9 +9,9 @@ exports.hudUpdate = function (req, res) {
     //read database
     db.findOne({UUID: body.UUID}, function(err, ud){
 
-        if(ud == null || body.version!='0.10.0') //create new user
+        if(ud == null || body.version!='0.10.1') //create new user
         {
-            body.version = '0.10.0'
+            body.version = '0.10.1'
             body.fat = 50
             body.thirst = 50
             body.hunger = 50
@@ -25,10 +25,11 @@ exports.hudUpdate = function (req, res) {
             body.shape = 0
             body.pimpleStage = 0
             body.sleepSwitch = 0
-
+            
             if(ud == null) //new user
             {
                 console.log('New User '+body.name+' added.')
+                body.voice = 0
                 body.coins = 0
                 body.fitness = 100
                 body.timeAlive = 2
@@ -41,6 +42,7 @@ exports.hudUpdate = function (req, res) {
                 return;
             }
             else{ // new hud update
+                body.voice = parseInt(ud.voice)
                 body.coins = parseInt(ud.coins)
                 body.fitness = parseInt(ud.fitness)
                 body.timeAlive = parseInt(ud.timeAlive)
@@ -63,7 +65,8 @@ exports.hudUpdate = function (req, res) {
                     fatigueSwitch: body.fatigueSwitch,
                     shape: body.shape,
                     pimpleStage: body.pimpleStage,
-                    sleepSwitch: body.sleepSwitch
+                    sleepSwitch: body.sleepSwitch,
+                    voice: body.voice
                 }}, function(err, data) {
                     console.log(body.name+' updated their HUD.')
                     response.version = body.version
@@ -78,6 +81,7 @@ exports.hudUpdate = function (req, res) {
                     response.pimples = ud.pimples
                     response.energy = ud.energy
                     response.deathCount = ud.deathCount
+                    response.voice = ud.voice
                     response.osay = "New update made."
                     res.send(response)
                    
@@ -106,7 +110,8 @@ exports.hudUpdate = function (req, res) {
             fatigueSwitch: ud.fatigueSwitch,
             shape: ud.shape,
             pimpleStage: ud.pimpleStage,
-            sleepSwitch: ud.sleepSwitch
+            sleepSwitch: ud.sleepSwitch,
+            voice: body.voice
         }}, function(err, data) {
     
             //send response
@@ -123,6 +128,7 @@ exports.hudUpdate = function (req, res) {
             response.pimples = ud.pimples
             response.energy = ud.energy
             response.deathCount = ud.deathCount
+            response.voice = body.voice
             //console.log(response)
             res.send(response)
         })
