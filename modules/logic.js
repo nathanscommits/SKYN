@@ -1,7 +1,7 @@
 let queue = 0
 function playsound(voice, sound)
 {
-    let sounds
+    let sounds = []
     if(voice==0||voice==3) return "";
 
 	else if(voice==1) //Masculine voice sounds
