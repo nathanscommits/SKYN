@@ -3,7 +3,7 @@ function playsound(voice, sound)
 {
     let sounds = []
     if(voice==0||voice==3) return "";
-
+//d1e83b54-cc26-d069-f950-a04e4f94fe1f silennce
 	else if(voice==1) //Masculine voice sounds
 	{
 		if(sound == "breathing") {
@@ -29,7 +29,11 @@ function playsound(voice, sound)
 		{
 			sounds=["270ae083-57ab-7995-45a1-f95e8228e21d",
 			"41660ca1-d6c3-7fc3-9b93-61587c3daf71",
-			"adf4b6c4-0bf8-9960-2c29-0e6cfe4fc576"];
+            "adf4b6c4-0bf8-9960-2c29-0e6cfe4fc576",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f"
+        ];
 			queue = 1;
 		}
 		else if(sound=="yawn") sounds=["7bbe5343-3e31-5f75-abde-3649df4c97d1",
@@ -69,7 +73,10 @@ function playsound(voice, sound)
 		}
 		else if(sound=="snore")
 		{
-			sounds=["0de41a89-d565-db61-87c9-eabb57403450"];
+            sounds=["0de41a89-d565-db61-87c9-eabb57403450",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f"];
 			queue = 1;
 		}
 		else if(sound=="yawn")sounds=["b731237a-79f0-8ad6-b6b7-3afee9476945",
@@ -217,30 +224,23 @@ exports.values = function(ud, body, response) {
 
     
     //listen
-    
     if(listen)
     {
-        let count = (listen.match(/is/g) || []).length;
-        let i = 0;
-        while(i < count)
+        if(action.substring(5, 6)=="0") //not sleeping
         {
-            if(action.substring(5, 6)=="0") //not sleeping
-            {
-                if(listen.includes("eatCalories:")) consumable("food", 20, 0, 15, 5, 20, 5, 0, 0, 0);
-                if(listen.includes("dietPill:")) consumable("pills", 20, -20, 20, 20, -20, -10, 0, 0, -10);
-                if(listen.includes("drinkCalories:")) consumable("drink", 0, 20, 10, -10, 20, 0, 0, 0, 0);
-                if(listen.includes("cham_tea Calories:")) consumable("drink", 0, 10, -10, 20, 0, 0, 25, 0, 0);
-                if(listen.includes("fruit Calories:")) consumable("food", 10, 0, 5, 0, 10, 2, 0, 0, 0);
-                if(listen.includes("salad Calories:")) consumable("food", 10, 5, -20, 0, 10, 0, 0, 0, 0);
-                if(listen.includes("coffee Calories:")) consumable("drink", 0, 5, 0, -25, 50, 0, 0, 0, 0);
-                if(listen.includes("pimpleAlter")) consumable("item", 0, 0, -100, 0, 0, 0, 0, 0, 0);
-                if(listen.includes("water Calories:")) consumable("drink", 0, 25, 0, 0, 0, 0, 0, 0, 0);
-                if(listen.includes("fitness:")) consumable("action", -5, -5, 0, -5, -20, 0, 0, 0, 10);
-            }
-            if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0);
-            if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1);
-            i++;
+            if(listen.includes("eatCalories:")) consumable("food", 20, 0, 15, 5, 20, 5, 0, 0, 0);
+            if(listen.includes("dietPill:")) consumable("pills", 20, -20, 20, 20, -20, -10, 0, 0, -10);
+            if(listen.includes("drinkCalories:")) consumable("drink", 0, 20, 10, -10, 20, 0, 0, 0, 0);
+            if(listen.includes("cham_tea Calories:")) consumable("drink", 0, 10, -10, 20, 0, 0, 25, 0, 0);
+            if(listen.includes("fruit Calories:")) consumable("food", 10, 0, 5, 0, 10, 2, 0, 0, 0);
+            if(listen.includes("salad Calories:")) consumable("food", 10, 5, -20, 0, 10, 0, 0, 0, 0);
+            if(listen.includes("coffee Calories:")) consumable("drink", 0, 5, 0, -25, 50, 0, 0, 0, 0);
+            if(listen.includes("pimpleAlter")) consumable("item", 0, 0, -100, 0, 0, 0, 0, 0, 0);
+            if(listen.includes("water Calories:")) consumable("drink", 0, 25, 0, 0, 0, 0, 0, 0, 0);
+            if(listen.includes("fitness:")) consumable("action", -5, -5, 0, -5, -20, 0, 0, 0, 10);
         }
+        if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0);
+        if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1);
     }
 
     //consumables
