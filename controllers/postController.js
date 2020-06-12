@@ -166,7 +166,7 @@ exports.venderGiver = function (req, res) {
 exports.prizeGen = function (req, res) {
     let rand_num = 100
     let pool = {}
-    pool.legendary [
+    pool.legendary = [
         "SKYN **LEGENDARY** Debug mode", 
         "SKYN **LEGENDARY** S.U.R - PRIZE MACHINE"
     ]
