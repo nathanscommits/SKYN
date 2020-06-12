@@ -258,7 +258,7 @@ exports.values = function(ud, body, response) {
             if(listen.includes("coffee Calories:")) consumable("drink", 0, 5, 0, -25, 50, 0, 0, 0, 0);
             if(listen.includes("pimpleAlter")) consumable("item", 0, 0, -100, 0, 0, 0, 0, 0, 0);
             if(listen.includes("water Calories:")) consumable("drink", 0, 25, 0, 0, 0, 0, 0, 0, 0);
-            if(listen.includes("fitness:")) consumable("action", -5, -5, 0, -5, (ud.fitness/10), 0, 0, 0, 10);
+            if(listen.includes("fitness:")) consumable("action", -5, -5, 0, -5, -(ud.fitness/10), 0, 0, 0, 10);
         }
         if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0);
         if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1);
