@@ -155,7 +155,7 @@ exports.venderGiver = function (req, res) {
         {
             // replace url
             db.findOneAndUpdate({vender: "vender"}, {$set: {
-                url = body.url
+                url: body.url
             }}, function(err, data) {
                 res.send("url updated")
             })
