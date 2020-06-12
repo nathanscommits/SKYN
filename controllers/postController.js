@@ -8,7 +8,7 @@ exports.hudUpdate = function (req, res) {
     response.UUID = body.UUID
     //read database
     db.findOne({UUID: body.UUID}, function(err, ud){
-
+        //update new or old people
         if(ud == null || body.version!='0.10.1') //create new user
         {
             body.version = '0.10.1'
@@ -128,7 +128,7 @@ exports.hudUpdate = function (req, res) {
             response.pimples = ud.pimples
             response.energy = ud.energy
             response.deathCount = ud.deathCount
-            response.voice = body.voice
+            if(body.voice != 0)response.voice = body.voice
             //console.log(response)
             res.send(response)
         })
