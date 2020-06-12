@@ -358,7 +358,7 @@ exports.prizeGen = function (req, res) {
     response.price = price
     //see if avatar wants it
     db.findOne({vender: "vender"}, function(err, ud){
-        if(ud!=NULL)
+        if(ud!=null)
         {
             response.url = ud.url
             res.send(response)
