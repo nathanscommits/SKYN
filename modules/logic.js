@@ -32,6 +32,10 @@ function playsound(voice, sound)
             "adf4b6c4-0bf8-9960-2c29-0e6cfe4fc576",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "adf4b6c4-0bf8-9960-2c29-0e6cfe4fc576",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f"
         ];
 			queue = 1;
