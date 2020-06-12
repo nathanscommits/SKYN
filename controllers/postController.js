@@ -91,7 +91,7 @@ exports.hudUpdate = function (req, res) {
         }
         //change values
         logic.values(ud, body, response)
-
+        if(body.voice == 0) body.voice = ud.voice
         //save values
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
             version: body.version,
