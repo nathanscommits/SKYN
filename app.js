@@ -20,6 +20,7 @@ app.use("/leaderboard", router)
 //posts
 app.use('/3489h40', router)
 app.use('/29uf9374hs', router)
+app.use('/834h98h3', router)
 let currentVersion = "0.9.1"
 let sendstring 
 
