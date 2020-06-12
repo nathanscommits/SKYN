@@ -30,22 +30,14 @@ router.post("/29uf9374hs", (req, res) => {
     postController.userInfo(req, res)
 })
 
-let pool = 100
+
 router.post('/834h98h3', (req,res) => {
-    let response = {}
-    //get avatar and ammount they paid
-    let UUID = req.UUID
-    let price = req.price
-    //get random prize key
-    let key = pool * Math.random() | 0
-    
-    response.key = key
-    //see if avatar wants it
-    res.send(response)
+    postController.prizeGen(req, res)
 })
 
 router.post('/329yfh3', (req,res) => {
     //give item or refund
+    postController.venderGiver(req, res)
 })
 
 module.exports = router
