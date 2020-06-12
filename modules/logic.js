@@ -145,6 +145,7 @@ exports.values = function(ud, body, response) {
     consumed = body.consumed
     let listen = {}
     listen = body.listen
+    let attached = body.attached
     function consumable(type, hunger, thirst, pimples, sleep, energy, fat, health, coins, fitness) {
         consumed.type = type
         ud.hunger += hunger
@@ -179,6 +180,13 @@ exports.values = function(ud, body, response) {
                 response.anim = "sleeping_chair"
                 response.sound = playsound(ud.voice, "snore")
             }
+
+            //particles
+            if(!attached.includes("SKYN_SleepParticles"))
+            {
+                if(response.osay.substring(0,1) == "@") response.osay += ",attachover:"+essr_folder+"~SKYN_SleepParticles=force"
+                else response.osay += "@attachover:"+essr_folder+"~SKYN_SleepParticles=force"
+            }
             
         }
         else //sitting but not ud.sleeping
@@ -188,6 +196,15 @@ exports.values = function(ud, body, response) {
     }
     else{ // not sitting
         ud.sleep+=0.1; //not sitting, get ud.sleepy! you could do 1/ud.energy to make it based off of ud.energy loss
+    }
+
+    if(action.substring(5, 6)=="0") //not sleeping
+    {
+        if(attached.includes("SKYN_SleepParticles"))
+        {
+            if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_SleepParticles=force"
+            else response.osay += "@detach:"+essr_folder+"~SKYN_SleepParticles=force"
+        }
     }
     
     if(action.substring(1, 2)=="1") //flying
