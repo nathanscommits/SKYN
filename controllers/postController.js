@@ -126,11 +126,14 @@ exports.hudUpdate = function (req, res) {
             shape: ud.shape,
             pimpleStage: ud.pimpleStage,
             sleepSwitch: ud.sleepSwitch,
-            voice: body.voice
+            voice: body.voice,
+            debug: body.debug
         }}, function(err, data) {
     
             //send response
-            response.alert = "Energy: "+ud.energy.toFixed(2)+"\n Fitness: "+ud.fitness.toFixed(2)+"\n Hunger: "+ud.hunger.toFixed(2)+"\n Thirst: "+ud.thirst.toFixed(2)+"\n Sleep: "+ud.sleep.toFixed(2)+"\n Health: "+ud.health.toFixed(2)+"\n Coins: "+ud.coins.toFixed(2)+"\n Fat: "+ud.fat.toFixed(2)+"\n Pimples: "+ud.pimples.toFixed(2)
+            if(body.debug == true)
+                response.alert = "Energy: "+ud.energy.toFixed(2)+"\n Fitness: "+ud.fitness.toFixed(2)+"\n Hunger: "+ud.hunger.toFixed(2)+"\n Thirst: "+ud.thirst.toFixed(2)+"\n Sleep: "+ud.sleep.toFixed(2)+"\n Health: "+ud.health.toFixed(2)+"\n Coins: "+ud.coins.toFixed(2)+"\n Fat: "+ud.fat.toFixed(2)+"\n Pimples: "+ud.pimples.toFixed(2)
+            else response.alert = ""
             response.version = body.version
             response.coins = ud.coins
             response.fitness = ud.fitness   
