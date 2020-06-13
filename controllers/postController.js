@@ -357,19 +357,40 @@ exports.prizeGen = function (req, res) {
     }
     
     response.price = price
-    //see if avatar wants it
-    db.findOne({vender: "vender"}, function(err, ud){
+
+    db.findOne({UUID: req.body.UUID}, function(err, ud){ // find users exist and get coin balance
         if(err)
         {
-            response.url = "error"
+            response.error = "You need a SKYN HUD for that."
             res.send(response)
+        }
+        else if((ud.coins - price) >= 0) // CHECK THEY HAVE ENOUGH MONEY
+        {
+            //take users money
+            db.findOneAndUpdate({UUID: req.body.UUID}, {$set: {
+                coins: (ud.coins - price)
+            }}, function(err, data) {
+                db.findOne({vender: "vender"}, function(err, ud){
+                    if(err)
+                    {
+                        response.error = "error"
+                        res.send(response)
+                    }
+                    else
+                    {
+                        response.url = ud.url
+                        res.send(response)
+                    }
+                })
+            })
         }
         else
         {
-            response.url = ud.url
+            response.error = "Insufficient balance."
             res.send(response)
         }
     })
+    //see if avatar wants it
     
 }
 
