@@ -101,6 +101,7 @@ exports.hudUpdate = function (req, res) {
         if(body.coin_find == "true")
         {
             let rand = 100 * Math.random() | 0
+            console.log(rand)
             if(rand<100)
             {
                 ud.coins += 100
