@@ -5,6 +5,7 @@ const build = "0.10.1"
 
 
 exports.hudUpdate = function (req, res) {
+    console.log(req.body)
     let body = req.body
     let response = {}
     response.osay = "";
