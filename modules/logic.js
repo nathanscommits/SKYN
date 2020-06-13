@@ -81,7 +81,6 @@ function playsound(voice, sound)
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
-            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f"];
 			queue = 1;
 		}
