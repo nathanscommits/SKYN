@@ -80,7 +80,6 @@ function playsound(voice, sound)
             sounds=["0de41a89-d565-db61-87c9-eabb57403450",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
-            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f"];
 			queue = 1;
 		}
