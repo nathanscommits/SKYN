@@ -154,6 +154,7 @@ anims.sleeps = [
     "Sleep_03_anim",
     "Sleep_04_anim",
 ]
+anims.death = "death"
 anims.csleeps = "Sleeping_Chair_loop"
 anims.stretch = "Stretch"
 anims.exhausted = "Exhausted_WIP"
@@ -500,7 +501,7 @@ exports.values = function(ud, body, response) {
         ud.sleep=0;
         if(response.osay.substring(0,1) == "@") response.osay += ",sit:00000000-0000-0000-0000-000000000000=force";
         else response.osay += "@sit:00000000-0000-0000-0000-000000000000=force";
-        response.anim = anims.sleeps[3]
+        response.anim = anims.death
         response.death = "true"
         response.sound = playsound(ud.voice, "dieing"); 
     }
