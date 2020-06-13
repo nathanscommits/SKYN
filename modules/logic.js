@@ -190,41 +190,6 @@ exports.values = function(ud, body, response) {
     
     let action = body.action
     //console.log(action)
-    if(action.substring(0, 1)=="1") //sitting
-    {
-        ud.energy+=(ud.fitness/50); //resting
-
-        if(parseInt(action.substring(5, 6))>=1) //ud.sleeping on ground =1 on object =2
-        {
-            ud.sleep--;
-            ud.energy+=(ud.fitness/20); //resting even more
-
-            //particles
-            if(!attached.includes("SKYN_SleepParticles"))
-            {
-                if(response.osay.substring(0,1) == "@") response.osay += ",attachover:"+essr_folder+"~SKYN_SleepParticles=force"
-                else response.osay += "@attachover:"+essr_folder+"~SKYN_SleepParticles=force"
-
-                if(action.substring(5,6)=="1") //ground sleeping
-                {
-                    response.anim = anims.sleeps[anims.sleeps.length * Math.random() | 0]
-                    response.sound = playsound(ud.voice, "snore")
-                }
-                else //chair sleeping
-                {
-                    response.anim = anims.csleeps
-                    response.sound = playsound(ud.voice, "snore")
-                }
-            }   
-        }
-        else //sitting but not ud.sleeping
-        {
-            ud.sleep+=0.05; //get ud.sleepy if not ud.sleeping while sitting
-        }
-    }
-    else{ // not sitting
-        ud.sleep+=0.1; //not sitting, get ud.sleepy! you could do 1/ud.energy to make it based off of ud.energy loss
-    }
 
     if(action.substring(5, 6)=="0") //not sleeping
     {
@@ -366,35 +331,7 @@ exports.values = function(ud, body, response) {
     if(ud.health<0) ud.health=0;
     if(ud.coins<0) ud.coins=0;
 
-    //ud.coins
-    if(ud.health>0)
-    {
-        ud.timeAlive+=2;
-        if(ud.hunger>0) ud.coins+=(ud.hunger/1000);
-        if(ud.thirst>0) ud.coins+=(ud.thirst/1000);
-        if(ud.fitness>=100) ud.coins+=(ud.fitness/10000);
-        if(ud.energy<ud.fitness) ud.coins+=((ud.fitness-ud.energy)/100000);
-        if(ud.sleep<100) ud.coins+=((100-ud.sleep)/10000);
-    }
-    else //dieing
-    {
-        ud.deathCount++;
-        ud.timeAlive=0;
-        ud.coins-=(ud.coins/10);
-        ud.health=100;
-        ud.hunger=100;
-        ud.thirst=100;
-        ud.sleep=0;
-        if(response.osay.substring(0,1) == "@") response.osay += ",sit:00000000-0000-0000-0000-000000000000=force";
-        else response.osay += "@sit:00000000-0000-0000-0000-000000000000=force";
-        response.anim = anims.sleeps[3]
-        response.death = "true"
-        response.sound = playsound(ud.voice, "dieing"); 
-    }
-    if(ud.health<25)
-    {
-        if(hp%2==0) response.sound = playsound(ud.voice, "low health");
-    }
+    
 
     //if(ud.fitness>1000) ud.fitness=1000; //ud.fitness cap
 
@@ -497,7 +434,74 @@ exports.values = function(ud, body, response) {
         ud.fatigueSwitch=2;
     }
 
+    if(action.substring(0, 1)=="1") //sitting
+    {
+        ud.energy+=(ud.fitness/50); //resting
+
+        if(parseInt(action.substring(5, 6))>=1) //ud.sleeping on ground =1 on object =2
+        {
+            ud.sleep--;
+            ud.energy+=(ud.fitness/20); //resting even more
+
+            //particles
+            if(!attached.includes("SKYN_SleepParticles"))
+            {
+                if(response.osay.substring(0,1) == "@") response.osay += ",attachover:"+essr_folder+"~SKYN_SleepParticles=force"
+                else response.osay += "@attachover:"+essr_folder+"~SKYN_SleepParticles=force"
+
+                if(action.substring(5,6)=="1") //ground sleeping
+                {
+                    response.anim = anims.sleeps[anims.sleeps.length * Math.random() | 0]
+                    response.sound = playsound(ud.voice, "snore")
+                }
+                else //chair sleeping
+                {
+                    response.anim = anims.csleeps
+                    response.sound = playsound(ud.voice, "snore")
+                }
+            }   
+        }
+        else //sitting but not ud.sleeping
+        {
+            ud.sleep+=0.05; //get ud.sleepy if not ud.sleeping while sitting
+        }
+    }
+    else{ // not sitting
+        ud.sleep+=0.1; //not sitting, get ud.sleepy! you could do 1/ud.energy to make it based off of ud.energy loss
+    }
+
+    //ud.coins
+    if(ud.health>0)
+    {
+        ud.timeAlive+=2;
+        if(ud.hunger>0) ud.coins+=(ud.hunger/1000);
+        if(ud.thirst>0) ud.coins+=(ud.thirst/1000);
+        if(ud.fitness>=100) ud.coins+=(ud.fitness/10000);
+        if(ud.energy<ud.fitness) ud.coins+=((ud.fitness-ud.energy)/100000);
+        if(ud.sleep<100) ud.coins+=((100-ud.sleep)/10000);
+    }
+    else //dieing
+    {
+        ud.deathCount++;
+        ud.timeAlive=0;
+        ud.coins-=(ud.coins/10);
+        ud.health=100;
+        ud.hunger=100;
+        ud.thirst=100;
+        ud.sleep=0;
+        if(response.osay.substring(0,1) == "@") response.osay += ",sit:00000000-0000-0000-0000-000000000000=force";
+        else response.osay += "@sit:00000000-0000-0000-0000-000000000000=force";
+        response.anim = anims.sleeps[3]
+        response.death = "true"
+        response.sound = playsound(ud.voice, "dieing"); 
+    }
+    if(ud.health<25)
+    {
+        if(hp%2==0) response.sound = playsound(ud.voice, "low health");
+    }
 
     response.queue = queue
+
+    
 }
 
