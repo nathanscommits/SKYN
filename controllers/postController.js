@@ -93,20 +93,39 @@ exports.hudUpdate = function (req, res) {
                 return;
             }
         }
-        //change values
-        logic.values(ud, body, response)
-        if(body.voice == 0) body.voice = ud.voice
 
-        //coin finder
-        if(body.coin_find == true)
-        {
-            let rand = 100 * Math.random() | 0
-            if(rand<5)
+        if(body.features.substring(0,1)=="1") //all features on
+        {  
+            if(body.features.substring(2,3)=="0") //food is off
             {
-                ud.coins += 100
-                response.psay = "You found 100 coins just laying there!"
-            } 
+                ud.hunger+=2;
+                ud.thirst+=2;
+            }
+            if(body.features.substring(3,4)=="0") //sleep is off
+            {
+                ud.sleep+=2;
+            }
+            if(body.features.substring(4,5)=="0") //energy is off
+            {
+                ud.energy+=100;
+            }
+            //change values
+            logic.values(ud, body, response)
+            //coin finder
+            if(body.features=="11111")
+            {
+                if(body.coin_find == true)
+                {
+                    let rand = 100 * Math.random() | 0
+                    if(rand<5)
+                    {
+                        ud.coins += 100
+                        response.psay = "You found 100 coins just laying there!"
+                    } 
+                }
+            }            
         }
+        if(body.voice == 0) body.voice = ud.voice
         //save values
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
             version: body.version,
@@ -127,7 +146,8 @@ exports.hudUpdate = function (req, res) {
             pimpleStage: ud.pimpleStage,
             sleepSwitch: ud.sleepSwitch,
             voice: body.voice,
-            debug: body.debug
+            debug: body.debug,
+            features: body.features
         }}, function(err, data) {
     
             //send response

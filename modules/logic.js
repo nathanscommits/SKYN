@@ -173,7 +173,7 @@ anims.hungry = "Hungry_WIP_noloop"
 exports.values = function(ud, body, response) {
     response.queue = ""
     let essr_folder = "~SKYN ESSR DLC/"
-    let consumed = {} //= JSON.parse(body.consumed)
+    let consumed = {}
     consumed = body.consumed
     let listen = {}
     listen = body.listen
@@ -407,30 +407,34 @@ exports.values = function(ud, body, response) {
     }
     
     //sweat
-    if(ud.sweatSwitch!=1 && ud.energy<=((ud.fitness/4)*3) && ud.energy>(ud.fitness/2))
+    if(body.features.substring(1,2)=="1") //sweat is off
     {
-        if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
-        else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
-        ud.sweatSwitch=1;
+        if(ud.sweatSwitch!=1 && ud.energy<=((ud.fitness/4)*3) && ud.energy>(ud.fitness/2))
+        {
+            if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
+            else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force";
+            ud.sweatSwitch=1;
+        }
+        else if(ud.sweatSwitch!=2 && ud.energy>(ud.fitness/4) && ud.energy<=(ud.fitness/2))
+        {
+            if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
+            else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
+            ud.sweatSwitch=2;
+        }
+        else if(ud.sweatSwitch!=3 && ud.energy<=(ud.fitness/4))
+        {
+            if(response.osay.substring(0,1) == "@")  response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
+            else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
+            ud.sweatSwitch=3;
+        } 
+        else if (ud.sweatSwitch!=0 && ud.energy>=ud.fitness) 
+        {
+            ud.sweatSwitch=0;
+            if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
+            else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
+        }
     }
-    else if(ud.sweatSwitch!=2 && ud.energy>(ud.fitness/4) && ud.energy<=(ud.fitness/2))
-    {
-        if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
-        else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force";
-        ud.sweatSwitch=2;
-    }
-    else if(ud.sweatSwitch!=3 && ud.energy<=(ud.fitness/4))
-    {
-        if(response.osay.substring(0,1) == "@")  response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
-        else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force";
-        ud.sweatSwitch=3;
-    } 
-    else if (ud.sweatSwitch!=0 && ud.energy>=ud.fitness) 
-    {
-        ud.sweatSwitch=0;
-        if(response.osay.substring(0,1) == "@") response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
-        else response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force";
-    }
+    
     
     if(ud.fatigueSwitch!=1 && ud.energy<=0)
     {
@@ -483,12 +487,15 @@ exports.values = function(ud, body, response) {
     //ud.coins
     if(ud.health>0)
     {
-        ud.timeAlive+=2;
-        if(ud.hunger>0) ud.coins+=(ud.hunger/10000);
-        if(ud.thirst>0) ud.coins+=(ud.thirst/10000);
-        if(ud.fitness>=100) ud.coins+=(ud.fitness/100000);
-        if(ud.energy<ud.fitness) ud.coins+=((ud.fitness-ud.energy)/1000000);
-        if(ud.sleep<100) ud.coins+=((100-ud.sleep)/100000);
+        if(body.features=="11111")
+        {
+            ud.timeAlive+=2;
+            if(ud.hunger>0) ud.coins+=(ud.hunger/10000);
+            if(ud.thirst>0) ud.coins+=(ud.thirst/10000);
+            if(ud.fitness>=100) ud.coins+=(ud.fitness/100000);
+            if(ud.energy<ud.fitness) ud.coins+=((ud.fitness-ud.energy)/1000000);
+            if(ud.sleep<100) ud.coins+=((100-ud.sleep)/100000);
+        }
     }
     else //dieing
     {
@@ -505,7 +512,7 @@ exports.values = function(ud, body, response) {
         response.death = "true"
         response.sound = playsound(ud.voice, "dieing"); 
     }
-    if(ud.health<25)
+    if(ud.health<25 && body.features.substring(0,1)=="1")
     {
         response.sound = playsound(ud.voice, "low health");
     }
