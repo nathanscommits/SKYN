@@ -189,6 +189,13 @@ exports.values = function(ud, body, response) {
         ud.coins += coins
         ud.fitness += fitness
     }
+
+    if(body.yawn == "yawn")
+    {
+        ud.sleep--;
+        response.sound = playsound(ud.voice, "yawn");
+        response.anim = anims.stretch
+    }
     
     let action = body.action
     //console.log(action)
@@ -396,7 +403,8 @@ exports.values = function(ud, body, response) {
 		if(response.osay.substring(0,1) == "@") response.osay += ",attachover:"+essr_folder+"~SKYN_sleep001=force";
         else response.osay += "@attachover:"+essr_folder+"~SKYN_sleep001=force";
 		ud.sleepSwitch=2;
-		response.sound = playsound(ud.voice, "yawn");
+        response.sound = playsound(ud.voice, "yawn");
+        response.yawn = "true";
 		//llSay(ch, "yawn");
 	}
 	else if(ud.sleep<75 && ud.sleepSwitch!=1)
