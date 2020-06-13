@@ -284,8 +284,7 @@ exports.values = function(ud, body, response) {
     }
 
     //consumables
-    
-    if(consumed.type != "food") 
+    if(consumed.type != "food" && body.features.substring(2,3)=="1") 
     {
         ud.hunger-=0.07; //ud.hunger loss when not eating
         ud.fat-=0.001; //ud.fat loss when not eating
@@ -305,7 +304,7 @@ exports.values = function(ud, body, response) {
             }
         }
     }
-    if(consumed.type != "drink")
+    if(consumed.type != "drink" && body.features.substring(2,3)=="1")
     {
         ud.thirst-=0.1; //ud.thirst loss when not drinking
 
