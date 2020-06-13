@@ -370,7 +370,8 @@ exports.prizeGen = function (req, res) {
         {
             if(ud.version != build)
             {
-                res.send("You need to update your HUD first.")
+                response.error =  "You need to update your HUD first."
+                res.send(response)
                 return;
             }
             //take users money
