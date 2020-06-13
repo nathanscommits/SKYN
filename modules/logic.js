@@ -497,7 +497,7 @@ exports.values = function(ud, body, response) {
     }
     if(ud.health<25)
     {
-        if(hp%2==0) response.sound = playsound(ud.voice, "low health");
+        if(ud.health%2==0) response.sound = playsound(ud.voice, "low health");
     }
 
     response.queue = queue
