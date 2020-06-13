@@ -103,7 +103,7 @@ exports.hudUpdate = function (req, res) {
             }
             if(body.features.substring(3,4)=="0") //sleep is off
             {
-                ud.sleep+=2;
+                ud.sleep-=2;
             }
             if(body.features.substring(4,5)=="0") //energy is off
             {
