@@ -80,6 +80,8 @@ function playsound(voice, sound)
             sounds=["0de41a89-d565-db61-87c9-eabb57403450",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f"];
 			queue = 1;
 		}
@@ -219,6 +221,22 @@ exports.values = function(ud, body, response) {
     if(ud.energy<=0){
         response.anim = anims.exhausted
         response.sound = playsound(ud.voice, "breathing")
+    }
+    else if(ud.energy < ud.fitness/4)
+    {
+        let chance = 100 * Math.random() | 0
+
+        if(chance<10)
+        {
+            if(chance<5)
+            {
+                response.anim = anims.sweatwipe
+            }
+            else
+            {
+                response.anim = anims.fanning[anims.fanning * Math.random() | 0]
+            }
+        }
     }
     if(action.substring(0,5)=="00000") //standing
     {
