@@ -195,24 +195,23 @@ exports.values = function(ud, body, response) {
             ud.sleep--;
             ud.energy+=(ud.fitness/20); //resting even more
 
-            if(action.substring(5,6)=="1") //ground sleeping
-            {
-                response.anim = anims.sleeps[anims.sleeps.length * Math.random() | 0]
-                response.sound = playsound(ud.voice, "snore")
-            }
-            else //chair sleeping
-            {
-                response.anim = anims.csleeps
-                response.sound = playsound(ud.voice, "snore")
-            }
-
             //particles
             if(!attached.includes("SKYN_SleepParticles"))
             {
                 if(response.osay.substring(0,1) == "@") response.osay += ",attachover:"+essr_folder+"~SKYN_SleepParticles=force"
                 else response.osay += "@attachover:"+essr_folder+"~SKYN_SleepParticles=force"
-            }
-            
+
+                if(action.substring(5,6)=="1") //ground sleeping
+                {
+                    response.anim = anims.sleeps[anims.sleeps.length * Math.random() | 0]
+                    response.sound = playsound(ud.voice, "snore")
+                }
+                else //chair sleeping
+                {
+                    response.anim = anims.csleeps
+                    response.sound = playsound(ud.voice, "snore")
+                }
+            }   
         }
         else //sitting but not ud.sleeping
         {
