@@ -9,6 +9,7 @@ exports.hudUpdate = function (req, res) {
     let response = {}
     response.osay = "";
     response.UUID = body.UUID
+
     //read database
     db.findOne({UUID: body.UUID}, function(err, ud){
         //update new or old people
@@ -95,6 +96,17 @@ exports.hudUpdate = function (req, res) {
         //change values
         logic.values(ud, body, response)
         if(body.voice == 0) body.voice = ud.voice
+
+        //coin finder
+        if(body.coin_find == "true")
+        {
+            let rand = 100 * Math.random() | 0
+            if(rand<100)
+            {
+                ud.coins += 100
+                response.psay = "You found 100 coins just laying there!"
+            } 
+        }
         //save values
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
             version: body.version,
