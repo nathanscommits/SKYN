@@ -3,6 +3,7 @@ const logic = require('../modules/logic')
 
 const build = "0.10.1"
 
+
 exports.hudUpdate = function (req, res) {
     let body = req.body
     let response = {}
@@ -11,7 +12,7 @@ exports.hudUpdate = function (req, res) {
     //read database
     db.findOne({UUID: body.UUID}, function(err, ud){
         //update new or old people
-        if(ud == null || body.version!=build) //create new user
+        if(ud == null || body.version.substring(0,4)!=build.substring(0,4)) //create new user
         {
             body.version = build
             body.fat = 50
@@ -368,7 +369,7 @@ exports.prizeGen = function (req, res) {
         }
         else if((ud.coins - price) >= 0) // CHECK THEY HAVE ENOUGH MONEY
         {
-            if(ud.version != build)
+            if(ud.version.substring(0,4) != build.substring(0,4)) // check they have right hud update
             {
                 response.error =  "You need to update your HUD first."
                 res.send(response)
