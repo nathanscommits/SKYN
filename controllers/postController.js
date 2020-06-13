@@ -5,7 +5,7 @@ const build = "0.10.1"
 
 
 exports.hudUpdate = function (req, res) {
-    console.log(req.body)
+    console.log(req.body.coin_find)
     let body = req.body
     let response = {}
     response.osay = "";
