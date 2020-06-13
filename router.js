@@ -45,5 +45,10 @@ router.post('/38ufg423', (req,res) => {
     postController.refund(req, res)
 })
 
+router.post('/7fh839d', (req,res) => {
+    //save user prize list
+    postController.savePrize(req, res)
+})
+
 
 module.exports = router

@@ -414,4 +414,15 @@ exports.refund = function(req, res) {
     })
 }
 
+
+exports.savePrize = function(req, res) {
+    //refund 50% of price
+    db.findOneAndUpdate({UUID: req.body.UUID}, {$push: {
+        prizeName: req.body.prize
+    }}, function(err, data) {
+            if(err) res.send("Error on prize saver")
+            else res.send("Saved to the database")
+    })
+}
+
 	
