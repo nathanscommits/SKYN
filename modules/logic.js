@@ -305,11 +305,11 @@ exports.values = function(ud, body, response) {
             h = h.substring(h.length - 1, h.length)
             if(h == "0")
             {
-                response.sound = playSound(ud.voice, "hungry")
+                response.sound = playsound(ud.voice, "hungry")
             }
             else if(h == "8")
             {
-                response.sound = playSound(ud.voice, "rumble")
+                response.sound = playsound(ud.voice, "rumble")
                 response.anim = anims.hungry
             }
         }
@@ -324,7 +324,7 @@ exports.values = function(ud, body, response) {
             t = t.substring(t.length - 1, t.length)
             if(t == "5")
             {
-                response.sound = playSound(ud.voice, "thisty")
+                response.sound = playsound(ud.voice, "thisty")
                 response.anim = anims.sweatwipe
             }
         }
