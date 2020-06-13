@@ -118,7 +118,7 @@ exports.hudUpdate = function (req, res) {
         }}, function(err, data) {
     
             //send response
-            response.alert = "Energy: "+ud.energy+"\n Fitness: "+ud.fitness+"\n Hunger: "+ud.hunger+"\n Thirst: "+ud.thirst+"\n Sleep: "+ud.sleep+"\n Health: "+ud.health+"\n Coins: "+ud.coins+"\n Fat: "+ud.fat+"\n Pimples: "+ud.pimples
+            response.alert = "Energy: "+ud.energy.toFixed(2)+"\n Fitness: "+ud.fitness.toFixed(2)+"\n Hunger: "+ud.hunger.toFixed(2)+"\n Thirst: "+ud.thirst.toFixed(2)+"\n Sleep: "+ud.sleep.toFixed(2)+"\n Health: "+ud.health.toFixed(2)+"\n Coins: "+ud.coins.toFixed(2)+"\n Fat: "+ud.fat.toFixed(2)+"\n Pimples: "+ud.pimples.toFixed(2)
             response.version = body.version
             response.coins = ud.coins
             response.fitness = ud.fitness   
