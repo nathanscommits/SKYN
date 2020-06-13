@@ -17,7 +17,7 @@ function playsound(voice, sound)
             "d37f4d54-85d4-9c04-0934-8eb368624207",
             "ad358d99-d2c0-8cb4-6cc5-678372f1f6aa",
             "6a11ee47-7588-4864-aeae-3c0da86ac2e0"];
-		else if(sound=="rumble") 
+		else if(sound=="hungry") 
 		{
 			sounds=["3e961daa-cb2b-051a-3715-f6e047d1488b",
 			"465de504-0a7e-ff53-9b3b-68ed097ee5ef",
@@ -45,7 +45,7 @@ function playsound(voice, sound)
             "1b088bdc-5dc6-829c-cb97-9d353bc43bf2"];
 		else if(sound=="burp") sounds=["c8ad8ddb-687d-29d1-7e06-850838bd10a1",
 		    "2516f9f3-9f9a-8cf1-aee6-7e75c1c1e9f0"];
-		else if(sound=="thirst") sounds=["a150de07-a7b2-ac7b-825c-075c5570a086",
+		else if(sound=="thirsty") sounds=["a150de07-a7b2-ac7b-825c-075c5570a086",
             "ce3ea3eb-9d8c-f415-269d-14218d9f4e93",
             "27350e7d-16cf-361a-715c-9babb56875ce",
             "ab86eb09-5808-1bf3-cd78-a57d30240b1f",
@@ -67,7 +67,7 @@ function playsound(voice, sound)
 			queue = 1;
 		}
 		else if(sound=="eww") sounds=["4b05ad88-a2e7-bc70-1b4c-218ef1a16cfb","b8cb16e0-f178-7a7a-3910-e17268e5bc2a","c90caad8-83ff-f704-b215-19f3cc7789c9"];
-		else if(sound=="rumble") 
+		else if(sound=="hungry") 
 		{
 			sounds=["df995169-0f35-9af0-ce1f-96693af2367b",
 			"c90caad8-83ff-f704-b215-19f3cc7789c9",
@@ -89,7 +89,7 @@ function playsound(voice, sound)
 		else if(sound=="burp") sounds=["e006cdf8-47b0-4bc2-c109-91bf6daf4c03",
             "73d6388b-9ef1-a908-03a0-d4360d8e9163",
             "acb57314-00d2-6670-f5c7-d9a973a70f49"];
- 		if(sound=="thirst")sounds=["12eebb84-efdb-6764-bf55-3ef108e74a30",
+ 		if(sound=="thirsty")sounds=["12eebb84-efdb-6764-bf55-3ef108e74a30",
             "906e962f-f0fd-d5c8-4d2d-f808f43b47f4"];
         else if(sound=="drowning") 
         {
@@ -135,7 +135,11 @@ function playsound(voice, sound)
         "3a002595-915c-5957-ff25-36b58a8e37b2"];
 
     if(sound=="dieing") sounds=["7a17a826-de7a-241a-f840-05c32ac26399"];
-    if(sound=="low health") sounds=["61b4c41b-d166-4463-28e8-13abd0226f0a"];
+    if(sound=="low health") 
+    {
+        sounds=["61b4c41b-d166-4463-28e8-13abd0226f0a"];
+        queue = 1;
+    }
 
     
    return sounds[sounds.length * Math.random() | 0];
@@ -295,10 +299,31 @@ exports.values = function(ud, body, response) {
         ud.hunger-=0.1; //ud.hunger loss when not eating
         ud.fat-=0.01; //ud.fat loss when not eating
         ud.pimples-=0.1;
+        if(ud.hunger<25&&ud.hunger>0)
+        {
+            if(ud.hunger.toString().substring(ud.hunger.length - 1, ud.hunger.length) == 0)
+            {
+                response.sound = playSound(ud.voice, "hungry")
+            }
+            else if(ud.hunger.toString().substring(ud.hunger.length - 1, ud.hunger.length) == 8)
+            {
+                response.sound = playSound(ud.voice, "rumble")
+                response.anim = anims.hungry
+            }
+        }
     }
     if(consumed.type != "drink")
     {
         ud.thirst-=0.1; //ud.thirst loss when not drinking
+
+        if(ud.thirst<25&&ud.thirst>0)
+        {
+            if(ud.thirst.toString().substring(ud.thirst.length - 1, ud.thirst.length) == 5)
+            {
+                response.sound = playSound(ud.voice, "thisty")
+                response.anim = anims.sweatwipe
+            }
+        }
     }
     
     if(consumed) //consumed effects
@@ -358,13 +383,13 @@ exports.values = function(ud, body, response) {
         ud.sleep=0;
         if(response.osay.substring(0,1) == "@") response.osay += ",sit:00000000-0000-0000-0000-000000000000=force";
         else response.osay += "@sit:00000000-0000-0000-0000-000000000000=force";
-        response.anim = anims.sleeps[0]
+        response.anim = anims.sleeps[3]
         response.death = "true"
         response.sound = playsound(ud.voice, "dieing"); 
     }
-    if(ud.health<15)
+    if(ud.health<25)
     {
-        response.sound = playsound(ud.voice, "low health");
+        if(hp%2==0) response.sound = playsound(ud.voice, "low health");
     }
 
     //if(ud.fitness>1000) ud.fitness=1000; //ud.fitness cap
