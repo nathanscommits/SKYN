@@ -134,9 +134,34 @@ function playsound(voice, sound)
         "2b794dc5-33c0-58e1-94a2-f2933e564728",
         "3a002595-915c-5957-ff25-36b58a8e37b2"];
 
+    if(sound=="dieing") sounds=["7a17a826-de7a-241a-f840-05c32ac26399"];
+    if(sound=="low health") sounds=["61b4c41b-d166-4463-28e8-13abd0226f0a"];
+
     
    return sounds[sounds.length * Math.random() | 0];
 }
+
+let anims = {}
+anims.sleeps = [
+    "Sleep_01_anim",
+    "Sleep_02_anim",
+    "Sleep_03_anim",
+    "Sleep_04_anim",
+]
+anims.csleeps = "Sleeping_Chair_loop"
+anims.stretch = "SleepingStretch"
+anims.exhausted = "Exhausted_WIP"
+anims.standsleep = "FallingAsleepStanding_WIP_noloop"
+anims.breathing = "HeavyBreathing_WIP_noloop"
+anims.fanning = [
+    "Hot_Fanning_One_WIP_noloop",
+    "Hot_Fanning_One_INVERT_noloop",
+    "Hot_Fanning_Both_WIP_noloop",
+    "Hot_Fanning_Both_Version2_noloop",
+    "Hot_Fanning_Both_NoSync"
+]
+anims.sweatwipe = "Sweat_Wipe_WIP_noloop"
+anims.hungry = "Hungry_WIP_noloop"
 
 exports.values = function(ud, body, response) {
     response.queue = ""
@@ -172,12 +197,12 @@ exports.values = function(ud, body, response) {
 
             if(action.substring(5,6)=="1") //ground sleeping
             {
-                response.anim = "sleeping"
+                response.anim = anims.sleeps[anims.sleeps.length * Math.random() | 0]
                 response.sound = playsound(ud.voice, "snore")
             }
             else //chair sleeping
             {
-                response.anim = "sleeping_chair"
+                response.anim = anims.csleeps
                 response.sound = playsound(ud.voice, "snore")
             }
 
@@ -224,7 +249,7 @@ exports.values = function(ud, body, response) {
         ud.energy-=8;
     }
     if(ud.energy<=0){
-        response.anim = "exhausted"
+        response.anim = anims.exhausted
         response.sound = playsound(ud.voice, "breathing")
     }
     if(action.substring(0,5)=="00000") //standing
@@ -334,8 +359,13 @@ exports.values = function(ud, body, response) {
         ud.sleep=0;
         if(response.osay.substring(0,1) == "@") response.osay += ",sit:00000000-0000-0000-0000-000000000000=force";
         else response.osay += "@sit:00000000-0000-0000-0000-000000000000=force";
-        response.anim = "sleeping";
+        response.anim = anims.sleeps[0]
+        response.death = "true"
         response.sound = playsound(ud.voice, "dieing"); 
+    }
+    if(ud.health<15)
+    {
+        response.sound = playsound(ud.voice, "low health");
     }
 
     //if(ud.fitness>1000) ud.fitness=1000; //ud.fitness cap
