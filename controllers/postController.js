@@ -99,7 +99,7 @@ exports.hudUpdate = function (req, res) {
         if(body.voice == 0) body.voice = ud.voice
 
         //coin finder
-        if(body.coin_find == "true")
+        if(body.coin_find == true)
         {
             let rand = 100 * Math.random() | 0
             console.log(rand)
