@@ -254,7 +254,7 @@ exports.values = function(ud, body, response) {
     }
     if(ud.energy<ud.fitness)
     {
-        ud.fitness+=100/ud.fitness; //ud.fitness gain when exercising, more ud.fitness means harder to earn ud.fitness
+        ud.fitness+=50/ud.fitness; //ud.fitness gain when exercising, more ud.fitness means harder to earn ud.fitness
     }
 
     //if(action.substring(5, 5)==1) //underwater
@@ -338,23 +338,7 @@ exports.values = function(ud, body, response) {
     if(ud.thirst<=0) ud.health-=0.5
     else if(ud.hunger>0) ud.health+=0.1 //passive ud.health regain
 
-    //value min/max's
-    if(ud.energy<0) ud.energy=0;
-    if(ud.energy>ud.fitness) ud.energy=ud.fitness;
-    if(ud.sleep>100) ud.sleep=100;
-    if(ud.sleep<0) ud.sleep=0;
-    if(ud.fitness<100) ud.fitness=100;
-    if(ud.hunger>100) ud.hunger=100;
-    if(ud.hunger<0) ud.hunger=0;
-    if(ud.thirst>100) ud.thirst=100
-    if(ud.thirst<0) ud.thirst=0;
-    if(ud.pimples>100) ud.pimples=100;
-    if(ud.pimples<0) ud.pimples=0;
-    if(ud.fat>100) ud.fat=100;
-    if(ud.fat<0) ud.fat=0;
-    if(ud.health>100) ud.health=100;
-    if(ud.health<0) ud.health=0;
-    if(ud.coins<0) ud.coins=0;
+    
 
     
 
@@ -499,11 +483,11 @@ exports.values = function(ud, body, response) {
     if(ud.health>0)
     {
         ud.timeAlive+=2;
-        if(ud.hunger>0) ud.coins+=(ud.hunger/1000);
-        if(ud.thirst>0) ud.coins+=(ud.thirst/1000);
-        if(ud.fitness>=100) ud.coins+=(ud.fitness/10000);
-        if(ud.energy<ud.fitness) ud.coins+=((ud.fitness-ud.energy)/100000);
-        if(ud.sleep<100) ud.coins+=((100-ud.sleep)/10000);
+        if(ud.hunger>0) ud.coins+=(ud.hunger/10000);
+        if(ud.thirst>0) ud.coins+=(ud.thirst/10000);
+        if(ud.fitness>=100) ud.coins+=(ud.fitness/100000);
+        if(ud.energy<ud.fitness) ud.coins+=((ud.fitness-ud.energy)/1000000);
+        if(ud.sleep<100) ud.coins+=((100-ud.sleep)/100000);
     }
     else //dieing
     {
@@ -525,8 +509,24 @@ exports.values = function(ud, body, response) {
         response.sound = playsound(ud.voice, "low health");
     }
 
-    response.queue = queue
+    //value min/max's
+    if(ud.energy<0) ud.energy=0;
+    if(ud.energy>ud.fitness) ud.energy=ud.fitness;
+    if(ud.sleep>100) ud.sleep=100;
+    if(ud.sleep<0) ud.sleep=0;
+    if(ud.fitness<100) ud.fitness=100;
+    if(ud.hunger>100) ud.hunger=100;
+    if(ud.hunger<0) ud.hunger=0;
+    if(ud.thirst>100) ud.thirst=100
+    if(ud.thirst<0) ud.thirst=0;
+    if(ud.pimples>100) ud.pimples=100;
+    if(ud.pimples<0) ud.pimples=0;
+    if(ud.fat>100) ud.fat=100;
+    if(ud.fat<0) ud.fat=0;
+    if(ud.health>100) ud.health=100;
+    if(ud.health<0) ud.health=0;
+    if(ud.coins<0) ud.coins=0;
 
-    
+    response.queue = queue
 }
 
