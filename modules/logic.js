@@ -139,7 +139,7 @@ function playsound(voice, sound)
     if(sound=="dieing") sounds=["7a17a826-de7a-241a-f840-05c32ac26399"];
     if(sound=="low health") 
     {
-        sounds=["61b4c41b-d166-4463-28e8-13abd0226f0a"];
+        sounds=["10ea379e-38ed-86f6-9f58-27cf6315b5c6"];
         queue = 1;
     }
 
