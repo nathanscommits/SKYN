@@ -287,8 +287,8 @@ exports.values = function(ud, body, response) {
     
     if(consumed.type != "food") 
     {
-        ud.hunger-=0.1; //ud.hunger loss when not eating
-        ud.fat-=0.01; //ud.fat loss when not eating
+        ud.hunger-=0.07; //ud.hunger loss when not eating
+        ud.fat-=0.001; //ud.fat loss when not eating
         ud.pimples-=0.1;
         if(ud.hunger<25&&ud.hunger>0)
         {
