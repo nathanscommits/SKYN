@@ -80,6 +80,8 @@ function playsound(voice, sound)
             sounds=["0de41a89-d565-db61-87c9-eabb57403450",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
+            "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f"];
 			queue = 1;
 		}
@@ -458,6 +460,7 @@ exports.values = function(ud, body, response) {
         {
             ud.sleep--;
             ud.energy+=(ud.fitness/20); //resting even more
+            response.sound = playsound(ud.voice, "snore")
 
             //particles
             if(!attached.includes("SKYN_SleepParticles"))
@@ -468,12 +471,10 @@ exports.values = function(ud, body, response) {
                 if(action.substring(5,6)=="1") //ground sleeping
                 {
                     response.anim = anims.sleeps[anims.sleeps.length * Math.random() | 0]
-                    response.sound = playsound(ud.voice, "snore")
                 }
                 else //chair sleeping
                 {
                     response.anim = anims.csleeps
-                    response.sound = playsound(ud.voice, "snore")
                 }
             }   
         }
