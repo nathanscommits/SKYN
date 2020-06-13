@@ -155,7 +155,7 @@ anims.sleeps = [
     "Sleep_04_anim",
 ]
 anims.csleeps = "Sleeping_Chair_loop"
-anims.stretch = "SleepingStretch"
+anims.stretch = "SleepyStretch"
 anims.exhausted = "Exhausted_WIP"
 anims.standsleep = "FallingAsleepStanding_WIP_noloop"
 anims.breathing = "HeavyBreathing_WIP_noloop"
