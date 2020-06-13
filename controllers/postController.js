@@ -398,10 +398,19 @@ exports.refund = function(req, res) {
     //refund 50% of price
     if(req.body.refund != "TRUE") return;
     let i = (req.body.price/2)
-    db.findOneAndUpdate({UUID: req.body.UUID}, {$set: {
-        coins: (ud.coins + i)
-    }}, function(err, data) {
-        res.send("Coins refunded.")
+    db.findOne({UUID: req.body.UUID}, function(err, ud){ // find users exist and get coin balance
+        if(err)
+        {
+            res.send("Something went wrong")
+        }
+        else
+        {
+            db.findOneAndUpdate({UUID: req.body.UUID}, {$set: {
+                coins: (ud.coins + i)
+            }}, function(err, data) {
+                res.send("Coins refunded.")
+            })
+        }
     })
 }
 
