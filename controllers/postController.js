@@ -5,7 +5,6 @@ const build = "0.10.1"
 
 
 exports.hudUpdate = function (req, res) {
-    console.log(req.body.coin_find)
     let body = req.body
     let response = {}
     response.osay = "";
@@ -102,8 +101,7 @@ exports.hudUpdate = function (req, res) {
         if(body.coin_find == true)
         {
             let rand = 100 * Math.random() | 0
-            console.log(rand)
-            if(rand<100)
+            if(rand<5)
             {
                 ud.coins += 100
                 response.psay = "You found 100 coins just laying there!"
