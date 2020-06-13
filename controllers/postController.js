@@ -394,4 +394,15 @@ exports.prizeGen = function (req, res) {
     
 }
 
+exports.refund = function(req, res) {
+    //refund 50% of price
+    if(req.body.refund != "TRUE") return;
+    let i = (req.body.price/2)
+    db.findOneAndUpdate({UUID: req.body.UUID}, {$set: {
+        coins: (ud.coins + i)
+    }}, function(err, data) {
+        res.send("Coins refunded.")
+    })
+}
+
 	

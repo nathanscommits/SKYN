@@ -18,9 +18,11 @@ app.use("/HUD_guide", router)
 app.use("/leaderboard", router)
 
 //posts
-app.use('/3489h40', router)
-app.use('/29uf9374hs', router)
-app.use('/834h98h3', router)
+app.use('/3489h40', router) // hud updates
+app.use('/29uf9374hs', router) //user info
+app.use('/834h98h3', router) //coin machine draw
+app.use('/329yfh3', router) //vender inventory giver
+app.use('/38ufg423', router) //refund
 let currentVersion = "0.9.1"
 let sendstring 
 

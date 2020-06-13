@@ -36,8 +36,14 @@ router.post('/834h98h3', (req,res) => {
 })
 
 router.post('/329yfh3', (req,res) => {
-    //give item or refund
+    //give item
     postController.venderGiver(req, res)
 })
+
+router.post('/38ufg423', (req,res) => {
+    //refund item
+    postController.refund(req, res)
+})
+
 
 module.exports = router
