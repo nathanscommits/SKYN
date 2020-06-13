@@ -301,11 +301,11 @@ exports.values = function(ud, body, response) {
         ud.pimples-=0.1;
         if(ud.hunger<25&&ud.hunger>0)
         {
-            if(ud.hunger.parseInt().toString().substring(ud.hunger.length - 1, ud.hunger.length) == 0)
+            if(ud.hunger.toFixed(1).substring(ud.hunger.length - 1, ud.hunger.length) == 0)
             {
                 response.sound = playSound(ud.voice, "hungry")
             }
-            else if(ud.hunger.parseInt().toString().substring(ud.hunger.length - 1, ud.hunger.length) == 8)
+            else if(ud.hunger.toFixed(1).substring(ud.hunger.length - 1, ud.hunger.length) == 8)
             {
                 response.sound = playSound(ud.voice, "rumble")
                 response.anim = anims.hungry
@@ -318,7 +318,7 @@ exports.values = function(ud, body, response) {
 
         if(ud.thirst<25&&ud.thirst>0)
         {
-            if(ud.thirst.parseInt().toString().substring(ud.thirst.length - 1, ud.thirst.length) == 5)
+            if(ud.thirst.toFixed(1).substring(ud.thirst.length - 1, ud.thirst.length) == 5)
             {
                 response.sound = playSound(ud.voice, "thisty")
                 response.anim = anims.sweatwipe
