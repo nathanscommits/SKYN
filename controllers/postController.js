@@ -29,6 +29,8 @@ exports.hudUpdate = function (req, res) {
             body.shape = 0
             body.pimpleStage = 0
             body.sleepSwitch = 0
+            body.slapped = 0
+            body.slapping = 0
             
             if(ud == null) //new user
             {
@@ -147,7 +149,9 @@ exports.hudUpdate = function (req, res) {
             sleepSwitch: ud.sleepSwitch,
             voice: body.voice,
             debug: body.debug,
-            features: body.features
+            features: body.features,
+            slapped: (ud.slapped+body.slapped),
+            slapping: (ud.slapping+body.slapping)
         }}, function(err, data) {
     
             //send response

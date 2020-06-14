@@ -281,6 +281,8 @@ exports.values = function(ud, body, response) {
         }
         if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0);
         if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1);
+        if(listen.includes("breathing")) response.sound = playsound(udvoice, "breathing")
+        if(listen.includes("uncomfortable")) response.sound = playsound(udvoice, "eww")
     }
 
     //consumables
