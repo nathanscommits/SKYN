@@ -256,6 +256,7 @@ exports.values = function(ud, body, response) {
     if(ud.energy<ud.fitness)
     {
         ud.fitness+=50/ud.fitness; //ud.fitness gain when exercising, more ud.fitness means harder to earn ud.fitness
+        ud.fat-=0.1;
     }
 
     //if(action.substring(5, 5)==1) //underwater
