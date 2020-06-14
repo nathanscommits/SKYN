@@ -336,8 +336,8 @@ exports.values = function(ud, body, response) {
     }
 
     //ud.health
-    if(ud.hunger<=0) ud.health-=0.5
-    if(ud.thirst<=0) ud.health-=0.5
+    if(ud.hunger<=0) ud.health-=1
+    if(ud.thirst<=0) ud.health-=1
     else if(ud.hunger>0) ud.health+=0.1 //passive ud.health regain
 
     
@@ -366,8 +366,8 @@ exports.values = function(ud, body, response) {
     else if(ud.fat>=87 && ud.shape!=7) // super ud.fat
         ud.shape=7;
     if(shape_changed!=ud.shape)
-        if(response.osay.substring(0,1) == "@") response.osay += ",attach:"+essr_folder+"shape00" + ud.shape + "=force"
-        else response.osay += "@attach:"+essr_folder+"shape00" + ud.shape + "=force"
+        if(response.osay.substring(0,1) == "@") response.osay += ",attach:"+essr_folder+"Weight00" + ud.shape + "=force"
+        else response.osay += "@attach:"+essr_folder+"Weight00" + ud.shape + "=force"
 
     //pimples
     if(ud.pimples>=50 && ud.pimpleStage!=2)
