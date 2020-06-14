@@ -48,25 +48,25 @@ exports.hudUpdate = function (req, res) {
                 return;
             }
             else{ // new hud update
-                body.voice = parseInt(ud.voice)
-                body.coins = parseInt(ud.coins)
-                body.fitness = parseInt(ud.fitness)
-                body.timeAlive = parseInt(ud.timeAlive)
-                body.totalCoins = parseInt(ud.totalCoins)
+                body.voice = parseFloat(ud.voice)
+                body.coins = parseFloat(ud.coins)
+                body.fitness = parseFloat(ud.fitness)
+                body.timeAlive = parseFloat(ud.timeAlive)
+                body.totalCoins = parseFloat(ud.totalCoins)
                 db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
                     version: body.version,
-                    coins: parseInt(body.coins),
-                    totalCoins: parseInt(body.totalCoins),
-                    fitness: parseInt(body.fitness),
-                    fat: parseInt(body.fat),
-                    timeAlive: parseInt(body.timeAlive),
-                    thirst: parseInt(body.thirst),
-                    hunger: parseInt(body.hunger),
-                    sleep: parseInt(body.sleep),
-                    health: parseInt(body.health),
-                    pimples: parseInt(body.pimples),
-                    energy: parseInt(body.energy),
-                    deathCount: parseInt(body.deathCount),
+                    coins: parseFloat(body.coins),
+                    totalCoins: parseFloat(body.totalCoins),
+                    fitness: parseFloat(body.fitness),
+                    fat: parseFloat(body.fat),
+                    timeAlive: parseFloat(body.timeAlive),
+                    thirst: parseFloat(body.thirst),
+                    hunger: parseFloat(body.hunger),
+                    sleep: parseFloat(body.sleep),
+                    health: parseFloat(body.health),
+                    pimples: parseFloat(body.pimples),
+                    energy: parseFloat(body.energy),
+                    deathCount: parseFloat(body.deathCount),
                     sweatSwitch: body.sweatSwitch,
                     fatigueSwitch: body.fatigueSwitch,
                     shape: body.shape,
@@ -136,17 +136,17 @@ exports.hudUpdate = function (req, res) {
         
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
             version: body.version,
-            coins: parseInt(ud.coins),
-            fitness: parseInt(ud.fitness),
-            fat: parseInt(ud.fat),
-            timeAlive: parseInt(ud.timeAlive),
-            thirst: parseInt(ud.thirst),
-            hunger: parseInt(ud.hunger),
-            sleep: parseInt(ud.sleep),
-            health: parseInt(ud.health),
-            pimples: parseInt(ud.pimples),
-            energy: parseInt(ud.energy),
-            deathCount: parseInt(ud.deathCount),
+            coins: parseFloat(ud.coins),
+            fitness: parseFloat(ud.fitness),
+            fat: parseFloat(ud.fat),
+            timeAlive: parseFloat(ud.timeAlive),
+            thirst: parseFloat(ud.thirst),
+            hunger: parseFloat(ud.hunger),
+            sleep: parseFloat(ud.sleep),
+            health: parseFloat(ud.health),
+            pimples: parseFloat(ud.pimples),
+            energy: parseFloat(ud.energy),
+            deathCount: parseFloat(ud.deathCount),
             sweatSwitch: ud.sweatSwitch,
             fatigueSwitch: ud.fatigueSwitch,
             shape: ud.shape,
