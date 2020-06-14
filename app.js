@@ -12,18 +12,7 @@ app.use(express.json())
 
 //gets
 app.use("/", router)
-app.use("/prizes", router)
-app.use("/tutorial", router)
-app.use("/HUD_guide", router)
-app.use("/leaderboard", router)
 
-//posts
-app.use('/3489h40', router) // hud updates
-app.use('/29uf9374hs', router) //user info
-app.use('/834h98h3', router) //coin machine draw
-app.use('/329yfh3', router) //vender inventory giver
-app.use('/38ufg423', router) //refund 
-app.use('/7fh839d', router) //save user prize list
 let currentVersion = "0.9.1"
 let sendstring 
 
