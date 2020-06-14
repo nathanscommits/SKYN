@@ -162,7 +162,7 @@ exports.hudUpdate = function (req, res) {
             //send response
             if(body.debug == true)
             {
-                if(ud.energy && ud.hunger && ud.coins && ud.thirst && ud.sleep &&ud.fitness && ud.fat &&ud.pimples &&ud.health)
+                //if(ud.energy && ud.hunger && ud.coins && ud.thirst && ud.sleep &&ud.fitness && ud.fat &&ud.pimples &&ud.health)
                 response.alert = "Energy: "+ud.energy.toFixed(2)+
                                 "\n Fitness: "+ud.fitness.toFixed(2)+
                                 "\n Hunger: "+ud.hunger.toFixed(2)+
