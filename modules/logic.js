@@ -290,7 +290,7 @@ exports.values = function(ud, body, response) {
     if(consumed.type != "food" && body.features.substring(2,3)=="1") 
     {
         ud.hunger-=0.07; //ud.hunger loss when not eating
-        ud.fat-=0.001; //ud.fat loss when not eating
+        ud.fat-=0.01; //ud.fat loss when not eating
         ud.pimples-=0.1;
         if(ud.hunger<25&&ud.hunger>0)
         {
@@ -339,7 +339,7 @@ exports.values = function(ud, body, response) {
     //ud.health
     if(ud.hunger<=0) ud.health-=1
     if(ud.thirst<=0) ud.health-=1
-    else if(ud.hunger>0) ud.health+=0.1 //passive ud.health regain
+    else if(ud.hunger>0) ud.health+=1 //passive ud.health regain
 
     
 
