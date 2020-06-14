@@ -129,6 +129,11 @@ exports.hudUpdate = function (req, res) {
         }
         if(body.voice == 0) body.voice = ud.voice
         //save values
+        let slapped = ud.slapped
+        let slapping = ud.slapping
+        if(parseInt(body.slapped)!=0) slapped = (ud.slapped+parseInt(body.slapped))
+        if(parseInt(body.slapping)!=0) slapping = (ud.slapping+parseInt(body.slapping))
+        
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
             version: body.version,
             coins: ud.coins,
@@ -150,8 +155,8 @@ exports.hudUpdate = function (req, res) {
             voice: body.voice,
             debug: body.debug,
             features: body.features,
-            slapped: (ud.slapped+body.slapped),
-            slapping: (ud.slapping+body.slapping)
+            slapped: slapped,
+            slapping: slapping
         }}, function(err, data) {
     
             //send response
