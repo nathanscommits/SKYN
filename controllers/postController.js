@@ -133,6 +133,15 @@ exports.hudUpdate = function (req, res) {
         let slapping = ud.slapping
         if(parseInt(body.slapped)!=0) slapped = (ud.slapped+parseInt(body.slapped))
         if(parseInt(body.slapping)!=0) slapping = (ud.slapping+parseInt(body.slapping))
+        if(parseFloat(ud.fitness)==NaN) ud.fitness = 100;
+        if(parseFloat(ud.fat)==NaN) ud.fat = 50;
+        if(parseFloat(ud.timeAlive)==NaN) ud.timeAlive = 2;
+        if(parseFloat(ud.thirst)==NaN) ud.thirst = 100;
+        if(parseFloat(ud.hunger)==NaN) ud.hunger = 100;
+        if(parseFloat(ud.sleep)==NaN) ud.sleep = 0;
+        if(parseFloat(ud.health)==NaN) ud.health = 100;
+        if(parseFloat(ud.pimples)==NaN) ud.fitness = 0;
+        if(parseFloat(ud.deathCount)==NaN) ud.deathCount = 0;
         
         db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
             version: body.version,
