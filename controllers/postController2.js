@@ -2,9 +2,9 @@ const db = require('../db')
 const logic = require('../modules/logic3')
 const pool = require('../collections/prizes')
 const build = "0.10"
-
+let body = {}
 exports.hudUpdate = function (req, res) {
-    let body = {}
+    
     body.UUID = req.body.UUID
     body.name = req.body.name
     body.version = req.body.version
