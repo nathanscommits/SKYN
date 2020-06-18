@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const userController = require('./controllers/userController')
 const postController = require('./controllers/postController')
+const postController2 = require('./controllers/postController2')
 
 const db = require('./db')
 
@@ -24,6 +25,10 @@ router.get('/leaderboard', function(req, res){
 
 router.post("/3489h40", (req, res) => {
     postController.hudUpdate(req, res)
+})
+
+router.post("/hudUpdate010uhe8", (req, res) => {
+    postController2.hudUpdate(req, res)
 })
 
 router.post("/29uf9374hs", (req, res) => {
