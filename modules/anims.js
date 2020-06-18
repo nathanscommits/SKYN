@@ -1,4 +1,4 @@
-var express = require('express')
+var express = require('../express')
 let anims = express
 anims.sleeps = [
     "Sleep_01_anim",
