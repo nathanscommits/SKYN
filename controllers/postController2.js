@@ -48,14 +48,11 @@ exports.hudUpdate = function (req, res) {
     }
     db.findOne({UUID: req.body.UUID}, function(err, data){
         update(data, body)
-    })
-    //.then(logic.values(body))
-    .then(
+    }).then(
         db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
             res.send(body.response)
         })
-    )
-    .catch(
+    ).catch(
         res.send("Something went wrong")
     )
 }
