@@ -8,7 +8,7 @@ exports.hudUpdate = function (req, res) {
     db.findOne({UUID: req.body.UUID}, function(err, data){
         update(data, body)
     })
-    .then(logic.values(body))
+    //.then(logic.values(body))
     .then(
         db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
             res.send(body.response)
@@ -33,6 +33,7 @@ function update(data, body){ //maybe need to return on these res.sends
         //body.info.voice = data.info.voice
         //body.info.debug = data.info.debug
         //body.info.features = data.info.features
+        logic.values(body)
     }
 }
 
