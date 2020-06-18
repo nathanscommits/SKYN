@@ -1,3 +1,5 @@
+let anims = {}
+
 anims.sleeps = [
     "Sleep_01_anim",
     "Sleep_02_anim",
