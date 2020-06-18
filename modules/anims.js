@@ -1,5 +1,5 @@
-let anims = {}
-
+var express = require('express')
+let anims = express
 anims.sleeps = [
     "Sleep_01_anim",
     "Sleep_02_anim",
