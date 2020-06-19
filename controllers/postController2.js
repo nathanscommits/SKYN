@@ -82,6 +82,15 @@ exports.hudUpdate = function (req, res) {
                 let response = body.response
                 response.energy = body.values.energy
                 response.fitness = body.values.fitness
+                response.hunger = body.values.hunger
+                response.thirst = body.values.thirst
+                response.fat = body.values.fat
+                response.sleep = body.values.sleep
+                response.pimples = body.values.pimples
+                response.health = body.values.health
+                response.coins = body.values.coins
+                response.timeAlive = body.values.timeAlive
+                response.deathCount = body.values.deathCount
                 
                 console.log(response)
                 res.send(response)  
