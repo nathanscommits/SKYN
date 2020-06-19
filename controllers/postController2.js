@@ -55,7 +55,7 @@ exports.hudUpdate = function (req, res) {
         else if(body.version.substring(0,4)!=build)
             db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
                 console.log(body.name+' updated their HUD.')
-                res.send(body.response)
+                res.send("updating..."+body.response)
             })
         else
         {
@@ -68,8 +68,6 @@ exports.hudUpdate = function (req, res) {
 
             db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
                 if(body.info.debug == true)
-                {
-                    //if(ud.energy && ud.hunger && ud.coins && ud.thirst && ud.sleep &&ud.fitness && ud.fat &&ud.pimples &&ud.health)
                     body.response.alert = "Energy: "+parseFloat(body.values.energy).toFixed(2)+
                                     "\n Fitness: "+parseFloat(body.values.fitness).toFixed(2)+
                                     "\n Hunger: "+parseFloat(body.values.hunger).toFixed(2)+
@@ -79,11 +77,9 @@ exports.hudUpdate = function (req, res) {
                                     "\n Coins: "+parseFloat(body.values.coins).toFixed(2)+
                                     "\n Fat: "+parseFloat(body.values.fat).toFixed(2)+
                                     "\n Pimples: "+parseFloat(body.values.pimples).toFixed(2)
-                
-                }
                 else body.response.alert = ""
                 res.send(body.response)
-                console.log(body.response)
+                console.log("working..."+body.response)
             })
         }
     })

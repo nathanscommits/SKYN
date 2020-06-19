@@ -259,6 +259,7 @@ exports.values = function(body) {
     if(body.values.health<0) body.values.health=0
     if(body.values.coins<0) body.values.coins=0
 
+    
     //body.response.queue = queue
 }
 let anims = {}
