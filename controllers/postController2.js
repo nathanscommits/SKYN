@@ -79,8 +79,10 @@ exports.hudUpdate = function (req, res) {
                                 "\n Fat: "+parseFloat(body.values.fat).toFixed(2)+
                                 "\n Pimples: "+parseFloat(body.values.pimples).toFixed(2)
                 else body.response.hover = ""
-                body.response += body.values
                 let response = body.response
+                response.energy = body.values.energy
+                response.fitness = body.values.fitness
+                
                 console.log(response)
                 res.send(response)  
             })
