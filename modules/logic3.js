@@ -1,6 +1,7 @@
 
 exports.values = function(body) {
     //body.response.queue = ""
+    console.log(body)
     let essr_folder = "~SKYN ESSR DLC/"
     let consumed = body.info.consumed
     let listen = body.info.listen

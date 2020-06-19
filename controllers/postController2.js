@@ -46,14 +46,15 @@ exports.hudUpdate = function (req, res) {
         consumed: req.body.consumed,
         debug: req.body.debug
     }
-    return db.findOne({UUID: req.body.UUID}).then(function(data){
+    return db.findOne({UUID: req.body.UUID}
+        ).then(
         update(data, body)
-    }).then(
+        ).then(
         db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
             res.send(body.response)
         })
     ).catch(
-       console.log(body)
+       console.log("something broke")
     )
 }
 
