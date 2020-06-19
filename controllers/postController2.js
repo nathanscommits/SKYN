@@ -66,19 +66,19 @@ exports.hudUpdate = function (req, res) {
             //body.info.debug = data.info.debug
             //body.info.features = data.info.features
             logic.values(body)
-
+            if(body.info.debug == true)
+                body.response.alert = "Energy: "+parseFloat(body.values.energy).toFixed(2)+
+                                "\n Fitness: "+parseFloat(body.values.fitness).toFixed(2)+
+                                "\n Hunger: "+parseFloat(body.values.hunger).toFixed(2)+
+                                "\n Thirst: "+parseFloat(body.values.thirst).toFixed(2)+
+                                "\n Sleep: "+parseFloat(body.values.sleep).toFixed(2)+
+                                "\n Health: "+parseFloat(body.values.health).toFixed(2)+
+                                "\n Coins: "+parseFloat(body.values.coins).toFixed(2)+
+                                "\n Fat: "+parseFloat(body.values.fat).toFixed(2)+
+                                "\n Pimples: "+parseFloat(body.values.pimples).toFixed(2)
+            else body.response.alert = ""
             db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
-                if(body.info.debug == true)
-                    body.response.alert = "Energy: "+parseFloat(body.values.energy).toFixed(2)+
-                                    "\n Fitness: "+parseFloat(body.values.fitness).toFixed(2)+
-                                    "\n Hunger: "+parseFloat(body.values.hunger).toFixed(2)+
-                                    "\n Thirst: "+parseFloat(body.values.thirst).toFixed(2)+
-                                    "\n Sleep: "+parseFloat(body.values.sleep).toFixed(2)+
-                                    "\n Health: "+parseFloat(body.values.health).toFixed(2)+
-                                    "\n Coins: "+parseFloat(body.values.coins).toFixed(2)+
-                                    "\n Fat: "+parseFloat(body.values.fat).toFixed(2)+
-                                    "\n Pimples: "+parseFloat(body.values.pimples).toFixed(2)
-                else body.response.alert = ""
+                
                 console.log("working..."+body.response)
                 res.send(body.response)  
             })
