@@ -47,8 +47,9 @@ exports.hudUpdate = function (req, res) {
         consumed: req.body.consumed,
         debug: req.body.debug
     }
-    db.findOne({UUID: req.body.UUID}, function(data){
+    db.findOne({UUID: req.body.UUID}, function(err, data){
         if(data == null) db.insertOne(body, () => {
+            console.log("new entry in db")
             res.send(body.response)
         }) 
         else if(body.version.substring(0,4)!=build)
@@ -66,6 +67,21 @@ exports.hudUpdate = function (req, res) {
             logic.values(body)
 
             db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
+                if(body.info.debug == true)
+                {
+                    //if(ud.energy && ud.hunger && ud.coins && ud.thirst && ud.sleep &&ud.fitness && ud.fat &&ud.pimples &&ud.health)
+                    body.response.alert = "Energy: "+parseFloat(body.values.energy).toFixed(2)+
+                                    "\n Fitness: "+parseFloat(body.values.fitness).toFixed(2)+
+                                    "\n Hunger: "+parseFloat(body.values.hunger).toFixed(2)+
+                                    "\n Thirst: "+parseFloat(body.values.thirst).toFixed(2)+
+                                    "\n Sleep: "+parseFloat(body.values.sleep).toFixed(2)+
+                                    "\n Health: "+parseFloat(body.values.health).toFixed(2)+
+                                    "\n Coins: "+parseFloat(body.values.coins).toFixed(2)+
+                                    "\n Fat: "+parseFloat(body.values.fat).toFixed(2)+
+                                    "\n Pimples: "+parseFloat(body.values.pimples).toFixed(2)
+                
+                }
+                else body.response.alert = ""
                 res.send(body.response)
                 console.log(body.response)
             })
