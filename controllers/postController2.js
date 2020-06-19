@@ -66,6 +66,7 @@ exports.hudUpdate = function (req, res) {
 
             db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
                 res.send(body.response)
+                console.log(body.response)
             })
         }
     })
