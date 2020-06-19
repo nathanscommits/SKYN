@@ -53,7 +53,7 @@ exports.hudUpdate = function (req, res) {
             res.send(body.response)
         })
     ).catch(
-       console.log("Something went wrong")
+       console.log(body)
     )
 }
 
