@@ -80,9 +80,9 @@ exports.hudUpdate = function (req, res) {
                                 "\n Pimples: "+parseFloat(body.values.pimples).toFixed(2)
                 else body.response.hover = ""
                 body.response += body.values
-
-                console.log("working..."+body.response)
-                res.send(body.response)  
+                let response = body.response
+                console.log(response)
+                res.send(response)  
             })
         }
     })
