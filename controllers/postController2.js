@@ -46,7 +46,7 @@ exports.hudUpdate = function (req, res) {
         consumed: req.body.consumed,
         debug: req.body.debug
     }
-    return db.findOne({UUID: req.body.UUID}, function(err, data){
+    return db.findOne({UUID: req.body.UUID}).then(function(data){
         update(data, body)
     }).then(
         db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
