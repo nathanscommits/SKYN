@@ -46,16 +46,14 @@ exports.hudUpdate = function (req, res) {
         consumed: req.body.consumed,
         debug: req.body.debug
     }
-    return db.findOne({UUID: req.body.UUID}).then(function(data){
+    db.findOne({UUID: req.body.UUID}, function(data){
         if(data == null) db.insertOne(body, () => {
-            
-            return res.send(body.response)
+            res.send(body.response)
         }) 
         else if(body.version.substring(0,4)!=build)
             db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
                 console.log(body.name+' updated their HUD.')
-                
-                return res.send(body.response)
+                res.send(body.response)
             })
         else
         {
@@ -64,9 +62,15 @@ exports.hudUpdate = function (req, res) {
             //body.info.voice = data.info.voice
             //body.info.debug = data.info.debug
             //body.info.features = data.info.features
-            return logic.values(body)
+            logic.values(body)
+
+            db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
+                res.send(body.response)
+            })
         }
-    }).then(    
+    })
+
+    /*}).then(    
         db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
             res.send(body.response)
         })
