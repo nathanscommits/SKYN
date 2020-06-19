@@ -65,8 +65,11 @@ exports.hudUpdate = function (req, res) {
             //body.info.debug = data.info.debug
             //body.info.features = data.info.features
             logic.values(body)
-            if(body.info.debug == true)
-                body.response.hover = "Energy: "+parseFloat(body.values.energy).toFixed(2)+
+            
+            db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
+                
+                if(body.info.debug == true)
+                    body.response.hover = "Energy: "+parseFloat(body.values.energy).toFixed(2)+
                                 "\n Fitness: "+parseFloat(body.values.fitness).toFixed(2)+
                                 "\n Hunger: "+parseFloat(body.values.hunger).toFixed(2)+
                                 "\n Thirst: "+parseFloat(body.values.thirst).toFixed(2)+
@@ -75,11 +78,11 @@ exports.hudUpdate = function (req, res) {
                                 "\n Coins: "+parseFloat(body.values.coins).toFixed(2)+
                                 "\n Fat: "+parseFloat(body.values.fat).toFixed(2)+
                                 "\n Pimples: "+parseFloat(body.values.pimples).toFixed(2)
-            else body.response.hover = ""
-            db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
-                
+                else body.response.hover = ""
+                body.response += body.values
+
                 console.log("working..."+body.response)
-                res.send(body)  
+                res.send(body.response)  
             })
         }
     })
