@@ -47,7 +47,25 @@ exports.hudUpdate = function (req, res) {
         debug: req.body.debug
     }
     return db.findOne({UUID: req.body.UUID}).then(function(data){
-        update(res, data, body)
+        if(data == null) db.insertOne(body, () => {
+            
+            return res.send(body.response)
+        }) 
+        else if(body.version.substring(0,4)!=build)
+            db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
+                console.log(body.name+' updated their HUD.')
+                
+                return res.send(body.response)
+            })
+        else
+        {
+            body.values = data.values
+            body.states = data.states
+            //body.info.voice = data.info.voice
+            //body.info.debug = data.info.debug
+            //body.info.features = data.info.features
+            return logic.values(body)
+        }
     }).then(    
         db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
             res.send(body.response)
@@ -56,7 +74,7 @@ exports.hudUpdate = function (req, res) {
        console.log("something broke")
     )
 }
-
+/*
 function update(res, data, body){ //maybe need to return on these res.sends
     if(data == null) db.insertOne(body, () => {
         res.send(body.response)
