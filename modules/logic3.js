@@ -7,6 +7,7 @@ exports.values = function(body) {
     let listen = body.info.listen
     let attached = body.info.attached
     let action = body.info.action
+    body.response.osay = ""
     function consumable(type, hunger, thirst, pimples, sleep, energy, fat, health, coins, fitness) {
         consumed.type = type
         body.values.hunger += hunger
@@ -259,7 +260,7 @@ exports.values = function(body) {
     if(body.values.health<0) body.values.health=0
     if(body.values.coins<0) body.values.coins=0
 
-    
+
     //body.response.queue = queue
 }
 let anims = {}
