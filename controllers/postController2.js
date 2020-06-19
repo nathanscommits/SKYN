@@ -69,6 +69,7 @@ exports.hudUpdate = function (req, res) {
             })
         }
     })
+}
 
     /*}).then(    
         db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
