@@ -1,51 +1,7 @@
 const db = require('../db')
 const logic = require('../modules/logic3')
 const build = "0.11"
-let body = {
-    UUID: "00000000-0000-0000-0000-00000000000000",
-    name: "Demo Name",
-    version: "0.11.00",
-    response: {
-        osay: "",
-        hover : "",
-        anim: "",
-        sound: "",
-        rlv: "",
-        loop: ""
-    },
-    values: {
-        energy: 100,
-        fitness: 100,
-        hunger: 50,
-        thirst: 50,
-        fat: 50,
-        sleep: 50,
-        health: 100,
-        coins: 0,
-        pimples: 0,
-        timeAlive: 0,
-        deathCount: 0
-    },
-    states: {
-        death: 0,
-        sleeping: 0,
-        exhausted: 0,
-        sweat: 0,
-        pimples: 0,
-        shape: 0,
-        timer: 0
-    },
-    info: {
-        listen: "",
-        objects: "",
-        voice: "",
-        features: "",
-        attached: "",
-        action: "",
-        consumed: "",
-        debug: false
-    }
-}
+let body = {}
 exports.hudUpdate = function (req, res) {
     body = {
         UUID: req.body.UUID,
@@ -60,6 +16,36 @@ exports.hudUpdate = function (req, res) {
             action: req.body.action,
             consumed: req.body.consumed,
             debug: req.body.debug 
+        },
+        response: {
+            osay: "",
+            hover : "",
+            anim: "",
+            sound: "",
+            rlv: "",
+            loop: ""
+        },
+        values: {
+            energy: 100,
+            fitness: 100,
+            hunger: 50,
+            thirst: 50,
+            fat: 50,
+            sleep: 50,
+            health: 100,
+            coins: 0,
+            pimples: 0,
+            timeAlive: 0,
+            deathCount: 0
+        },
+        states: {
+            death: 0,
+            sleeping: 0,
+            exhausted: 0,
+            sweat: 0,
+            pimples: 0,
+            shape: 0,
+            timer: 0
         }
     }
     let myPromise = () => (
