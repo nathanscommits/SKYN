@@ -87,7 +87,7 @@ exports.hudUpdate = function (req, res) {
                     else body.response.hover = ""
 
                     console.log("promise resolved")
-                    resolve(res.send({...body.response, ...body.values}))
+                    resolve(res.send({...body.UUID, ...body.response, ...body.values}))
                 })
 
                 .catch(err => console.log("something went wrong" + err))
