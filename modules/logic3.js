@@ -158,7 +158,7 @@ exports.values = function(body) {
         body.response.sound = playsound(body.info.voice, "yawn")
         body.response.yawn = "true"
 	}
-	else if(body.values.sleep<75 && !attached.includes("sleep"))
+	else if(body.values.sleep<75 && attached.includes("sleep"))
          body.response.osay = rlv(body.response.osay, "detach", "SKYN_sleep001")
 	else if(body.values.sleep>=100 && action.substring(0, 1)=="0") {
 		if(body.response.osay.substring(0,1) == "@") body.response.osay += ",sit:00000000-0000-0000-0000-000000000000=force"
