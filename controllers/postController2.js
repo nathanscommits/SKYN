@@ -33,7 +33,7 @@ exports.hudUpdate = function (req, res) {
             fat: 50,
             sleep: 50,
             health: 100,
-            coins: 0,
+            //coins: 0,
             pimples: 0,
             timeAlive: 0,
             deathCount: 0
