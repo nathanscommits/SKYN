@@ -60,6 +60,7 @@ exports.hudUpdate = function (req, res) {
                     else if(req.body.version.substring(0,4)!=build)
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
                            console.log(body.name+' updated their HUD.')
+                           body.version = build
                            resolve(body.response)
                         })
                     else {
