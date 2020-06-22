@@ -1,177 +1,97 @@
 const db = require('../db')
 const logic = require('../modules/logic3')
-const pool = require('../collections/prizes')
 const build = "0.11"
-let body = {}
+let body = {
+    UUID: "00000000-0000-0000-0000-00000000000000",
+    name: "Demo Name",
+    version: "0.11.12",
+    response: {
+        osay: "",
+        hover : "",
+        anim: "",
+        sound: "",
+        rlv: "",
+        loop: ""
+    },
+    values: {
+        energy: 100,
+        fitness: 100,
+        hunger: 50,
+        thirst: 50,
+        fat: 50,
+        sleep: 50,
+        health: 100,
+        coins: 0,
+        pimples: 0,
+        timeAlive: 0,
+        deathCount: 0
+    },
+    states: {
+        death: 0,
+        sleeping: 0,
+        exhausted: 0,
+        sweat: 0,
+        pimples: 0,
+        shape: 0,
+        timer: 0
+    },
+    info: {
+        listen: "",
+        objects: "",
+        voice: "",
+        features: "",
+        attached: "",
+        action: "",
+        consumed: "",
+        debug: false
+    }
+}
 exports.hudUpdate = function (req, res) {
-    
-    body.UUID = req.body.UUID
-    body.name = req.body.name
-    body.version = req.body.version
-    body.response = {
-        osay: "",
-        hover : "",
-        anim: "",
-        sound: "",
-        rlv: "",
-        loop: "",
-        version: build + body.version.substring(4)
-    }
-    body.values = {
-        energy: 100,
-        fitness: 100,
-        hunger: 50,
-        thirst: 50,
-        fat: 50,
-        sleep: 50,
-        health: 100,
-        coins: 0,
-        pimples: 0
-    }
-    body.states = {
-        death: 0,
-        sleeping: 0,
-        exhausted: 0,
-        sweat: 0,
-        pimples: 0,
-        shape: 0,
-        timer: 0
-    }
-    body.info = {
-        listen: req.body.listen,
-        objects: req.body.objects,
-        voice: req.body.voice,
-        features: req.body.features,
-        attached: req.body.attached,
-        action: req.body.action,
-        consumed: req.body.consumed,
-        debug: req.body.debug
-    }
-    db.findOne({UUID: req.body.UUID}, function(err, data){
-        if(data == null) db.insertOne(body, () => {
-            console.log("new entry in db")
-            res.send(body.response)
-        }) 
-        else if(body.version.substring(0,4)!=build)
-            db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
-                console.log("updating..."+body.name+' updated their HUD.')
-                res.send(body.response)
-            })
-        else
-        {
-            body.values = data.values
-            body.states = data.states
-            //body.info.voice = data.info.voice
-            //body.info.debug = data.info.debug
-            //body.info.features = data.info.features
-            logic.values(body)
-            
-            db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
-                
-                if(body.info.debug == true)
-                    body.response.hover = "Energy: "+parseFloat(body.values.energy).toFixed(2)+
-                                "\n Fitness: "+parseFloat(body.values.fitness).toFixed(2)+
-                                "\n Hunger: "+parseFloat(body.values.hunger).toFixed(2)+
-                                "\n Thirst: "+parseFloat(body.values.thirst).toFixed(2)+
-                                "\n Sleep: "+parseFloat(body.values.sleep).toFixed(2)+
-                                "\n Health: "+parseFloat(body.values.health).toFixed(2)+
-                                "\n Coins: "+parseFloat(body.values.coins).toFixed(2)+
-                                "\n Fat: "+parseFloat(body.values.fat).toFixed(2)+
-                                "\n Pimples: "+parseFloat(body.values.pimples).toFixed(2)
-                else body.response.hover = ""
-                let response = body.response
-                response.energy = body.values.energy
-                response.fitness = body.values.fitness
-                response.hunger = body.values.hunger
-                response.thirst = body.values.thirst
-                response.fat = body.values.fat
-                response.sleep = body.values.sleep
-                response.pimples = body.values.pimples
-                response.health = body.values.health
-                response.coins = body.values.coins
-                response.timeAlive = body.values.timeAlive
-                response.deathCount = body.values.deathCount
-                
-                console.log(response)
-                res.send(response)  
-            })
-        }
-    })
-}
 
-    /*}).then(    
-        db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
-            res.send(body.response)
+    let myPromise = () => (
+        new Promise((resolve, reject) => {
+            db.findOne({UUID: req.body.UUID})
+
+                .then(function(data){
+                    if(data == null) db.insertOne(body, () => {
+                        console.log(body.name+" - New user created")
+                        resolve(body.response)
+                    }) 
+                    else if(req.body.version.substring(0,4)!=build)
+                        db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
+                           console.log(body.name+' updated their HUD.')
+                           resolve(body.response)
+                        })
+                    else {
+                        //console.log(data)
+                        body.values = data.values
+                        body.states = data.states
+                        if(body=logic.values(body)) resolve("logic passed")
+                        else reject("failed to process logic")
+                    }
+                })
+
+                .then(data => db.findOneAndUpdate({ UUID: body.UUID }, { $set: body }, { upsert:true } ))
+
+                .then(function(data){
+                    if (body.info.debug == true)
+                        body.response.hover = "Energy: " + parseFloat(body.values.energy).toFixed(2) +
+                            "\n Fitness: " + parseFloat(body.values.fitness).toFixed(2) +
+                            "\n Hunger: " + parseFloat(body.values.hunger).toFixed(2) +
+                            "\n Thirst: " + parseFloat(body.values.thirst).toFixed(2) +
+                            "\n Sleep: " + parseFloat(body.values.sleep).toFixed(2) +
+                            "\n Health: " + parseFloat(body.values.health).toFixed(2) +
+                            "\n Coins: " + parseFloat(body.values.coins).toFixed(2) +
+                            "\n Fat: " + parseFloat(body.values.fat).toFixed(2) +
+                            "\n Pimples: " + parseFloat(body.values.pimples).toFixed(2)
+                    else body.response.hover = ""
+
+                    console.log("promise resolved")
+                    resolve(res.send({...body.response, ...body.values}))
+                })
+
+                .catch(err => console.log("something went wrong" + err))
         })
-    ).catch(
-       console.log("something broke")
     )
+    myPromise()
 }
-/*
-function update(res, data, body){ //maybe need to return on these res.sends
-    if(data == null) db.insertOne(body, () => {
-        res.send(body.response)
-        return
-    }) 
-    else if(body.version.substring(0,4)!=build)
-        db.findOneAndUpdate({UUID: body.UUID}, body, function(err, data) {
-            console.log(body.name+' updated their HUD.')
-            res.send(body.response)
-            return
-        })
-    else
-    {
-        body.values = data.values
-        body.states = data.states
-        //body.info.voice = data.info.voice
-        //body.info.debug = data.info.debug
-        //body.info.features = data.info.features
-        logic.values(body)
-    }
-}
-/*
-let body = {}
-function object(req){
-    body.UUID = req.body.UUID
-    body.name = req.body.name
-    body.version = req.body.version
-    body.response = {
-        osay: "",
-        hover : "",
-        anim: "",
-        sound: "",
-        rlv: "",
-        loop: "",
-    }
-    body.values = {
-        energy: 100,
-        fitness: 100,
-        hunger: 50,
-        thirst: 50,
-        fat: 50,
-        sleep: 50,
-        health: 100,
-        coins: 0,
-        pimples: 0
-    }
-    body.states = {
-        death: 0,
-        sleeping: 0,
-        exhausted: 0,
-        sweat: 0,
-        pimples: 0,
-        shape: 0,
-        timer: 0
-    }
-    body.info = {
-        listen: req.body.listen,
-        objects: req.body.objects,
-        voice: req.body.voice,
-        features: req.body.features,
-        attached: req.body.attached,
-        action: req.body.action,
-        consumed: req.body.consumed,
-        debug: req.body.debug
-    }
-}
-*/

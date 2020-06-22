@@ -1,7 +1,6 @@
-
 exports.values = function(body) {
     //body.response.queue = ""
-    console.log(body)
+    //console.log(body)
     let essr_folder = "~SKYN ESSR DLC/"
     let consumed = body.info.consumed
     let listen = body.info.listen
@@ -260,9 +259,9 @@ exports.values = function(body) {
     if(body.values.health<0) body.values.health=0
     if(body.values.coins<0) body.values.coins=0
 
-
-    //body.response.queue = queue
+    return body
 }
+
 let anims = {}
 anims.sleeps = [
     "Sleep_01_anim",
