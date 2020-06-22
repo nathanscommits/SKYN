@@ -269,10 +269,10 @@ anims.sleeps = [
     "Sleep_03_anim",
     "Sleep_04_anim",
 ]
-anims.death = "death"
+anims.death = "Death_NoLoop"
 anims.csleeps = "Sleeping_Chair_loop"
 anims.stretch = "Stretch"
-anims.exhausted = "Exhausted_WIP"
+anims.exhausted = "Exhausted_NoLoop"
 anims.standsleep = "drowsyStanding_WIP_noloop"
 anims.breathing = "HeavyBreathing_WIP_noloop"
 anims.fanning = [
