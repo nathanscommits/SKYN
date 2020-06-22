@@ -34,9 +34,9 @@ exports.hudUpdate = function (req, res) {
             sleep: 50,
             health: 100,
             //coins: 0,
-            pimples: 0,
-            timeAlive: 0,
-            deathCount: 0
+            pimples: 0
+            //timeAlive: 0,
+            //deathCount: 0
         },
         states: {
             death: 0,
@@ -57,13 +57,17 @@ exports.hudUpdate = function (req, res) {
                         console.log(body.name+" - New user created")
                         resolve(body.response)
                     }) 
-                    else if(req.body.version.substring(0,4)!=build)
+                    else if(req.body.version.substring(0,4)!=build) {
+                        if(data.values.coins > 0) body.values.coins = data.values.coins
+                        else if(data.coins > 0) body.values.coins = data.coins
+                        if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
+                        else if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
-                           console.log(body.name+' updated their HUD.')
-                           body.version = build
-                           resolve(body.response)
-                        })
-                    else {
+                            console.log(body.name+' updated their HUD.')
+                            body.version = build
+                            resolve(body.response)
+                         })
+                    } else {
                         //console.log(data)
                         body.values = data.values
                         body.states = data.states
