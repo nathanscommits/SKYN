@@ -4,7 +4,7 @@ const build = "0.11"
 let body = {
     UUID: "00000000-0000-0000-0000-00000000000000",
     name: "Demo Name",
-    version: "0.11.12",
+    version: "0.11.00",
     response: {
         osay: "",
         hover : "",
@@ -47,7 +47,21 @@ let body = {
     }
 }
 exports.hudUpdate = function (req, res) {
-
+    body = {
+        UUID: req.body.UUID,
+        name: req.body.name,
+        version: req.body.version,
+        info:{
+            listen: req.body.listen,
+            objects: req.body.objects,
+            voice: req.body.voice,
+            features: req.body.features,
+            attached: req.body.attached,
+            action: req.body.action,
+            consumed: req.body.consumed,
+            debug: req.body.debug 
+        }
+    }
     let myPromise = () => (
         new Promise((resolve, reject) => {
             db.findOne({UUID: req.body.UUID})
