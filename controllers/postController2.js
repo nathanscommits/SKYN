@@ -15,10 +15,15 @@ exports.hudUpdate = function (req, res) {
             attached: req.body.attached,
             action: req.body.action,
             consumed: req.body.consumed,
-            debug: req.body.debug 
+            debug: req.body.debug, 
+            coin_find: req.body.coin_find,
+            slapped: req.body.slapped,
+            slapping: req.body.slapped
         },
         response: {
             osay: "",
+            psay: "",
+            csay: "",
             hover : "",
             anim: "",
             sound: "",
@@ -64,6 +69,9 @@ exports.hudUpdate = function (req, res) {
                         else if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
                         if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
                         else if(data.deathCount > 0) body.values.deathCount = data.deathCount
+                        if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
+                        if(data.info.slapped > 0) body.info.slapped += data.info.slapped
+                        if(data.info.slapping > 0) body.info.slapping += data.info.slapping
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
                             console.log(body.name+' updated their HUD.')
                             body.version = build
@@ -90,10 +98,12 @@ exports.hudUpdate = function (req, res) {
                             "\n Health: " + parseFloat(body.values.health).toFixed(2) +
                             "\n Coins: " + parseFloat(body.values.coins).toFixed(2) +
                             "\n Fat: " + parseFloat(body.values.fat).toFixed(2) +
-                            "\n Pimples: " + parseFloat(body.values.pimples).toFixed(2)
+                            "\n Pimples: " + parseFloat(body.values.pimples).toFixed(2)+
+                            "\n Slapped: " + parseFloat(body.info.slapped).toFixed(2)+
+                            "\n Slapping: " + parseFloat(body.info.slapping).toFixed(2)
                     else body.response.hover = ""
 
-                    console.log("promise resolved")
+                    //console.log("promise resolved")
                     body.response.UUID = body.UUID
                     body.response.version = body.version
                     resolve(res.send({...body.response, ...body.values}))
