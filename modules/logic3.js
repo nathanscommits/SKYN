@@ -1,4 +1,20 @@
 exports.values = function(body) {
+    if(body.info.features.substring(0,1)!="1") return; //all features on  
+    if(body.info.features.substring(2,3)=="0") { //food is off
+        ud.hunger+=2
+        ud.thirst+=2
+    }
+    if(body.info.features.substring(3,4)=="0") ud.sleep-=2 //sleep is off
+    if(body.info.features.substring(4,5)=="0") ud.energy+=100 //energy is off
+
+    //coin finder
+    if(body.info.features=="11111" && body.info.coin_find == true) {
+        let rand = 100 * Math.random() | 0
+        if(rand<5) {
+            ud.coins += 100
+            response.psay = "You found 100 coins just laying there!"
+        } 
+    }  
     //body.response.queue = ""
     //console.log(body)
     let essr_folder = "~SKYN ESSR DLC/"
@@ -156,7 +172,7 @@ exports.values = function(body) {
     if(body.values.sleep>=75 && body.values.sleep<100 && !attached.includes("sleep")) {
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_sleep001")
         body.response.sound = playsound(body.info.voice, "yawn")
-        body.response.yawn = "true"
+        body.response.csay = "yawn"
 	}
 	else if(body.values.sleep<75 && attached.includes("sleep"))
          body.response.osay = rlv(body.response.osay, "detach", "SKYN_sleep001")
