@@ -11,7 +11,7 @@ exports.values = function(body) {
     if(body.info.features=="11111" && body.info.coin_find == true) {
         let rand = 100 * Math.random() | 0
         if(rand<5) {
-            ud.coins += 100
+            body.values.coins += 100
             response.psay = "You found 100 coins just laying there!"
         } 
     }  
