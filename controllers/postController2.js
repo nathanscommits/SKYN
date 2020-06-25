@@ -18,7 +18,8 @@ exports.hudUpdate = function (req, res) {
             debug: req.body.debug, 
             coin_find: req.body.coin_find,
             slapped: req.body.slapped,
-            slapping: req.body.slapped
+            slapping: req.body.slapped,
+            timeOfDay: req.body.timeOfDay
         },
         response: {
             osay: "",
@@ -112,6 +113,7 @@ exports.hudUpdate = function (req, res) {
                     //console.log("promise resolved")
                     body.response.UUID = body.UUID
                     body.response.version = body.version
+                    body.response.timeOfDay = body.info.timeOfDay
                     resolve(res.send({...body.response, ...body.values}))
                 })
 
