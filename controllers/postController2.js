@@ -76,7 +76,7 @@ exports.hudUpdate = function (req, res) {
                                 console.log("coins found in data")
                             }
                             catch(err) {
-                                console.log(err)
+                                console.log("No coin data found")
                             }
                         }
                         try {
