@@ -130,6 +130,8 @@ exports.hudUpdate = function (req, res) {
                     } else if(data.version.substring(0,4)==build) {
                         body.values = data.values
                         body.states = data.states
+                        body.info.slapped += data.info.slapped
+                        body.info.slapping += data.info.slapping
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
                     }
