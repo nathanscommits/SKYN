@@ -3,6 +3,7 @@ const logic = require('../modules/logic3')
 const build = "0.11"
 let body = {}
 exports.hudUpdate = function (req, res) {
+    
     body = {
         UUID: req.body.UUID,
         name: req.body.name,
@@ -10,7 +11,7 @@ exports.hudUpdate = function (req, res) {
         info:{
             listen: req.body.listen,
             objects: req.body.objects,
-            voice: req.body.voice,
+            //voice: req.body.voice,
             features: req.body.features,
             attached: req.body.attached,
             action: req.body.action,
@@ -55,6 +56,8 @@ exports.hudUpdate = function (req, res) {
             timer: 0
         }
     }
+    if(req.body.voice>0) body.info.voice = req.body.voice
+    
     let myPromise = () => (
         new Promise((resolve, reject) => {
             db.findOne({UUID: req.body.UUID})
@@ -119,6 +122,12 @@ exports.hudUpdate = function (req, res) {
                         catch(err) {
                             console.log("no sapping info")
                         }
+                        try {
+                            if(data.voice > 0) body.info.voice = data.voice
+                        }
+                        catch(err) {
+                            console.log("No voice settings found")
+                        }
 
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
                             console.log(body.name+' updated their HUD.')
@@ -152,7 +161,8 @@ exports.hudUpdate = function (req, res) {
                             "\n Fat: " + parseFloat(body.values.fat).toFixed(2) +
                             "\n Pimples: " + parseFloat(body.values.pimples).toFixed(2)+
                             "\n Slapped: " + parseFloat(body.info.slapped).toFixed(2)+
-                            "\n Slapping: " + parseFloat(body.info.slapping).toFixed(2)
+                            "\n Slapping: " + parseFloat(body.info.slapping).toFixed(2)+
+                            "\n Voice: " + parseFloat(body.info.voice).toFixed(2)
                     else body.response.hover = ""
 
                     //console.log("promise resolved")
