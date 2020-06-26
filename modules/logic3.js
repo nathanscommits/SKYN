@@ -3,7 +3,7 @@ exports.values = function(body) {
         let s_minutes
         let tod = parseInt(body.info.timeOfDay)*6
         let hours = tod / 3600
-        let minutes = (tod / 60) - (hours * 60)
+        let minutes = (tod.toFixed(0) / 60) - (hours.toFixed(0) * 60)
         
         let s_hours = hours.toFixed(0) 
         s_minutes = minutes.toFixed(0)
@@ -13,7 +13,7 @@ exports.values = function(body) {
         
         body.response.timeOfDay = body.info.timeOfDay
         console.log(body.info.timeOfDay)
-        console.log(tod)
+        console.log(minutes)
 
     if(body.info.features.substring(0,1)!="1") return; //all features on  
     if(body.info.features.substring(2,3)=="0") { //food is off
