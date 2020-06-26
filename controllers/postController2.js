@@ -70,6 +70,7 @@ exports.hudUpdate = function (req, res) {
                         else if(coins in data){
                             if(data.coins > 0) body.values.coins = data.coins
                         }
+                        else console.log("no coins exists!")
                         if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
                         else if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
                         if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
