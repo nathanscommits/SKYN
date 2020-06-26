@@ -261,18 +261,6 @@ exports.values = function(body) {
         if(body.values.energy<body.values.fitness) body.values.coins+=((body.values.fitness-body.values.energy)/1000000)
         if(body.values.sleep<100) body.values.coins+=((100-body.values.sleep)/100000)
     } else if(body.values.health <= 0) { //dieing
-        body.values.deathCount++
-        body.values.timeAlive=0
-        body.values.coins-=(body.values.coins/10)
-        body.values.health=100
-        body.values.hunger=100
-        body.values.thirst=100
-        body.values.sleep=0
-        if(body.response.osay.substring(0,1) == "@") body.response.osay += ",sit:00000000-0000-0000-0000-000000000000=force"
-        else body.response.osay += "@sit:00000000-0000-0000-0000-000000000000=force"
-        body.response.anim = anims.death
-        body.response.death = "true"
-        body.response.sound = playsound(body.info.voice, "dieing")
         let deathMessage = [
             "Second death is not the opposite of second life, but a part of it.",
             "We all die. The goal isn’t to live forever, the goal is to rez something that will.",
@@ -288,7 +276,7 @@ exports.values = function(body) {
             "Why do ghosts ride the elevator? To lift their spirits.",
             "Cremation is your last hope for a smoking hot body.",
             "Don't feel bad, I'm usually about to die.",
-            "Here lies ",
+            "Here lies "+body.name+", a free elf.",
             "Death, griefers and group chats! There's never any convenient time for any of them.",
             "Mesh's to mesh's, prim to prim.",
             "I don't think of it as dieing, I think of it as going to the big lost and found folder in the sky.",
@@ -298,7 +286,21 @@ exports.values = function(body) {
             "It’s been a funny sort of day, hasn’t it?",
             "I’ll see you in another life. When we are both cats."
         ]
-        body.response.psay = "You died!\nYou made it"+(body.values.timeAlive/60)+" minutes,\nWhich is "+(body.values.timeAlive/3600)+" hours.\nYou lost "+(body.values.coins/10)+" SKYN Coins!\n"+deathMessage[deathMessage.length * Math.random() | 0]
+        body.response.psay = "You died!\nYou made it "+(body.values.timeAlive/60)+" minutes,\nWhich is "+(body.values.timeAlive/3600)+" hours.\nYou lost "+(body.values.coins/10)+" SKYN Coins!\n"+deathMessage[deathMessage.length * Math.random() | 0]
+        
+        body.values.deathCount++
+        body.values.timeAlive=0
+        body.values.coins-=(body.values.coins/10)
+        body.values.health=100
+        body.values.hunger=100
+        body.values.thirst=100
+        body.values.sleep=0
+        if(body.response.osay.substring(0,1) == "@") body.response.osay += ",sit:00000000-0000-0000-0000-000000000000=force"
+        else body.response.osay += "@sit:00000000-0000-0000-0000-000000000000=force"
+        body.response.anim = anims.death
+        body.response.death = "true"
+        body.response.sound = playsound(body.info.voice, "dieing")
+        
     } if(body.values.health<25 && body.info.features.substring(0,1)=="1")
         body.response.sound = playsound(body.info.voice, "low health")
 
