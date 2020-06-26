@@ -1,9 +1,9 @@
 exports.values = function(body) {
     
         let s_minutes
-        let tod = body.info.timeOfDay*6;
-        let hours = (tod / 3600) ;
-        let minutes = (tod / 60) - (hours * 60);
+        let tod = parseInt(body.info.timeOfDay)*6
+        let hours = (tod / 3600)
+        let minutes = (tod / 60) - (hours * 60)
         
         let s_hours = hours; 
         if(hours<10) s_hours = "0"+hours;
