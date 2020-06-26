@@ -1,8 +1,8 @@
 exports.values = function(body) {
     
         let s_minutes
-        let tod = parseInt(body.info.timeOfDay)*6
-        let hours = tod / 3600
+        let tod = body.info.timeOfDay*6
+        let hours = tod.toFixed(0) / 3600
         let minutes = (tod.toFixed(0) / 60) - (hours.toFixed(0) * 60)
         
         let s_hours = hours.toFixed(0) 
