@@ -97,7 +97,7 @@ exports.hudUpdate = function (req, res) {
                             body.version = build
                             body.response.UUID = body.UUID
                             body.response.version = body.version
-                            resolve(res.send({...body.response, ...body.values}))
+                            resolve(body.response)
                          })
                     } else if(data.version.substring(0,4)==build) {
                         console.log("made it past checks")
