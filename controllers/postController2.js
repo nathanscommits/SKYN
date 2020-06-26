@@ -64,17 +64,17 @@ exports.hudUpdate = function (req, res) {
                         resolve(body.response)
                     }) 
                     else if(data.version.substring(0,4)!=build) {
-                        if(data.values.coins){
+                        if(coins in data.values){
                             if(data.values.coins > 0) body.values.coins = data.values.coins
                         }
-                        if(data.coins){
+                        else if(coins in data){
                             if(data.coins > 0) body.values.coins = data.coins
                         }
                         if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
                         else if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
                         if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
                         else if(data.deathCount > 0) body.values.deathCount = data.deathCount
-                        if(data.prizeName){
+                        if(prizeName in data){
                             if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
                         }
                         if(data.info.slapped > 0) body.info.slapped += data.info.slapped
