@@ -57,7 +57,7 @@ exports.hudUpdate = function (req, res) {
         }
     }
     if(req.body.voice>0) body.info.voice = req.body.voice
-    
+
     let myPromise = () => (
         new Promise((resolve, reject) => {
             db.findOne({UUID: req.body.UUID})
@@ -134,6 +134,8 @@ exports.hudUpdate = function (req, res) {
                             body.version = build
                             body.response.UUID = body.UUID
                             body.response.version = body.version
+                            if(body.info.voice < 1 && voice in data)body.info.voice = data.info.voice
+                            else body.info.voice = req.body.voice
                             resolve(body.response)
                          })
                     } else if(data.version.substring(0,4)==build) {
