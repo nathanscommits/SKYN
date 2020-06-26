@@ -91,7 +91,7 @@ exports.hudUpdate = function (req, res) {
                             resolve(res.send({...body.response, ...body.values}))
                          })
                     } else {
-                        console.log(data)
+                        console.log("made it past checks")
                         body.values = data.values
                         body.states = data.states
                         if(body=logic.values(body)) resolve("logic passed")
