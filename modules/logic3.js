@@ -8,7 +8,7 @@ exports.values = function(body) {
         let s_minutes
         let tod = float2int(body.info.timeOfDay*6)
         let hours = float2int(tod) / 3600
-        let minutes = (tod / 60) - (hours * 60)
+        let minutes = (tod / 60) - (float2int(hours) * 60)
         let s_hours = float2int(hours)
         s_minutes = float2int(minutes)
         if(hours<10) s_hours = "0"+float2int(hours)
