@@ -80,12 +80,10 @@ exports.hudUpdate = function (req, res) {
                             }
                         }
                         try {
-                            if(prizeName in data){
-                                if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
-                            }
+                            if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
                         }
                         catch(err) {
-                            console.log(err)
+                            console.log("No prizes found")
                         }
                         try {
                             if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
@@ -113,13 +111,13 @@ exports.hudUpdate = function (req, res) {
                             if(data.info.slapped > 0) body.info.slapped += data.info.slapped
                         }
                         catch(err) {
-                            console.log(err)
+                            console.log("no slapped info")
                         }
                         try {
                             if(data.info.slapping > 0) body.info.slapping += data.info.slapping
                         }
                         catch(err) {
-                            console.log(err)
+                            console.log("no sapping info")
                         }
 
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
