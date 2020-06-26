@@ -59,7 +59,7 @@ exports.hudUpdate = function (req, res) {
             db.findOne({UUID: req.body.UUID})
 
                 .then(function(data){
-                    console.log("made it to first then")
+                    console.log(data)
                     if(data == null) db.insertOne(body, () => {
                         console.log(body.name+" - New user created")
                         resolve(body.response)
