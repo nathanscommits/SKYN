@@ -11,6 +11,7 @@ exports.values = function(body) {
         body.info.timeOfDay = s_hours+":"+s_minutes
         
         body.response.timeOfDay = body.info.timeOfDay
+        console.log(body.info.timeOfDay)
 
     if(body.info.features.substring(0,1)!="1") return; //all features on  
     if(body.info.features.substring(2,3)=="0") { //food is off
