@@ -299,7 +299,7 @@ exports.values = function(body) {
         
         body.values.deathCount++
         body.values.timeAlive=0
-        body.values.coins-=(body.values.coins/10)
+        body.values.coins =  body.values.coins - (body.values.coins/10)
         body.values.health=100
         body.values.hunger=100
         body.values.thirst=100
