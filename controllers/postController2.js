@@ -66,9 +66,11 @@ exports.hudUpdate = function (req, res) {
                     else if(data.version.substring(0,4)!=build) {
                         if(coins in data.values){
                             if(data.values.coins > 0) body.values.coins = data.values.coins
+                            console.log("coins found in data values")
                         }
                         else if(coins in data){
                             if(data.coins > 0) body.values.coins = data.coins
+                            console.log("coins found in data")
                         }
                         else console.log("no coins exists!")
                         if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
