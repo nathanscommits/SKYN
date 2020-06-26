@@ -18,11 +18,11 @@ exports.values = function(body) {
 ////////////////////
     if(body.info.features.substring(0,1)!="1") return; //all features on  
     if(body.info.features.substring(2,3)=="0") { //food is off
-        ud.hunger+=2
-        ud.thirst+=2
+        body.values.hunger+=2
+        body.values.thirst+=2
     }
-    if(body.info.features.substring(3,4)=="0") ud.sleep-=2 //sleep is off
-    if(body.info.features.substring(4,5)=="0") ud.energy+=100 //energy is off
+    if(body.info.features.substring(3,4)=="0") body.values.sleep-=2 //sleep is off
+    if(body.info.features.substring(4,5)=="0") body.values.energy+=100 //energy is off
 
     //coin finder
     if(body.info.features=="11111" && body.info.coin_find == true) {
