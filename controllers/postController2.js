@@ -75,23 +75,53 @@ exports.hudUpdate = function (req, res) {
                                 if(data.coins > 0) body.values.coins = data.coins
                                 console.log("coins found in data")
                             }
-                            catch(err)
-                            {
+                            catch(err) {
                                 console.log(err)
                             }
                         }
                         try {
-                            if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
+                            if(prizeName in data){
+                                if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
+                            }
                         }
                         catch(err) {
                             console.log(err)
                         }
-                        if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
-                        else if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
-                        if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
-                        else if(data.deathCount > 0) body.values.deathCount = data.deathCount
-                        if(data.info.slapped > 0) body.info.slapped += data.info.slapped
-                        if(data.info.slapping > 0) body.info.slapping += data.info.slapping
+                        try {
+                            if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
+                        }
+                        catch(err) {
+                            try{
+                                if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
+                            }
+                            catch(err) {
+                                console.log("no time alive stat")
+                            }
+                        }
+                        try {
+                            if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
+                        }
+                        catch(err) {
+                            try {
+                                if(data.deathCount > 0) body.values.deathCount = data.deathCount
+                            }
+                            catch(err) {
+                                console.log("no death count stat")
+                            }
+                        }
+                        try {
+                            if(data.info.slapped > 0) body.info.slapped += data.info.slapped
+                        }
+                        catch(err) {
+                            console.log(err)
+                        }
+                        try {
+                            if(data.info.slapping > 0) body.info.slapping += data.info.slapping
+                        }
+                        catch(err) {
+                            console.log(err)
+                        }
+
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
                             console.log(body.name+' updated their HUD.')
                             body.version = build
