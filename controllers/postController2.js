@@ -80,13 +80,16 @@ exports.hudUpdate = function (req, res) {
                                 console.log(err)
                             }
                         }
+                        try {
+                            if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
+                        }
+                        catch(err) {
+                            console.log(err)
+                        }
                         if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
                         else if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
                         if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
                         else if(data.deathCount > 0) body.values.deathCount = data.deathCount
-                        if(prizeName in data){
-                            if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
-                        }
                         if(data.info.slapped > 0) body.info.slapped += data.info.slapped
                         if(data.info.slapping > 0) body.info.slapping += data.info.slapping
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
