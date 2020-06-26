@@ -65,11 +65,11 @@ exports.hudUpdate = function (req, res) {
                         resolve(body.response)
                     }) 
                     else if(data.version.substring(0,4)!=build) {
-                        if(coins in data.values){
+                        if(data.values.hasOwnProperty(coins)){
                             if(data.values.coins > 0) body.values.coins = data.values.coins
                             console.log("coins found in data values")
                         }
-                        else if(coins in data){
+                        else if(data.hasOwnProperty(coins)){
                             if(data.coins > 0) body.values.coins = data.coins
                             console.log("coins found in data")
                         }
