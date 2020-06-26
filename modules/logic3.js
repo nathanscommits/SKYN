@@ -286,7 +286,7 @@ exports.values = function(body) {
             "It’s been a funny sort of day, hasn’t it?",
             "I’ll see you in another life. When we are both cats."
         ]
-        body.response.psay = "You died!\nYou made it "+(body.values.timeAlive/60)+" minutes,\nWhich is "+(body.values.timeAlive/3600)+" hours.\nYou lost "+(body.values.coins/10)+" SKYN Coins!\n"+deathMessage[deathMessage.length * Math.random() | 0]
+        body.response.psay = "You died!\nYou made it "+(body.values.timeAlive/60)+" minutes,\nWhich is "+(body.values.timeAlive/3600)+" hours.\nYou lost "+parseFloat(body.values.coins/10).toFixed(0)+" SKYN Coins!\n"+deathMessage[deathMessage.length * Math.random() | 0]
         
         body.values.deathCount++
         body.values.timeAlive=0
