@@ -126,7 +126,12 @@ exports.hudUpdate = function (req, res) {
                             if(data.voice > 0) body.info.voice = data.voice
                         }
                         catch(err) {
-                            console.log("No voice settings found")
+                            try {
+                                if(data.info.voice > 0) body.info.voice = data.info.voice
+                            }
+                            catch(err) {
+                                console.log("No voice settings found")
+                            }
                         }
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
                             console.log(body.name+' updated their HUD.')
