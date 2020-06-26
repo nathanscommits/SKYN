@@ -113,7 +113,6 @@ exports.hudUpdate = function (req, res) {
                     //console.log("promise resolved")
                     body.response.UUID = body.UUID
                     body.response.version = body.version
-                    body.response.timeOfDay = body.info.timeOfDay
                     resolve(res.send({...body.response, ...body.values}))
                 })
 

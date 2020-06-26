@@ -9,6 +9,8 @@ exports.values = function(body) {
         if(hours<10) s_hours = "0"+hours;
         if(minutes<10) s_minutes = "0"+minutes
         body.info.timeOfDay = s_hours+":"+s_minutes
+        
+        body.response.timeOfDay = body.info.timeOfDay
 
     if(body.info.features.substring(0,1)!="1") return; //all features on  
     if(body.info.features.substring(2,3)=="0") { //food is off
