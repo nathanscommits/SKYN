@@ -273,6 +273,32 @@ exports.values = function(body) {
         body.response.anim = anims.death
         body.response.death = "true"
         body.response.sound = playsound(body.info.voice, "dieing")
+        let deathMessage = [
+            "Second death is not the opposite of second life, but a part of it.",
+            "We all die. The goal isn’t to live forever, the goal is to rez something that will.",
+            "You were DROP DEAD gorgeous!",
+            "Something smells dead over here...",
+            "That outfit is to die for!",
+            "That it will never come again is what makes life so sweet. Respawning...",
+            "Don't troll the respawn, Jeremy!",
+            "Did you fall from a skybox? Because you look like an angel.",
+            "No one is actually dead until all their objects have been auto returned.",
+            "You've made a GRAVE mistake!",
+            "You put the fun back in funeral!",
+            "Why do ghosts ride the elevator? To lift their spirits.",
+            "Cremation is your last hope for a smoking hot body.",
+            "Don't feel bad, I'm usually about to die.",
+            "Here lies ",
+            "Death, griefers and group chats! There's never any convenient time for any of them.",
+            "Mesh's to mesh's, prim to prim.",
+            "I don't think of it as dieing, I think of it as going to the big lost and found folder in the sky.",
+            "Corn nuts!",
+            "Clever girl...",
+            "No, not the bees! NOT THE BEES! AAAAAAAAGH!",
+            "It’s been a funny sort of day, hasn’t it?",
+            "I’ll see you in another life. When we are both cats."
+        ]
+        body.response.psay = "You died!\nYou made it"+(body.values.timeAlive/60)+" minutes,\nWhich is "+(body.values.timeAlive/3600)+" hours.\nYou lost "+(body.values.coins/10)+" SKYN Coins!\n"+deathMessage[deathMessage.length * Math.random() | 0]
     } if(body.values.health<25 && body.info.features.substring(0,1)=="1")
         body.response.sound = playsound(body.info.voice, "low health")
 
