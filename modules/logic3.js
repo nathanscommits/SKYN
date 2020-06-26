@@ -182,10 +182,14 @@ exports.values = function(body) {
         else body.response.osay += "@attach:"+essr_folder+"Weight00" + body.values.shape + "=force"
 
     //pimples
-    if(body.values.pimples>=50 && !attached.includes("Pimples")) 
+    if(body.values.pimples>=50 && body.states.pimples !=1) {
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_Pimples001")
-    else if(body.values.pimples<50 && attached.includes("Pimples"))
+        body.states.pimples = 1
+    }
+    else if(body.values.pimples<50 && body.states.pimples !=0) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_Pimples001")
+        body.states.pimples = 0
+    }
 
     //sleep
     if(body.values.sleep>=75 && body.values.sleep<100 && !attached.includes("sleep")) {
