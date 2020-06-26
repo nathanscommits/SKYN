@@ -86,7 +86,9 @@ exports.hudUpdate = function (req, res) {
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
                             console.log(body.name+' updated their HUD.')
                             body.version = build
-                            resolve(body.response)
+                            body.response.UUID = body.UUID
+                            body.response.version = body.version
+                            resolve(res.send({...body.response, ...body.values}))
                          })
                     } else {
                         console.log(data)
