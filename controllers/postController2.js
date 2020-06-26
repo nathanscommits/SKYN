@@ -88,7 +88,7 @@ exports.hudUpdate = function (req, res) {
                             resolve(body.response)
                          })
                     } else {
-                        //console.log(data)
+                        console.log(data)
                         body.values = data.values
                         body.states = data.states
                         if(body=logic.values(body)) resolve("logic passed")
