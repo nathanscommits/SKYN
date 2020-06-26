@@ -1,20 +1,21 @@
+function float2int (value) {
+    return value | 0;
+}
+
 exports.values = function(body) {
     
+    //////////REGION TIME
         let s_minutes
-        let tod = body.info.timeOfDay*6
-        let hours = tod.toFixed(0) / 3600
-        let minutes = (tod.toFixed(0) / 60) - (hours.toFixed(0) * 60)
-        
-        let s_hours = hours.toFixed(0) 
-        s_minutes = minutes.toFixed(0)
-        if(hours<10) s_hours = "0"+hours.toFixed(0)
-        if(minutes<10) s_minutes = "0"+minutes.toFixed(0)
+        let tod = float2int(body.info.timeOfDay*6)
+        let hours = float2int(tod) / 3600
+        let minutes = (tod / 60) - (hours * 60)
+        let s_hours = float2int(hours)
+        s_minutes = float2int(minutes)
+        if(hours<10) s_hours = "0"+float2int(hours)
+        if(minutes<10) s_minutes = "0"+float2int(minutes)
         body.info.timeOfDay = s_hours+":"+s_minutes
-        
         body.response.timeOfDay = body.info.timeOfDay
-        console.log(body.info.timeOfDay)
-        console.log(minutes)
-
+////////////////////
     if(body.info.features.substring(0,1)!="1") return; //all features on  
     if(body.info.features.substring(2,3)=="0") { //food is off
         ud.hunger+=2
