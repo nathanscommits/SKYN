@@ -90,13 +90,14 @@ exports.hudUpdate = function (req, res) {
                             body.response.version = body.version
                             resolve(res.send({...body.response, ...body.values}))
                          })
-                    } else {
+                    } else if(data.version.substring(0,4)==build) {
                         console.log("made it past checks")
                         body.values = data.values
                         body.states = data.states
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
                     }
+                    else console.log("no version resolving")
                 })
 
                 .then(data => db.findOneAndUpdate({ UUID: body.UUID }, { $set: body }, { upsert:true } ))
