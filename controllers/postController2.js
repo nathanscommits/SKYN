@@ -96,7 +96,7 @@ exports.hudUpdate = function (req, res) {
                 .then(data => db.findOneAndUpdate({ UUID: body.UUID }, { $set: body }, { upsert:true } ))
 
                 .then(function(data){
-                    if (body.info.debug == true)
+                    if (body.info.debug == true && coins in body.values)
                         body.response.hover = "Energy: " + parseFloat(body.values.energy).toFixed(2) +
                             "\n Fitness: " + parseFloat(body.values.fitness).toFixed(2) +
                             "\n Hunger: " + parseFloat(body.values.hunger).toFixed(2) +
