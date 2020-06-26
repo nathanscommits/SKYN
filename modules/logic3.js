@@ -18,10 +18,12 @@ exports.values = function(body) {
 ////////////////////
     if(body.info.features.substring(0,1)!="1") return; //all features on  
     if(body.info.features.substring(2,3)=="0") { //food is off
-        body.values.hunger+=2
-        body.values.thirst+=2
+        if(body.values.hunger<=0)body.values.hunger++
+        if(body.values.thirst<=0)body.values.thirst++
     }
-    if(body.info.features.substring(3,4)=="0") body.values.sleep-=2 //sleep is off
+    if(body.info.features.substring(3,4)=="0") {
+         if(body.values.sleep>=99)body.values.sleep-=2 //sleep is off
+    }
     if(body.info.features.substring(4,5)=="0") body.values.energy+=100 //energy is off
 
     //coin finder
@@ -45,7 +47,7 @@ exports.values = function(body) {
         body.values.hunger += hunger
         body.values.thirst += thirst
         body.values.pimples += pimples
-        body.values.sleep += sleep
+        if(sleep < 0 || body.info.features.substring(3,4)=="0")body.values.sleep += sleep
         body.values.energy += energy
         body.values.fat += fat
         body.values.health += health
@@ -146,7 +148,7 @@ exports.values = function(body) {
         if(consumed.fat) body.values.fat+=consumed.fat
         if(consumed.pimples) body.values.pimples+=consumed.pimples
         if(consumed.energy) body.values.energy+=consumed.energy
-        if(consumed.sleep) body.values.sleep+=consumed.sleep
+        if(consumed.sleep && body.info.features.substring(3,4)=="1") body.values.sleep+=consumed.sleep
         if(consumed.thirst) body.values.thirst+=consumed.thirst
         if(consumed.health) body.values.health+=consumed.health
         if(consumed.coins) body.values.coins+=consumed.coins
@@ -193,7 +195,7 @@ exports.values = function(body) {
 	}
 	else if(body.values.sleep<75 && attached.includes("sleep"))
          body.response.osay = rlv(body.response.osay, "detach", "SKYN_sleep001")
-	else if(body.values.sleep>=100 && action.substring(0, 1)=="0") {
+	else if(body.values.sleep>=100 && action.substring(0, 1)=="0" && body.info.features.substring(3,4)=="1") {
 		if(body.response.osay.substring(0,1) == "@") body.response.osay += ",sit:00000000-0000-0000-0000-000000000000=force"
         else body.response.osay += "@sit:00000000-0000-0000-0000-000000000000=force"
     }
