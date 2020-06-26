@@ -6,8 +6,8 @@ exports.values = function(body) {
         let minutes = (tod / 60) - (hours * 60)
         
         let s_hours = hours; 
-        if(hours<10) s_hours = "0"+hours;
-        if(minutes<10) s_minutes = "0"+minutes
+        if(hours<10) s_hours = "0"+hours.toFixed(0)
+        if(minutes<10) s_minutes = "0"+minutes.toFixed(0)
         body.info.timeOfDay = s_hours+":"+s_minutes
         
         body.response.timeOfDay = body.info.timeOfDay
