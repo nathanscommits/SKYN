@@ -128,7 +128,6 @@ exports.hudUpdate = function (req, res) {
                         catch(err) {
                             console.log("No voice settings found")
                         }
-                        if(body.info.voice <= 0) body.info.voice = data.info.voice
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
                             console.log(body.name+' updated their HUD.')
                             body.version = build
@@ -141,6 +140,7 @@ exports.hudUpdate = function (req, res) {
                         body.states = data.states
                         body.info.slapped = parseInt(body.info.slapped) + parseInt(data.info.slapped)
                         body.info.slapping = parseInt(body.info.slapping) + parseInt(data.info.slapping)
+                        if(body.info.voice <= 0) body.info.voice = data.info.voice
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
                     }
