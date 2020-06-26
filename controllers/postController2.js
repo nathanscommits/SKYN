@@ -63,7 +63,7 @@ exports.hudUpdate = function (req, res) {
                         console.log(body.name+" - New user created")
                         resolve(body.response)
                     }) 
-                    else if(req.body.version.substring(0,4)!=build) {
+                    else if(data.version.substring(0,4)!=build) {
                         if(data.values.coins){
                             if(data.values.coins > 0) body.values.coins = data.values.coins
                         }
