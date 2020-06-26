@@ -192,13 +192,16 @@ exports.values = function(body) {
     }
 
     //sleep
-    if(body.values.sleep>=75 && body.values.sleep<100 && !attached.includes("sleep")) {
+    if(body.values.sleep>=75 && body.values.sleep<100 && body.states.sleeping !=1) {
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_sleep001")
         body.response.sound = playsound(body.info.voice, "yawn")
         body.response.csay = "yawn"
+        body.states.sleeping =1
 	}
-	else if(body.values.sleep<75 && attached.includes("sleep"))
+	else if(body.values.sleep<75 && body.states.sleeping !=0) {
          body.response.osay = rlv(body.response.osay, "detach", "SKYN_sleep001")
+         body.states.sleeping =0
+    }
 	else if(body.values.sleep>=100 && action.substring(0, 1)=="0" && body.info.features.substring(3,4)=="1") {
 		if(body.response.osay.substring(0,1) == "@") body.response.osay += ",sit:00000000-0000-0000-0000-000000000000=force"
         else body.response.osay += "@sit:00000000-0000-0000-0000-000000000000=force"
