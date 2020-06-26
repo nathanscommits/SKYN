@@ -52,7 +52,7 @@ exports.values = function(body) {
         body.values.fat += fat
         body.values.health += health
         body.values.coins += coins
-        body.values.fitness += fitness
+        body.values.fitness += fitness/body.values.fitness
     }
     function rlv(osay, method, file) {
         if(osay.substring(0,1) == "@") osay += ","+method+":"+essr_folder+"~"+file+"=force"
@@ -85,7 +85,7 @@ exports.values = function(body) {
         body.values.fitness-=0.02 //passive body.values.fitness loss
     }
     if(body.values.energy<body.values.fitness) {
-        body.values.fitness+=50/body.values.fitness //body.values.fitness gain when exercising, more body.values.fitness means harder to earn body.values.fitness
+        body.values.fitness += 50/body.values.fitness //fitness gain when exercising, more fitness means harder to earn fitness
         body.values.fat-=0.1
     }
     //if(action.substring(5, 5)==1) //underwater
@@ -152,7 +152,7 @@ exports.values = function(body) {
         if(consumed.thirst) body.values.thirst+=consumed.thirst
         if(consumed.health) body.values.health+=consumed.health
         if(consumed.coins) body.values.coins+=consumed.coins
-        if(consumed.fitness) body.values.fitness+=consumed.fitness
+        if(consumed.fitness) body.values.fitness+=consumed.fitness/body.values.fitness
     }
 
     //body.values.health
@@ -293,7 +293,9 @@ exports.values = function(body) {
             "It’s been a funny sort of day, hasn’t it?",
             "I’ll see you in another life. When we are both cats."
         ]
-        body.response.psay = "You died!\nYou made it "+float2int(body.values.timeAlive/60)+" minutes,\nWhich is "+float2int(body.values.timeAlive/3600)+" hours.\nYou lost "+float2int(body.values.coins/10)+" SKYN Coins!\n"+deathMessage[deathMessage.length * Math.random() | 0]
+        let timeAliveString = float2int(body.values.timeAlive/60)+" minutes"
+        if(timeAlive > 3600) timeAliveString = float2int(body.values.timeAlive/3600)+" hours"
+        body.response.psay = "You died!\nYou made it "+timeAliveString+".\nYou lost "+float2int(body.values.coins/10)+" SKYN Coins!\n"+deathMessage[deathMessage.length * Math.random() | 0]
         
         body.values.deathCount++
         body.values.timeAlive=0
