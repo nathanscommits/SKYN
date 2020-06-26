@@ -18,7 +18,7 @@ exports.hudUpdate = function (req, res) {
             debug: req.body.debug, 
             coin_find: req.body.coin_find,
             slapped: req.body.slapped,
-            slapping: req.body.slapped,
+            slapping: req.body.slapping,
             timeOfDay: req.body.timeOfDay,
             inSun: req.body.inSun
         },
