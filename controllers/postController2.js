@@ -19,7 +19,8 @@ exports.hudUpdate = function (req, res) {
             coin_find: req.body.coin_find,
             slapped: req.body.slapped,
             slapping: req.body.slapped,
-            timeOfDay: req.body.timeOfDay
+            timeOfDay: req.body.timeOfDay,
+            inSun: req.body.inSun
         },
         response: {
             osay: "",
@@ -59,7 +60,6 @@ exports.hudUpdate = function (req, res) {
             db.findOne({UUID: req.body.UUID})
 
                 .then(function(data){
-                    console.log(data)
                     if(data == null) db.insertOne(body, () => {
                         console.log(body.name+" - New user created")
                         resolve(body.response)
@@ -100,7 +100,6 @@ exports.hudUpdate = function (req, res) {
                             resolve(body.response)
                          })
                     } else if(data.version.substring(0,4)==build) {
-                        console.log("made it past checks")
                         body.values = data.values
                         body.states = data.states
                         if(body=logic.values(body)) resolve("logic passed")
