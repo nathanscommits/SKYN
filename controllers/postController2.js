@@ -11,7 +11,7 @@ exports.hudUpdate = function (req, res) {
         info:{
             listen: req.body.listen,
             objects: req.body.objects,
-            //voice: req.body.voice,
+            voice: req.body.voice,
             features: req.body.features,
             attached: req.body.attached,
             action: req.body.action,
@@ -56,7 +56,6 @@ exports.hudUpdate = function (req, res) {
             timer: 0
         }
     }
-    if(req.body.voice>0) body.info.voice = req.body.voice
 
     let myPromise = () => (
         new Promise((resolve, reject) => {
@@ -67,7 +66,7 @@ exports.hudUpdate = function (req, res) {
                         console.log(body.name+" - New user created")
                         resolve(body.response)
                     }) 
-                    else if(data.version.substring(0,4)!=build) {
+                    else if(data.version != build) {
 
                         try {
                             if(data.values.coins > 0) body.values.coins = data.values.coins
@@ -123,11 +122,11 @@ exports.hudUpdate = function (req, res) {
                             console.log("no sapping info")
                         }
                         try {
-                            if(data.voice > 0) body.info.voice = data.voice
+                            if(data.info.voice) body.info.voice = data.info.voice    
                         }
                         catch(err) {
                             try {
-                                if(data.info.voice > 0) body.info.voice = data.info.voice
+                                if(data.voice) body.info.voice = data.voice
                             }
                             catch(err) {
                                 console.log("No voice settings found")
@@ -140,7 +139,7 @@ exports.hudUpdate = function (req, res) {
                             body.response.version = body.version
                             resolve(body.response)
                          })
-                    } else if(data.version.substring(0,4)==build) {
+                    } else if(data.version == build) {
                         body.values = data.values
                         body.states = data.states
                         body.info.slapped = parseInt(body.info.slapped) + parseInt(data.info.slapped)
