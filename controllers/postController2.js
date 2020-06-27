@@ -110,13 +110,13 @@ exports.hudUpdate = function (req, res) {
                             }
                         }
                         try {
-                            if(data.info.slapped > 0) body.info.slapped += data.info.slapped
+                            if(data.info.slapped > 0) body.info.slapped += parseInt(data.info.slapped)
                         }
                         catch(err) {
                             console.log("no slapped info")
                         }
                         try {
-                            if(data.info.slapping > 0) body.info.slapping += data.info.slapping
+                            if(data.info.slapping > 0) body.info.slapping += parseInt(data.info.slapping)
                         }
                         catch(err) {
                             console.log("no sapping info")
