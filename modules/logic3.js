@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 function float2int (value) {
     return value | 0;
 }
@@ -31,7 +33,8 @@ exports.values = function(body) {
         let rand = 100 * Math.random() | 0
         if(rand<5) {
             body.values.coins += 100
-            response.psay = "You found 100 coins just laying there!"
+            body.response.psay = "You found 100 coins just laying there!"
+            body.response.pound= playsound(body.info.voice, "coins")
         } 
     }  
     //body.response.queue = ""
@@ -311,7 +314,7 @@ exports.values = function(body) {
         body.response.sound = playsound(body.info.voice, "dieing")
         
     } if(body.values.health<25 && body.info.features.substring(0,1)=="1")
-        body.response.sound = playsound(body.info.voice, "low health")
+        body.response.pound = playsound(body.info.voice, "low health")
 
     //value min/max's
     if(body.values.energy<0) body.values.energy=0
@@ -487,7 +490,7 @@ function playsound(voice, sound)
 	if(sound=="rumble")sounds=["95c9d0f6-da44-b19b-c4b5-bb97c8f6baa3",
         "2b794dc5-33c0-58e1-94a2-f2933e564728",
         "3a002595-915c-5957-ff25-36b58a8e37b2"]
-
+    if(sound=="coins") sounds=["991deed9-2d9e-4cdf-e445-3a25af22a426"]
     if(sound=="dieing") sounds=["7a17a826-de7a-241a-f840-05c32ac26399"]
     if(sound=="low health") {
         sounds=["10ea379e-38ed-86f6-9f58-27cf6315b5c6"]
