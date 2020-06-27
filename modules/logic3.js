@@ -85,7 +85,7 @@ exports.values = function(body) {
     }
     if(action.substring(0,5)=="00000") { //standing
         body.values.energy+=(body.values.fitness/100) //regain body.values.energy while idle
-        body.values.fitness-=0.02 //passive body.values.fitness loss
+        body.values.fitness-=0.01 //passive body.values.fitness loss
     }
     if(body.values.energy<body.values.fitness) {
         body.values.fitness += 100/body.values.fitness //fitness gain when exercising, more fitness means harder to earn fitness
