@@ -7,7 +7,7 @@ exports.hudUpdate = function (req, res) {
     body = {
         UUID: req.body.UUID,
         name: req.body.name,
-        version: req.body.version,
+        version: build,
         info:{
             listen: req.body.listen,
             objects: req.body.objects,
