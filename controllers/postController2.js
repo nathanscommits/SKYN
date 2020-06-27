@@ -146,7 +146,7 @@ exports.hudUpdate = function (req, res) {
                             body.version = build
                             body.response.UUID = body.UUID
                             body.response.version = body.version
-                            resolve(body.response)
+                            throw "HUD UPDATED"
                          })
                     } else console.log("no version resolving")
                 })
