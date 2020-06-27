@@ -62,8 +62,7 @@ exports.hudUpdate = function (req, res) {
         new Promise((resolve, reject) => {
             db.findOne({UUID: req.body.UUID})
 
-                .then(function(data, other){
-                    console.log(other)
+                .then(function(data){
                     if(data == null) {
                         db.insertOne(body, () => {
                             console.log(body.name+" - New user created")
