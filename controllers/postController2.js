@@ -111,6 +111,7 @@ exports.hudUpdate = function (req, res) {
                         }
                         try {
                             if(data.info.slapped > 0) body.info.slapped += parseInt(data.info.slapped)
+                            body.response.psay = "Slapped try block triggered"
                         }
                         catch(err) {
                             console.log("no slapped info")
@@ -142,8 +143,8 @@ exports.hudUpdate = function (req, res) {
                     } else if(data.version == build) {
                         body.values = data.values
                         body.states = data.states
-                        body.info.slapped = parseInt(body.info.slapped) + parseInt(data.info.slapped)
-                        body.info.slapping = parseInt(body.info.slapping) + parseInt(data.info.slapping)
+                        body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
+                        body.info.slapping = parseInt(req.body.slapping) + parseInt(data.info.slapping)
                         if(body.info.voice <= 0) body.info.voice = data.info.voice
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
@@ -163,10 +164,10 @@ exports.hudUpdate = function (req, res) {
                             "\n Health: " + parseFloat(body.values.health).toFixed(2) +
                             "\n Coins: " + parseFloat(body.values.coins).toFixed(2) +
                             "\n Fat: " + parseFloat(body.values.fat).toFixed(2) +
-                            "\n Pimples: " + parseFloat(body.values.pimples).toFixed(2)+
-                            "\n Slapped: " + parseFloat(body.info.slapped).toFixed(2)+
-                            "\n Slapping: " + parseFloat(body.info.slapping).toFixed(2)+
-                            "\n Voice: " + parseFloat(body.info.voice).toFixed(2)
+                            "\n Pimples: " + parseFloat(body.values.pimples).toFixed(0)+
+                            "\n Slapped: " + parseFloat(body.info.slapped).toFixed(0)+
+                            "\n Slapping: " + parseFloat(body.info.slapping).toFixed(0)+
+                            "\n Voice: " + parseFloat(body.info.voice).toFixed(0)
                     else body.response.hover = ""
 
                     //console.log("promise resolved")
