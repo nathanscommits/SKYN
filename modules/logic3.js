@@ -85,7 +85,7 @@ exports.values = function(body) {
         body.values.fitness-=0.02 //passive body.values.fitness loss
     }
     if(body.values.energy<body.values.fitness) {
-        body.values.fitness += 50/body.values.fitness //fitness gain when exercising, more fitness means harder to earn fitness
+        body.values.fitness += 100/body.values.fitness //fitness gain when exercising, more fitness means harder to earn fitness
         body.values.fat-=0.1
     }
     //if(action.substring(5, 5)==1) //underwater
