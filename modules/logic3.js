@@ -414,7 +414,11 @@ function playsound(voice, sound)
 	}
 	else if(voice==2) { //fem voice sounds
 		if(sound == "breathing") {
-			sounds = ["1d6934ab-7c01-c2e7-0b45-78a65b9531bb"]
+            sounds = [
+            "e995d655-673a-48db-3f37-2a45844e7558",
+            "9f76903f-64e6-a2e3-76c8-9970f665461f",
+            "f441f752-ea65-0f80-0721-1d698f12c062",
+            "6daf7ca9-70b9-4254-3991-459c0d2c553b"]
 			//queue = 1
 		}
 		else if(sound=="eww") sounds=["4b05ad88-a2e7-bc70-1b4c-218ef1a16cfb","b8cb16e0-f178-7a7a-3910-e17268e5bc2a","c90caad8-83ff-f704-b215-19f3cc7789c9"]
@@ -426,7 +430,7 @@ function playsound(voice, sound)
 			//queue = 1
 		}
 		else if(sound=="snore") {
-            sounds=["0de41a89-d565-db61-87c9-eabb57403450",
+            sounds=["28cb37ba-9174-f237-8f2b-f65077e31611",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
             "d1e83b54-cc26-d069-f950-a04e4f94fe1f",
