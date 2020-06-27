@@ -62,11 +62,20 @@ exports.hudUpdate = function (req, res) {
             db.findOne({UUID: req.body.UUID})
 
                 .then(function(data){
-                    if(data == null) db.insertOne(body, () => {
-                        console.log(body.name+" - New user created")
-                        resolve(body.response)
-                    }) 
-                    else if(data.version != build) {
+                    if(data == null) {
+                        db.insertOne(body, () => {
+                            console.log(body.name+" - New user created")
+                            resolve(body.response)
+                        }) 
+                    } else if(data.version == build) {
+                        body.values = data.values
+                        body.states = data.states
+                        body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
+                        body.info.slapping = parseInt(req.body.slapping) + parseInt(data.info.slapping)
+                        if(body.info.voice <= 0) body.info.voice = data.info.voice
+                        if(body=logic.values(body)) resolve("logic passed")
+                        else reject("failed to process logic")
+                    } else if(data.version != build) {
 
                         try {
                             if(data.values.coins > 0) body.values.coins = data.values.coins
@@ -140,16 +149,7 @@ exports.hudUpdate = function (req, res) {
                             body.response.version = body.version
                             resolve(body.response)
                          })
-                    } else if(data.version == build) {
-                        body.values = data.values
-                        body.states = data.states
-                        body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
-                        body.info.slapping = parseInt(req.body.slapping) + parseInt(data.info.slapping)
-                        if(body.info.voice <= 0) body.info.voice = data.info.voice
-                        if(body=logic.values(body)) resolve("logic passed")
-                        else reject("failed to process logic")
-                    }
-                    else console.log("no version resolving")
+                    } else console.log("no version resolving")
                 })
 
                 .then(data => db.findOneAndUpdate({ UUID: body.UUID }, { $set: body }, { upsert:true } ))
