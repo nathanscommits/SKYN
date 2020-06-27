@@ -142,12 +142,13 @@ exports.hudUpdate = function (req, res) {
                                 console.log("No voice settings found")
                             }
                         }
+                        
+                        body.version = build
                         db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
-                            console.log(body.name+' updated their HUD.')
-                            body.version = build
+                            
                             body.response.UUID = body.UUID
                             body.response.version = body.version
-                            //throw "HUD UPDATED"
+                            resolve(console.log(body.name+' updated their HUD.'))
                          })
                     } else console.log("no version resolving")
                 })
