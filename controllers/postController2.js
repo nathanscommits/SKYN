@@ -76,7 +76,7 @@ exports.hudUpdate = function (req, res) {
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
                     } else if(data.version != build) {
-
+                        body.response.psay = "SKYN HUD was updated."
                         try {
                             if(data.values.coins > 0) body.values.coins = data.values.coins
                             console.log("coins found in data values")
@@ -120,7 +120,6 @@ exports.hudUpdate = function (req, res) {
                         }
                         try {
                             if(data.info.slapped > 0) body.info.slapped += parseInt(data.info.slapped)
-                            body.response.psay = "Slapped try block triggered"
                         }
                         catch(err) {
                             console.log("no slapped info")
