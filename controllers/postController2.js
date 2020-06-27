@@ -68,7 +68,7 @@ exports.hudUpdate = function (req, res) {
                             console.log(body.name+" - New user created")
                             resolve(body.response)
                         }) 
-                    } else if(data.version == build) {
+                    } else if(data.response.version == build) {
                         body.values = data.values
                         body.states = data.states
                         body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
@@ -76,7 +76,7 @@ exports.hudUpdate = function (req, res) {
                         if(body.info.voice <= 0) body.info.voice = data.info.voice
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
-                    } else if(data.version != build) {
+                    } else if(data.response.version != build) {
                         body.response.psay = "SKYN HUD was updated from "+data.version+" to "+build
                         console.log(data)
                         try {
