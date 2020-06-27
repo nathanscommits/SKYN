@@ -67,7 +67,7 @@ exports.hudUpdate = function (req, res) {
                             console.log(body.name+" - New user created")
                             resolve(body.response)
                         }) 
-                    } else if(data.version == build) {
+                    } else if(data.version === build) {
                         body.values = data.values
                         body.states = data.states
                         body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
@@ -75,70 +75,53 @@ exports.hudUpdate = function (req, res) {
                         if(body.info.voice <= 0) body.info.voice = data.info.voice
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
-                    } else if(data.version != build) {
+                    } else if(data.version !== build) {
                         body.response.psay = "SKYN HUD was updated from "+data.version+" to "+build
                         console.log(data)
                         try {
                             if(data.values.coins > 0) body.values.coins = data.values.coins
                             console.log("coins found in data values")
-                        }
-                        catch(err) {
+                        } catch(err) {
                             try {
                                 if(data.coins > 0) body.values.coins = data.coins
                                 console.log("coins found in data")
-                            }
-                            catch(err) {
+                            } catch(err) {
                                 console.log("No coin data found")
                             }
-                        }
-                        try {
+                        } try {
                             if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
-                        }
-                        catch(err) {
+                        } catch(err) {
                             console.log("No prizes found")
-                        }
-                        try {
+                        } try {
                             if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
-                        }
-                        catch(err) {
+                        } catch(err) {
                             try{
                                 if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
-                            }
-                            catch(err) {
+                            } catch(err) {
                                 console.log("no time alive stat")
                             }
-                        }
-                        try {
+                        } try {
                             if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
-                        }
-                        catch(err) {
+                        } catch(err) {
                             try {
                                 if(data.deathCount > 0) body.values.deathCount = data.deathCount
-                            }
-                            catch(err) {
+                            } catch(err) {
                                 console.log("no death count stat")
                             }
-                        }
-                        try {
+                        } try {
                             if(data.info.slapped > 0) body.info.slapped += parseInt(data.info.slapped)
-                        }
-                        catch(err) {
+                        } catch(err) {
                             console.log("no slapped info")
-                        }
-                        try {
+                        } try {
                             if(data.info.slapping > 0) body.info.slapping += parseInt(data.info.slapping)
-                        }
-                        catch(err) {
+                        } catch(err) {
                             console.log("no sapping info")
-                        }
-                        try {
+                        } try {
                             if(data.info.voice) body.info.voice = data.info.voice    
-                        }
-                        catch(err) {
+                        } catch(err) {
                             try {
                                 if(data.voice) body.info.voice = data.voice
-                            }
-                            catch(err) {
+                            } catch(err) {
                                 console.log("No voice settings found")
                             }
                         }
