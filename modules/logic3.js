@@ -298,7 +298,7 @@ exports.values = function(body) {
         ]
         let timeAliveString = float2int(body.values.timeAlive/60)+" minutes"
         if(body.values.timeAlive > 3600) timeAliveString = float2int(body.values.timeAlive/3600)+" hours"
-        body.response.psay = "You died!\nYou made it "+timeAliveString+".\nYou lost "+float2int(body.values.coins/10)+" SKYN Coins!\n"+deathMessage[deathMessage.length * Math.random() | 0]
+        body.response.psay = "You died!\nYou made it "+timeAliveString+".\nYou lost "+float2int(body.values.coins/10)+' SKYN Coins!\n \"'+deathMessage[deathMessage.length * Math.random() | 0]+'\"'
         
         body.values.deathCount++
         body.values.timeAlive=0
