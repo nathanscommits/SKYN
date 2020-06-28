@@ -162,7 +162,10 @@ exports.hudUpdate = function (req, res) {
                     resolve(res.send({...body.response, ...body.values}))
                 })
 
-                .catch(err => console.log("something went wrong" + err))
+                .catch( err => { 
+                    console.log("something went wrong" + err)
+                    res.send("Something went wrong")
+                })
         })
     )
     myPromise()
