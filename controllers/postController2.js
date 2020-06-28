@@ -10,11 +10,11 @@ exports.hudUpdate = function (req, res) {
         version: build,
         info:{
             listen: req.body.listen,
-            objects: {
-                o_names: JSON.parse( "[" + req.body.o_names + "]" ),
-                o_bb: JSON.parse( "[" + req.body.o_bb + "]" ),
-                o_range: JSON.parse( "[" + req.body.o_range + "]" ),
-                o_pos: JSON.parse( "[" + req.body.o_pos + "]" )
+            objects:{
+                o_names: req.body.o_names.split(", "),
+                o_bb: req.body.o_bb.split(", "),
+                o_range: req.body.o_range.split(", "),
+                o_pos: req.body.o_pos.split(", ")
             },
             voice: req.body.voice,
             features: req.body.features,
