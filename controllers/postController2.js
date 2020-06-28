@@ -11,10 +11,10 @@ exports.hudUpdate = function (req, res) {
         info:{
             listen: req.body.listen,
             objects:{
-                o_names: req.body.o_names.split(", "),
-                o_bb: req.body.o_bb.split(", "),
-                o_range: req.body.o_range.split(", "),
-                o_pos: req.body.o_pos.split(", ")
+                o_names: req.body.o_names.split(",&,"),
+                o_bb: req.body.o_bb.split(",&,"),
+                o_range: req.body.o_range.split(",&,"),
+                o_pos: req.body.o_pos.split(",&,")
             },
             voice: req.body.voice,
             features: req.body.features,
