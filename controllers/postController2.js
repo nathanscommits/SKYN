@@ -128,7 +128,7 @@ exports.hudUpdate = function (req, res) {
                         }
                         
                         body.version = build
-                        db.findOneAndUpdate({UUID: body.UUID}, { $set: body }, function(err, data) {
+                        db.findOneAndUpdate({UUID: req.body.UUID}, { $set: body }, function(err, data) {
                             
                             body.response.UUID = body.UUID
                             body.response.version = body.version
@@ -137,7 +137,7 @@ exports.hudUpdate = function (req, res) {
                     } else console.log("no version resolving")
                 })
 
-                .then(data => db.findOneAndUpdate({ UUID: body.UUID }, { $set: body }, { upsert:true } ))
+                .then(data => db.findOneAndUpdate({ UUID: req.body.UUID }, { $set: body }, { upsert:true } ))
 
                 .then(function(data){
                     if (body.info.debug == true)
@@ -152,7 +152,8 @@ exports.hudUpdate = function (req, res) {
                             "\n Pimples: " + parseFloat(body.values.pimples).toFixed(0)+
                             "\n Slapped: " + parseFloat(body.info.slapped).toFixed(0)+
                             "\n Slapping: " + parseFloat(body.info.slapping).toFixed(0)+
-                            "\n Voice: " + parseFloat(body.info.voice).toFixed(0)
+                            "\n Voice: " + parseFloat(body.info.voice).toFixed(0)+
+                            "\n Deaths: " + parseFloat(body.values.deathCount).toFixed(0)
                     else body.response.hover = ""
 
                     //console.log("promise resolved")
