@@ -69,7 +69,7 @@ if(body.info.warm_object != ""){
         body.values.hunger += hunger
         body.values.thirst += thirst
         body.values.pimples += pimples
-        if(sleep < 0 || body.info.features.substring(3,4)=="0")body.values.sleep += sleep
+        if(sleep < 0 || body.info.features.substring(3,4)=="1")body.values.sleep += sleep
         body.values.energy += energy
         body.values.fat += fat
         body.values.health += health
