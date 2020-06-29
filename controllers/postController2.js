@@ -156,7 +156,9 @@ exports.hudUpdate = function (req, res) {
                             "\n Slapped: " + parseFloat(body.info.slapped).toFixed(0)+
                             "\n Slapping: " + parseFloat(body.info.slapping).toFixed(0)+
                             "\n Voice: " + parseFloat(body.info.voice).toFixed(0)+
-                            "\n Deaths: " + parseFloat(body.values.deathCount).toFixed(0)
+                            "\n Deaths: " + parseFloat(body.values.deathCount).toFixed(0)+
+                            "\n Warm Object: " + body.info.warm_object+
+                            "\n Wet Object: " + body.info.wet_object
                     else body.response.hover = ""
 
                     //console.log("promise resolved")
