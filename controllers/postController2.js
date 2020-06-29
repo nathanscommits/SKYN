@@ -66,10 +66,9 @@ exports.hudUpdate = function (req, res) {
             db.findOne({UUID: req.body.UUID})
 
                 .then(function(data){
-                    if(data == null) {
+                    if(data === null) {
                         db.insertOne(body, () => {
-                            console.log(body.name+" - New user created")
-                            resolve(body.response)
+                            resolve(console.log(body.name+" - New user created"))
                         }) 
                     } else if(data.response.version == build) {
                         body.values = data.values
