@@ -63,7 +63,11 @@ exports.hudUpdate = function (req, res) {
 
     let myPromise = () => (
         new Promise((resolve, reject) => {
-            db.findOne({UUID: req.body.UUID})
+            db.findOne({UUID: req.body.UUID}, function (err, data) {
+                if (err) {
+                    return console.log("error: " + err);
+                  }
+            })
 
                 .then(function(data){
                     if(data === null) {
