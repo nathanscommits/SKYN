@@ -35,7 +35,8 @@ exports.hudUpdate = function (req, res) {
             sound: "",
             rlv: "",
             loop: "",
-            version: build
+            version: build,
+            announce: ""
         },
         values: {
             energy: 100,
