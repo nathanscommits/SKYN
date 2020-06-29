@@ -18,6 +18,25 @@ exports.values = function(body) {
         body.info.timeOfDay = s_hours+":"+s_minutes
         body.response.timeOfDay = body.info.timeOfDay
 ////////////////////
+
+let warmObjects = [
+	"fire","heater","radiator","lava","flame","fireplace","kiln","stove","boiler"
+];   
+let wetObjects = [
+	"water","pool","spa ","spring","tub ","bath","shower"
+]; 
+
+body.response.warm_objects_list = warmObjects.toString()
+body.response.wet_objects_list = wetObjects.toString()
+
+if(body.info.warm_object != ""){
+    announce = "Warm object discovered in range! name: "+body.info.warm_object+" range: "+body.info.warm_object_range
+}
+if(body.info.warm_object != ""){
+    announce = "Wet object discovered in range! name: "+body.info.wet_object+" range: "+body.info.wet_object_range
+}
+
+
     if(body.info.features.substring(0,1)!="1") return; //all features on  
     if(body.info.features.substring(2,3)=="0") { //food is off
         if(body.values.hunger<=0)body.values.hunger++

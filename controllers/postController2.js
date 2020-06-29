@@ -20,7 +20,11 @@ exports.hudUpdate = function (req, res) {
             slapped: req.body.slapped,
             slapping: req.body.slapping,
             timeOfDay: req.body.timeOfDay,
-            inSun: req.body.inSun
+            inSun: req.body.inSun,
+            warm_object: req.body.warm_object,
+            wet_object: req.body.wet_object,
+            warm_object_range: req.body.warm_object_range,
+            wet_object_range: req.body.wet_object_range
         },
         response: {
             osay: "",
