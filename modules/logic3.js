@@ -30,10 +30,10 @@ body.response.warm_objects_list = warmObjects.toString()
 body.response.wet_objects_list = wetObjects.toString()
 
 if(body.info.warm_object != ""){
-    announce = "Warm object discovered in range! name: "+body.info.warm_object+" range: "+body.info.warm_object_range
+    body.response.announce = "Warm object discovered in range! name: "+body.info.warm_object+" range: "+body.info.warm_object_range
 }
 if(body.info.warm_object != ""){
-    announce = "Wet object discovered in range! name: "+body.info.wet_object+" range: "+body.info.wet_object_range
+    body.response.announce = "Wet object discovered in range! name: "+body.info.wet_object+" range: "+body.info.wet_object_range
 }
 
 
@@ -141,7 +141,7 @@ if(body.info.warm_object != ""){
     //consumables//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if(consumed.type != "food" && body.info.features.substring(2,3)=="1") {
         body.values.hunger-=0.07 //body.values.hunger loss when not eating
-        body.values.fat-=0.01 //body.values.fat loss when not eating
+        //body.values.fat-=0.01 //body.values.fat loss when not eating
         body.values.pimples-=0.1
         if(body.values.hunger<25&&body.values.hunger>0) {
             let h = body.values.hunger.toFixed(1)
