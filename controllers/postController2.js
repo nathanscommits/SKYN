@@ -65,10 +65,7 @@ exports.hudUpdate = function (req, res) {
         new Promise((resolve, reject) => {
             db.findOne({UUID: body.UUID})
 
-                .then(function(data, err){
-                    if (err) {
-                        return console.log("error: " + err);
-                      }
+                .then(function(data){
                     if(data === null) {
                         db.insertOne(body, () => {
                             resolve(
