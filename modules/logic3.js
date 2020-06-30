@@ -40,6 +40,8 @@ exports.values = function(body) {
     if(body.values.coins<0) body.values.coins=0
     if(body.states.timeInSun<0) body.states.timeInSun=0
     if(body.states.wet<0) body.states.wet=0
+    if(body.values.tan<-100) body.values.tan = -100
+    else if(body.values.tan>100) body.values.tan = 100
 
     return body
 }
