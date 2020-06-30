@@ -86,66 +86,66 @@ module.exports = function(body) {
     }
 
     //sunburn
-    if(body.state.timeInSun > 10 && body.state.timeInSun < 21 && body.state.sunburn != 1) {
+    if(body.states.timeInSun > 10 && body.states.timeInSun < 21 && body.states.sunburn != 1) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn002")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn003")
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_sunburn001")
-        body.state.sunburn = 1
-    } else if(body.state.timeInSun > 20 && body.state.timeInSun < 31 && body.state.sunburn != 2) {
+        body.states.sunburn = 1
+    } else if(body.states.timeInSun > 20 && body.states.timeInSun < 31 && body.states.sunburn != 2) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn003")
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_sunburn002")
-        body.state.sunburn = 2
-    } else if(body.state.timeInSun > 30 && body.state.sunburn != 3) {
+        body.states.sunburn = 2
+    } else if(body.states.timeInSun > 30 && body.states.sunburn != 3) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn002")
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_sunburn003")
-        body.state.sunburn = 3
-    } else if(body.state.timeInSun <=0 && body.state.sunburn != 0) {
+        body.states.sunburn = 3
+    } else if(body.states.timeInSun <=0 && body.states.sunburn != 0) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn002")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_sunburn003")
-        body.state.sunburn = 0
+        body.states.sunburn = 0
     }
 
     //tan
-    if(body.values.tan > 10 && body.values.tan < 21 && body.state.tan != 1) {
+    if(body.values.tan > 10 && body.values.tan < 21 && body.states.tan != 1) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan002")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan003")
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_tan001")
-        body.state.tan = 1
-    } else if(body.values.tan > 20 && body.values.tan < 31 && body.state.tan != 2) {
+        body.states.tan = 1
+    } else if(body.values.tan > 20 && body.values.tan < 31 && body.states.tan != 2) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan003")
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_tan002")
-        body.state.tan = 2
-    } else if(body.values.tan > 30 && body.state.tan != 3) {
+        body.states.tan = 2
+    } else if(body.values.tan > 30 && body.states.tan != 3) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan002")
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_tan003")
-        body.state.tan = 3
-    } else if(body.values.tan <=10 && body.values.tan >=0 && body.state.tan != 0) {
+        body.states.tan = 3
+    } else if(body.values.tan <=10 && body.values.tan >=0 && body.states.tan != 0) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan002")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan003")
-        body.state.tan = 0
+        body.states.tan = 0
     }
     //pale
-    else if(body.values.tan <0 && body.values.tan >=-10 && body.state.tan != 4) {
+    else if(body.values.tan <0 && body.values.tan >=-10 && body.states.tan != 4) {
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_pale001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale002")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale003")
-        body.state.tan = 4
-    } else if(body.values.tan <-10 && body.values.tan >=-20 && body.state.tan != 5) {
+        body.states.tan = 4
+    } else if(body.values.tan <-10 && body.values.tan >=-20 && body.states.tan != 5) {
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_pale002")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale003")
-        body.state.tan = 5
-    } else if(body.values.tan <-20 && body.state.tan != 6) {
+        body.states.tan = 5
+    } else if(body.values.tan <-20 && body.states.tan != 6) {
         body.response.osay = rlv(body.response.osay, "attachover", "SKYN_pale003")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale002")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale001")
-        body.state.tan = 6
+        body.states.tan = 6
     }
 
     return body
