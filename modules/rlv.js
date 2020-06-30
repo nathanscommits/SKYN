@@ -128,6 +128,9 @@ module.exports = function(body) {
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan001")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan002")
         body.response.osay = rlv(body.response.osay, "detach", "SKYN_tan003")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale001")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale002")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_pale003")
         body.states.tan = 0
     }
     //pale
