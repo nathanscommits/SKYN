@@ -146,9 +146,10 @@ exports.hudUpdate = function (req, res) {
                              })
                         }
                     } else {
+                        db.createIndex({ UUID: body.UUID }, { unique: true }).then(
                         db.insertOne(body, () => {
                             resolve(console.log(body.name+" - New user created"))
-                        })
+                        })).catch(err => console.log("Could not insert new entry. "+err))
                     }
                 })
 
@@ -182,7 +183,7 @@ exports.hudUpdate = function (req, res) {
                 })
 
                 .catch( err => { 
-                    console.log("something went wrong" + err)
+                    console.log("Something went wrong. " + err)
                     res.send("Something went wrong")
                 })
         })
