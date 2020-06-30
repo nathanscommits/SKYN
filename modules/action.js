@@ -58,7 +58,7 @@ module.exports = function(body) {
         body.values.fat-=0.1
     }
 
-    if(body.info.inSun = "TRUE") {
+    if(body.info.inSun == "TRUE") {
         body.states.timeInSun+=2
         body.values.tan+=2
     } else {
