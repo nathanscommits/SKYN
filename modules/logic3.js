@@ -38,6 +38,7 @@ exports.values = function(body) {
     if(body.values.health>100) body.values.health=100
     if(body.values.health<0) body.values.health=0
     if(body.values.coins<0) body.values.coins=0
+    if(body.states.timeInSun<0) body.states.timeInSun=0
 
     return body
 }
