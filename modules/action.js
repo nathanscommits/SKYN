@@ -59,10 +59,10 @@ module.exports = function(body) {
     }
 
     if(body.info.inSun = "TRUE") {
-        body.state.timeInSun+=2
+        body.states.timeInSun+=2
         body.values.tan+=2
     } else {
-        body.state.timeInSun-=2
+        body.states.timeInSun-=2
         body.values.tan-=0.5
     }
 
