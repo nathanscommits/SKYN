@@ -62,7 +62,9 @@ exports.hudUpdate = function (req, res) {
             timer: 0,
             timeInSun: 0,
             sunburn: 0,
-            tan: 0
+            tan: 0,
+            wet: 0,
+            dry: 0
         }
     }
 

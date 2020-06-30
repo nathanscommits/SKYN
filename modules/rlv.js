@@ -148,5 +148,28 @@ module.exports = function(body) {
         body.states.tan = 6
     }
 
+    //wet
+    if(body.states.wet>100 && body.states.dry !=3){
+        body.response.osay = rlv(body.response.osay, "attachover", "SKYN_wet003")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet002")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet001")
+        body.states.dry = 3
+    } else if(body.states.wet>50 && body.states.wet<=100 && body.states.dry !=2){
+        body.response.osay = rlv(body.response.osay, "attachover", "SKYN_wet002")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet003")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet001")
+        body.states.dry = 2
+    } else if(body.states.wet>0 && body.states.wet<=50 && body.states.dry !=1){
+        body.response.osay = rlv(body.response.osay, "attachover", "SKYN_wet001")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet003")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet002")
+        body.states.dry = 1
+    } else if(body.states.wet<=0 && body.states.dry !=0){
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet001")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet003")
+        body.response.osay = rlv(body.response.osay, "detach", "SKYN_wet002")
+        body.states.dry = 0
+    }
+
     return body
 }
