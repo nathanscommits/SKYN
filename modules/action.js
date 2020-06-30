@@ -66,7 +66,7 @@ module.exports = function(body) {
         body.values.tan-=0.5
     }
 
-    if(body.info.wet_object != "" || body.info.submerged == "TRUE") {
+    if(body.info.wet_object != "" || body.info.submerged == 1) {
         body.states.wet = 120
     }
 
