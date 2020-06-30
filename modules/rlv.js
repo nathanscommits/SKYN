@@ -1,7 +1,7 @@
 const anims = require('../modules/anims')
 const sound = require('../modules/sounds')
+let essr_folder = "~SKYN ESSR DLC/"
 function rlv(osay, method, file) {
-    let essr_folder = "~SKYN ESSR DLC/"
     if(osay.substring(0,1) == "@") osay += ","+method+":"+essr_folder+"~"+file+"=force"
     else osay += "@"+method+":"+essr_folder+"~"+file+"=force"
     return osay
