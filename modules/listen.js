@@ -1,3 +1,5 @@
+const anims = require('../modules/anims')
+const sound = require('../modules/sounds')
 module.exports = function(body) {
     let listen = body.info.listen
     let consumed = body.info.consumed

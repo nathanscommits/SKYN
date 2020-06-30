@@ -1,3 +1,5 @@
+const anims = require('../modules/anims')
+const sound = require('../modules/sounds')
 module.exports = function (body) {
     //coin finder
 if(body.info.features=="11111" && body.info.coin_find == true) {

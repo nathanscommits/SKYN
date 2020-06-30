@@ -1,6 +1,4 @@
 const { response } = require("express");
-const anims = require('../modules/anims')
-const sound = require('../modules/sounds')
 const time = require('../modules/region_time')
 const objects = require('../modules/objects')
 const features = require('../modules/features')

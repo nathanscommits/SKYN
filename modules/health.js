@@ -1,3 +1,5 @@
+const anims = require('../modules/anims')
+const sound = require('../modules/sounds')
 function float2int (value) {
     return value | 0;
 }
