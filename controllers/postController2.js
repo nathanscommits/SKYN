@@ -21,6 +21,7 @@ exports.hudUpdate = function (req, res) {
             slapping: req.body.slapping,
             timeOfDay: req.body.timeOfDay,
             inSun: req.body.inSun,
+            submerged: req.body.submerged,
             warm_object: req.body.warm_object,
             wet_object: req.body.wet_object,
             warm_object_range: req.body.warm_object_range,
