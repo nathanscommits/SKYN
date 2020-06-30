@@ -6,7 +6,7 @@ let body = {}
 exports.hudUpdate = function (req, res) {
     
     body = {
-        _id: req.body.UUID,
+        id: req.body.UUID,
         UUID: req.body.UUID,
         name: req.body.name,
         version: build,
@@ -78,7 +78,7 @@ exports.hudUpdate = function (req, res) {
 
                 .then(function(data){
                     if(data === null) {
-                        db.findOne({_id: body._id}, function (err, data) {
+                        db.findOne({id: body.id}, function (err, data) {
                             if(err) reject("error: "+err)
                             else if(data===null) db.insertOne(body, () => {
                                 resolve(console.log(body.name+" - New user created"))
