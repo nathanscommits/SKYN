@@ -3,7 +3,7 @@ module.exports = function (body) {
         "fire","heater","radiator","lava","flame","kiln","stove","boiler"
     ]   
     let wetObjects = [
-        "water","pool","spa ","spring","tub ","bath","shower","pond","river","stream","lake"
+        "water","pool","spa ","spring","tub ","bath","shower","pond","river","stream","lake","fountain"
     ]
     
     body.response.warm_objects_list = warmObjects.toString()
