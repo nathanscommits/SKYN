@@ -163,6 +163,7 @@ exports.hudUpdate = function (req, res) {
                             "\n Thirst: " + parseFloat(body.values.thirst).toFixed(2) +
                             "\n Sleep: " + parseFloat(body.values.sleep).toFixed(2) +
                             "\n Health: " + parseFloat(body.values.health).toFixed(2) +
+                            "\n Oxygen: " + parseFloat(body.values.oxygen).toFixed(0) +
                             "\n Coins: " + parseFloat(body.values.coins).toFixed(2) +
                             "\n Fat: " + parseFloat(body.values.fat).toFixed(2) +
                             "\n Pimples: " + parseFloat(body.values.pimples).toFixed(0)+
@@ -171,9 +172,7 @@ exports.hudUpdate = function (req, res) {
                             //"\n Voice: " + parseFloat(body.info.voice).toFixed(0)+
                            // "\n Deaths: " + parseFloat(body.values.deathCount).toFixed(0)+
                            "\n Tan: " + body.values.tan.toFixed(0)+
-                           "\n timeInSun: " + body.states.timeInSun.toFixed(0)+
-                           "\n Warm Object: " + body.info.warm_object+
-                            "\n Wet Object: " + body.info.wet_object
+                           "\n timeInSun: " + body.states.timeInSun.toFixed(0)
                     else body.response.hover = ""
 
                     //console.log("promise resolved")

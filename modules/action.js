@@ -60,15 +60,15 @@ module.exports = function(body) {
 
     if(body.info.inSun == 1) {
         body.states.timeInSun+=2
-        body.values.tan+=2
+        body.values.tan+=0.1
     } else {
         body.states.timeInSun-=2
-        body.values.tan-=0.5
+        body.values.tan-=0.01
     }
 
     if(body.info.wet_object != "" || body.info.submerged == 1) {
         body.states.wet = 120
-        body.values.oxygen -= 1
+        if(body.info.features.substring(5,6)=="1")body.values.oxygen -= 1
     } else {
         body.values.oxygen += 5
     }
