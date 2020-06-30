@@ -77,14 +77,7 @@ exports.hudUpdate = function (req, res) {
             db.findOne({UUID: body.UUID})
 
                 .then(function(data){
-                    if(data === null) {
-                        db.findOne({id: body.id}, function (err, data) {
-                            if(err) reject("error: "+err)
-                            else if(data===null) db.insertOne(body, () => {
-                                resolve(console.log(body.name+" - New user created"))
-                            }) 
-                        })
-                    } else if(data.response.version == build) {
+                    if(data.response.version == build) {
                         body.values = data.values
                         body.states = data.states
                         body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
@@ -150,7 +143,11 @@ exports.hudUpdate = function (req, res) {
                             body.response.version = body.version
                             resolve(console.log(body.name+' updated their HUD.'))
                          })
-                    } else console.log("no version resolving")
+                    } else if(!data) {
+                        db.insertOne(body, () => {
+                            resolve(console.log(body.name+" - New user created"))
+                        })
+                    }
                 })
 
                 .then(data => db.findOneAndUpdate({ UUID: req.body.UUID }, { $set: body }, { upsert:true } ))
