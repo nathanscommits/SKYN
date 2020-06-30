@@ -19,7 +19,7 @@ module.exports = function(body) {
 
 //listen///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if(listen){ 
-    if(action.substring(5, 6)=="0") { //not sleeping
+    if(body.info.action.substring(5, 6)=="0") { //not sleeping
         if(listen.includes("eatCalories:")) consumable("food", 20, 0, 15, 5, 20, 5, 0, 0, 0)
         if(listen.includes("dietPill:")) consumable("pills", 20, -20, 20, 20, -20, -10, 0, 0, -10)
         if(listen.includes("drinkCalories:")) consumable("drink", 0, 20, 10, -10, 20, 0, 0, 0, 0)

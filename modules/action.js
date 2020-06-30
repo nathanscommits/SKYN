@@ -58,5 +58,13 @@ module.exports = function(body) {
         body.values.fat-=0.1
     }
 
+    if(body.info.inSun = "TRUE") {
+        body.state.timeInSun+=2
+        body.values.tan+=2
+    } else {
+        body.state.timeInSun-=2
+        body.values.tan-=0.5
+    }
+
     return body
 }

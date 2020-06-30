@@ -49,7 +49,8 @@ exports.hudUpdate = function (req, res) {
             coins: 0,
             pimples: 0,
             timeAlive: 0,
-            deathCount: 0
+            deathCount: 0,
+            tan: 0
         },
         states: {
             death: 0,
@@ -58,7 +59,10 @@ exports.hudUpdate = function (req, res) {
             sweat: 0,
             pimples: 0,
             shape: 0,
-            timer: 0
+            timer: 0,
+            timeInSun: 0,
+            sunburn: 0,
+            tan: 0
         }
     }
 
