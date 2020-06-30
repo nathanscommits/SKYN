@@ -42,6 +42,8 @@ exports.values = function(body) {
     if(body.states.wet<0) body.states.wet=0
     if(body.values.tan<-100) body.values.tan = -100
     else if(body.values.tan>100) body.values.tan = 100
+    if(body.values.oxygen<0) body.values.oxygen = 0
+    else if(body.valyes.oxygen>100) body.values.oxygen = 100
 
     return body
 }

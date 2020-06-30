@@ -1,10 +1,12 @@
 const db = require('../db')
 const logic = require('../modules/logic3')
+const { ObjectId } = require('mongodb')
 const build = "0.11"
 let body = {}
 exports.hudUpdate = function (req, res) {
     
     body = {
+        _id: ObjectId(req.body.UUID),
         UUID: req.body.UUID,
         name: req.body.name,
         version: build,
@@ -51,7 +53,8 @@ exports.hudUpdate = function (req, res) {
             pimples: 0,
             timeAlive: 0,
             deathCount: 0,
-            tan: 0
+            tan: 0,
+            oxygen: 100
         },
         states: {
             death: 0,
@@ -75,7 +78,7 @@ exports.hudUpdate = function (req, res) {
 
                 .then(function(data){
                     if(data === null) {
-                        db.findOne({UUID: body.UUID}, function (err, data) {
+                        db.findOne({_id: body._id}, function (err, data) {
                             if(err) reject("error: "+err)
                             else if(data===null) db.insertOne(body, () => {
                                 resolve(console.log(body.name+" - New user created"))

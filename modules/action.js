@@ -68,6 +68,9 @@ module.exports = function(body) {
 
     if(body.info.wet_object != "" || body.info.submerged == 1) {
         body.states.wet = 120
+        body.values.oxygen -= 1
+    } else {
+        body.values.oxygen += 5
     }
 
     if(body.states.wet>0)body.states.wet-=2
