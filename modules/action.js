@@ -66,9 +66,9 @@ module.exports = function(body) {
         body.values.tan-=0.01
     }
 
-    if(body.info.wet_object != "" || body.info.water > body.info.pos.z-0.5) { //body.info.submerged == 1
+    if(body.info.wet_object != "" || body.info.water > body.info.pos.split(",")[2]-0.5) { //body.info.submerged == 1
         body.states.wet = 120
-        if(body.info.features.substring(5,6)=="1" && body.info.water > body.info.pos.z+1)body.values.oxygen -= 1
+        if(body.info.features.substring(5,6)=="1" && body.info.water > body.info.pos.split(",")[2]+1)body.values.oxygen -= 1
     } else {
         body.values.oxygen += 5
     }
