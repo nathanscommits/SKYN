@@ -154,10 +154,16 @@ exports.hudUpdate = function (req, res) {
                             db.findOne({"UUID": req.body.UUID}, function (err, found) {
                                 if(err) resolve(console.log(err));
                                 else if(found) resolve(console.log("User already exists!"));
-                                else if(found == null) db.insertOne(body, () => {
-                                    resolve(console.log(body.name+" - New user created"))
-                                })
-                            }).catch(err => console.log("Could not insert new entry. "+err))
+                                else if(found == null) {
+                                    db.findOne({name: req.body.name}, function(err, found_name) {
+                                        if(err)resolve(console.log(err));
+                                        else if(found_name) resolve(console.log("User by that name already exists!"));
+                                        else if(found_name == null) db.insertOne(body, () => {
+                                            resolve(console.log(body.name+" - New user created"))
+                                        })
+                                    })
+                                }
+                            })
                     }
                 })
 
