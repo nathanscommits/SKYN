@@ -43,6 +43,7 @@ exports.hudUpdate = function (req, res) {
                 db.insertOne(body, function(){
                     response.version = body.version
                     response.osay = "Successfully added to the database"
+                    console.log("Added in post1 line 46")
                     res.send(response)
                 })
                 
@@ -217,6 +218,7 @@ exports.venderGiver = function (req, res) {
         {
             //make new url entry
             db.insertOne(body, function(){
+                console.log("added in post1 line 221")
                 res.send("new entry and url added")
             })
         }
