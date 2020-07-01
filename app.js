@@ -131,6 +131,7 @@ app.post('/jShf8Sh37dSb3', (req, res) => {
             else{
                 //new entry
                 db.insertOne(bodyData, function(){
+                    console.log("new entry from app line 134")
                     res.send("New user added")
                 })
             }
