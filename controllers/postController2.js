@@ -160,6 +160,7 @@ exports.hudUpdate = function (req, res) {
                                         else if(found_name) resolve(console.log("User by that name already exists!"));
                                         else if(found_name == null) db.insertOne(body, () => {
                                             resolve(console.log(body.name+" - New user created"))
+                                            console.log(err+" : "+found_name)
                                         })
                                     })
                                 }
