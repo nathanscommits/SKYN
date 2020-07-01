@@ -38,7 +38,9 @@ if(listen){
     }
     if(listen.includes("slapped!")) consumable("action", 0, 0, 0, -5, 0, 0, 0, 0, 0)
     if(listen.includes("slapping!")) consumable("action", 0, -5, 0, 0, -10, 0, 0, 0, 1)
-    if(listen.includes("breathing")) body.response.sound = sound.play(body.info.voice, "breathing")
+    if(listen.includes("breathing")) body.response.sound = sound.play(body.info.voice, "breathing")\
+    if(listen.includes("sunscreen30")) body.states.sunscreen = 240
+    if(listen.includes("sunscreen50")) body.states.sunscreen = 600
     //if(listen.includes("uncomfortable")) body.response.sound = sound.play(body.info.voice, "eww")
 }
 

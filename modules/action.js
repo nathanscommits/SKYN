@@ -53,19 +53,24 @@ module.exports = function(body) {
     else // not sitting
         body.values.sleep+=0.1 //not sitting, sleepy! you could do 1/energy to make it based off of energy loss
 
-    if(body.values.energy<body.values.fitness) {
+    if(body.values.energy<body.values.fitness || body.values.oxygen < 100) {
         body.values.fitness += 100/body.values.fitness //fitness gain when exercising, more fitness means harder to earn fitness
         body.values.fat-=0.1
     }
 
     if(body.info.inSun == 1) {
-        body.states.timeInSun+=2
-        body.values.tan+=0.1
-        if(body.states.timeInSun>=1200) body.response.anim = anims.sunny
+        if(body.states.sunscreen <= 0) body.states.timeInSun+=2
+        body.values.tan+=0.02
+        if(body.states.timeInSun>=1200) {
+            body.response.anim = anims.sunny
+            body.reaponse.sound = sound.play(body.info.voice, "sizzle")
+        }
     } else {
         body.states.timeInSun-=2
-        body.values.tan-=0.01
+        body.values.tan-=0.02
     }
+
+    body.states.sunscreen -= 2
 
     let posString = body.info.pos
     posString = posString.replace(">", "")
@@ -74,7 +79,7 @@ module.exports = function(body) {
     
     if(body.info.wet_object != "" || body.info.water > poz[2]-0.5) { //body.info.submerged == 1
         body.states.wet = 120
-        if(action.substring(1, 2)=="1" || action.substring(2, 3)=="1" || action.substring(3, 4)=="1" || action.substring(4, 5)=="1") 
+        if(action.substring(1, 5)!="0000") 
             sound.play(body.info.voice, "splash")
         if(body.info.features.substring(5,6)=="1" && body.info.water > poz[2]+1) body.values.oxygen -= 1
     } else {

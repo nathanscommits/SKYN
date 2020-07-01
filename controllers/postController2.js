@@ -70,7 +70,8 @@ exports.hudUpdate = function (req, res) {
             sunburn: 0,
             tan: 0,
             wet: 0,
-            dry: 0
+            dry: 0,
+            sunscreen: 0
         }
     }
 

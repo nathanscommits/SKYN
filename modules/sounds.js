@@ -49,7 +49,7 @@ module.exports = {
                 "9d81e8a6-b373-13ab-9869-b4dd9cfd81a4"]
             else if(sound=="drowning") {
                 sounds=["c05803c1-bcf1-cb15-6dac-b27fffc80f55",
-                "777ef6cc-ee80-6919-c977-790b477e0fc6"]
+                "777ef6cc-ee80-6919-c977-790b477e0fc6","7faa816c-e66d-7439-85be-82635847d416","87549ea0-e1eb-1512-af13-1441ecc6eb23"]
                 //queue = 1
             }
             else if(sound=="drowningDeath") sounds=["960223a8-ee61-39ef-c37c-0ce2109eae06",
@@ -90,13 +90,13 @@ module.exports = {
             if(sound=="thirsty")sounds=["12eebb84-efdb-6764-bf55-3ef108e74a30",
                 "906e962f-f0fd-d5c8-4d2d-f808f43b47f4"]
             else if(sound=="drowning") {
-                sounds=["e5a80866-cea8-1ed4-72bc-5ba8ea6c760c"]
+                sounds=["e5a80866-cea8-1ed4-72bc-5ba8ea6c760c","7faa816c-e66d-7439-85be-82635847d416","87549ea0-e1eb-1512-af13-1441ecc6eb23"]
                 //queue = 1
             }
             else if(sound=="drowningDeath") sounds=["e4b0933c-99c6-4ef8-7d6f-367973c13277"]
         }
 
-        if(sound=="drowning") sounds=["7faa816c-e66d-7439-85be-82635847d416","87549ea0-e1eb-1512-af13-1441ecc6eb23"]
+        //if(sound=="drowning") sounds=["7faa816c-e66d-7439-85be-82635847d416","87549ea0-e1eb-1512-af13-1441ecc6eb23"]
         if(sound=="sizzle") sounds=["27670beb-bdc2-9329-96e0-f9d66b7f76a8","d6a9764c-9ccb-d969-9d76-0ee2f53e7a6c"]
 
         if(sound=="walksplash")sounds=["fe47983d-197b-d6cd-b3e3-33b57b2acd1b",

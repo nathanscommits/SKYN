@@ -10,6 +10,7 @@ module.exports = function (body) {
     if(body.values.oxygen<=0) {
         body.values.health-=1
         body.response.anim = anims.drowning
+        body.reaponse.sound = sound.play(body.info.voice, "drowning")
     }
     else if(body.values.hunger>0) body.values.health+=1 //passive body.values.health regain
     
@@ -54,7 +55,9 @@ module.exports = function (body) {
         else body.response.osay += "@sit:00000000-0000-0000-0000-000000000000=force"
         body.response.anim = anims.death
         body.response.death = "true"
-        body.response.sound = sound.play(body.info.voice, "dieing")
+
+        if(oxygen<=0) body.response.sound = sound.play(body.info.voice, "drowningDeath")
+        else body.response.sound = sound.play(body.info.voice, "dieing")
         
     } if(body.values.health<25 && body.info.features.substring(0,1)=="1")
         body.response.pound = sound.play(body.info.voice, "low health")
