@@ -57,7 +57,7 @@ module.exports = function (body) {
         body.response.anim = anims.death
         body.response.death = "true"
 
-        if(oxygen<=0) body.response.sound = sound.play(body.info.voice, "drowningDeath")
+        if(body.values.oxygen<=0) body.response.sound = sound.play(body.info.voice, "drowningDeath")
         else body.response.sound = sound.play(body.info.voice, "dieing")
         
     } if(body.values.health<25 && body.info.features.substring(0,1)=="1")
