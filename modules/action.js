@@ -67,8 +67,8 @@ module.exports = function(body) {
     }
 
     let poz = body.info.pos.split(",")
-    poz.replace(">", "")
-    poz.replace("<", "")
+    poz = poz.replace(">", "")
+    poz = poz.replace("<", "")
     if(body.info.wet_object != "" || body.info.water > poz[2]-0.5) { //body.info.submerged == 1
         body.states.wet = 120
         if(body.info.features.substring(5,6)=="1" && body.info.water > poz[2]+1)body.values.oxygen -= 1
