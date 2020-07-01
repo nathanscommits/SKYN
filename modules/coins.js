@@ -19,6 +19,8 @@ if(body.values.health>0 && body.info.features=="111111") {
     if(body.values.fitness>=100) body.values.coins+=(body.values.fitness/100000)
     if(body.values.energy<body.values.fitness) body.values.coins+=((body.values.fitness-body.values.energy)/1000000)
     if(body.values.sleep<100) body.values.coins+=((100-body.values.sleep)/100000)
+    if(body.values.tan>0) body.values.coins+=(body.values.tan/10000)
+    if(body.values.sunburn<=10) body.values.coins+=(body.values.tan/10000)
 }
 
 return body

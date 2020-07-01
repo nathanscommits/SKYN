@@ -61,6 +61,7 @@ module.exports = function(body) {
     if(body.info.inSun == 1) {
         body.states.timeInSun+=2
         body.values.tan+=0.1
+        if(body.states.timeInSun>=1200) body.response.anim = anims.sunny
     } else {
         body.states.timeInSun-=2
         body.values.tan-=0.01
@@ -73,7 +74,9 @@ module.exports = function(body) {
     
     if(body.info.wet_object != "" || body.info.water > poz[2]-0.5) { //body.info.submerged == 1
         body.states.wet = 120
-        if(body.info.features.substring(5,6)=="1" && body.info.water > poz[2]+1)body.values.oxygen -= 1
+        if(action.substring(1, 2)=="1" || action.substring(2, 3)=="1" || action.substring(3, 4)=="1" || action.substring(4, 5)=="1") 
+            sound.play(body.info.voice, "splash")
+        if(body.info.features.substring(5,6)=="1" && body.info.water > poz[2]+1) body.values.oxygen -= 1
     } else {
         body.values.oxygen += 5
     }

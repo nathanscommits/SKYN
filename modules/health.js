@@ -7,7 +7,10 @@ module.exports = function (body) {
     //body.values.health
     if(body.values.hunger<=0) body.values.health-=1
     if(body.values.thirst<=0) body.values.health-=1
-    if(body.values.oxygen<=0) body.values.health-=1
+    if(body.values.oxygen<=0) {
+        body.values.health-=1
+        body.response.anim = anims.drowning
+    }
     else if(body.values.hunger>0) body.values.health+=1 //passive body.values.health regain
     
     if(body.values.health <= 0) { //dieing

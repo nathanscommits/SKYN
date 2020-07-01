@@ -21,6 +21,8 @@ anims.fanning = [
 ]
 anims.sweatwipe = "Sweat_Wipe_WIP_noloop"
 anims.hungry = "Hungry_WIP_noloop"
+anims.drowning = "Drowning"
+anims.sunny = "TooMuchSun"
 
 
 module.exports = anims
