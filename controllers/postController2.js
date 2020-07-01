@@ -151,10 +151,16 @@ exports.hudUpdate = function (req, res) {
                              })
                         }
                     } else {
-                        db.createIndex({ UUID: body.UUID }, { unique: true }).then(
-                        db.insertOne(body, () => {
-                            resolve(console.log(body.name+" - New user created"))
-                        })).catch(err => console.log("Could not insert new entry. "+err))
+                        db.createIndex({ UUID: body.UUID }, { unique: true })
+                            .then(
+                            db.findOne({UUID: req.body.UUID}, function (err, found) {
+                                if(err) resolve(console.log(err));
+                                else if(found) resolve(console.log("User already exists!"));
+                                else db.insertOne(body, () => {
+                                    resolve(console.log(body.name+" - New user created"))
+                                })
+                            }))
+                            .catch(err => console.log("Could not insert new entry. "+err))
                     }
                 })
 
