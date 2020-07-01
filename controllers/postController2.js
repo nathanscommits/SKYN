@@ -29,7 +29,9 @@ exports.hudUpdate = function (req, res) {
             warm_object: req.body.warm_object,
             wet_object: req.body.wet_object,
             warm_object_range: req.body.warm_object_range,
-            wet_object_range: req.body.wet_object_range
+            wet_object_range: req.body.wet_object_range,
+            simName: req.body.simName,
+            wind: req.body.wind
         },
         response: {
             osay: "",

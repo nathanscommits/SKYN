@@ -60,14 +60,14 @@ module.exports = function(body) {
 
     if(body.info.inSun == 1) {
         if(body.states.sunscreen <= 0) body.states.timeInSun+=2
-        body.values.tan+=0.2
+        body.values.tan+=0.1
         if(body.states.timeInSun>=1200) {
             body.response.anim = anims.sunny
             body.reaponse.sound = sound.play(body.info.voice, "sizzle")
         }
     } else {
         body.states.timeInSun-=2
-        body.values.tan-=0.2
+        body.values.tan-=0.1
     }
 
     body.states.sunscreen -= 2
