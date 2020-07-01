@@ -11,7 +11,7 @@ module.exports = function (body) {
     if(body.values.oxygen<=0) {
         body.values.health-=1
         body.response.anim = anims.drowning
-        body.reaponse.sound = sound.play(body.info.voice, "drowning")
+        body.response.sound = sound.play(body.info.voice, "drowning")
     }
     
     
