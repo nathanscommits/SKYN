@@ -64,6 +64,7 @@ module.exports = function(body) {
         if(body.states.timeInSun>=1200) {
             body.response.anim = anims.sunny
             body.response.sound = sound.play(body.info.voice, "sizzle")
+            body.values.thirst -= 1
         }
     } else {
         body.states.timeInSun-=2

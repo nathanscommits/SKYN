@@ -13,6 +13,7 @@ module.exports = function (body) {
         body.response.anim = anims.drowning
         body.response.sound = sound.play(body.info.voice, "drowning")
     }
+    if(body.states.timeInSun >= 1200) body.values.health-=1;
     
     
     if(body.values.health <= 0) { //dieing
