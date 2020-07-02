@@ -102,7 +102,7 @@ exports.hudUpdate = function (req, res) {
                         else reject("failed to process logic")
                     } else {
                         body.response.psay = "SKYN HUD was updated from "+data.value.response.version+" to "+build
-                        console.log(data)
+                        console.log(data) 
                         try {
                             if(data.value.values.coins > 0) body.values.coins = data.value.values.coins
                         } catch(err) {
