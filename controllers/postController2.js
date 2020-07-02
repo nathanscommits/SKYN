@@ -79,91 +79,80 @@ exports.hudUpdate = function (req, res) {
 
     let myPromise = () => (
         new Promise((resolve, reject) => {
-            db.findOne({UUID: body.UUID})
+
+            db.findAndModify({
+                query: {UUID: req.body.UUID},
+                update: {
+                    $setOnInsert: body
+                },
+                new: true,
+                upsert: true
+            })
 
                 .then(function(data){
-                    if(data) {
-                        if(data.response.version == build) {
-                            body.values = data.values
-                            body.states = data.states
-                            body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
-                            body.info.slapping = parseInt(req.body.slapping) + parseInt(data.info.slapping)
-                            if(body.info.voice <= 0) body.info.voice = data.info.voice
-                            if(body=logic.values(body)) resolve("logic passed")
-                            else reject("failed to process logic")
-                        } else if(data.response.version != build) {
-                            body.response.psay = "SKYN HUD was updated from "+data.version+" to "+build
-                            console.log(data)
+                    if(data.response.version == build) {
+                        body.values = data.values
+                        body.states = data.states
+                        body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
+                        body.info.slapping = parseInt(req.body.slapping) + parseInt(data.info.slapping)
+                        if(body.info.voice <= 0) body.info.voice = data.info.voice
+                        if(body=logic.values(body)) resolve("logic passed")
+                        else reject("failed to process logic")
+                    } else if(data.response.version != build) {
+                        body.response.psay = "SKYN HUD was updated from "+data.version+" to "+build
+                        console.log(data)
+                        try {
+                            if(data.values.coins > 0) body.values.coins = data.values.coins
+                        } catch(err) {
                             try {
-                                if(data.values.coins > 0) body.values.coins = data.values.coins
-                                console.log("coins found in data values")
+                                if(data.coins > 0) body.values.coins = data.coins
                             } catch(err) {
-                                try {
-                                    if(data.coins > 0) body.values.coins = data.coins
-                                    console.log("coins found in data")
-                                } catch(err) {
-                                    console.log("No coin data found")
-                                }
-                            } try {
-                                if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
-                            } catch(err) {
-                                console.log("No prizes found")
-                            } try {
-                                if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
-                            } catch(err) {
-                                try{
-                                    if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
-                                } catch(err) {
-                                    console.log("no time alive stat")
-                                }
-                            } try {
-                                if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
-                            } catch(err) {
-                                try {
-                                    if(data.deathCount > 0) body.values.deathCount = data.deathCount
-                                } catch(err) {
-                                    console.log("no death count stat")
-                                }
-                            } try {
-                                if(data.info.slapped > 0) body.info.slapped += parseInt(data.info.slapped)
-                            } catch(err) {
-                                console.log("no slapped info")
-                            } try {
-                                if(data.info.slapping > 0) body.info.slapping += parseInt(data.info.slapping)
-                            } catch(err) {
-                                console.log("no sapping info")
-                            } try {
-                                if(data.info.voice) body.info.voice = data.info.voice    
-                            } catch(err) {
-                                try {
-                                    if(data.voice) body.info.voice = data.voice
-                                } catch(err) {
-                                    console.log("No voice settings found")
-                                }
+                                console.log("No coin data found")
                             }
-                            
-                            body.version = build
-                            db.findOneAndUpdate({UUID: req.body.UUID}, { $set: body }, function(err, data) {
-                                
-                                body.response.UUID = body.UUID
-                                body.response.version = body.version
-                                resolve(console.log(body.name+' updated their HUD.'))
-                             })
+                        } try {
+                            if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
+                        } catch(err) {
+                            console.log("No prizes found")
+                        } try {
+                            if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
+                        } catch(err) {
+                            try{
+                                if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
+                            } catch(err) {
+                                console.log("no time alive stat")
+                            }
+                        } try {
+                            if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
+                        } catch(err) {
+                            try {
+                                if(data.deathCount > 0) body.values.deathCount = data.deathCount
+                            } catch(err) {
+                                console.log("no death count stat")
+                            }
+                        } try {
+                            if(data.info.slapped > 0) body.info.slapped += parseInt(data.info.slapped)
+                        } catch(err) {
+                            console.log("no slapped info")
+                        } try {
+                            if(data.info.slapping > 0) body.info.slapping += parseInt(data.info.slapping)
+                        } catch(err) {
+                            console.log("no slapping info")
+                        } try {
+                            if(data.info.voice) body.info.voice = data.info.voice    
+                        } catch(err) {
+                            try {
+                                if(data.voice) body.info.voice = data.voice
+                            } catch(err) {
+                                console.log("No voice settings found")
+                            }
                         }
-                    } else {
-                            db.findOne({"UUID": req.body.UUID}, function (err, found) {
-                                if(err) resolve(console.log(err));
-                                else if(found) resolve(console.log("User already exists!"));
-                                else if(found == null) {
-                                    db.findOne({name: req.body.name}, function(err, found_name) {
-                                        if(err)resolve(console.log(err));
-                                        else if(found_name) resolve(console.log("User by that name already exists!"));
-                                        else if(found_name == null) db.insertOne(body, () => {
-                                            resolve(console.log(body.name+" - New user created"))
-                                            console.log(err+" : "+found_name)
-                                        })
-                                    })
-                                }
+                        
+                        body.version = build
+                        db.findOneAndUpdate({UUID: req.body.UUID}, { $set: body }, function(err, data) {
+                            
+                            body.response.UUID = body.UUID
+                            body.response.version = body.version
+                            resolve(console.log(body.name+' updated their HUD.'))
                             })
                     }
                 })
