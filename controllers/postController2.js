@@ -91,7 +91,7 @@ exports.hudUpdate = function (req, res) {
 
                 .then(function(data){
                     //console.log(data)
-                    if(!data.response.version) reject(console.log("no data to process"))
+                    //if(!data.response.version) reject(console.log("no data to process"))
                     if(data.response.version == build) {
                         body.values = data.values
                         body.states = data.states
@@ -100,7 +100,7 @@ exports.hudUpdate = function (req, res) {
                         if(body.info.voice <= 0) body.info.voice = data.info.voice
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
-                    } else if(data.response.version != build) {
+                    } else {
                         body.response.psay = "SKYN HUD was updated from "+data.response.version+" to "+build
                         console.log(data)
                         try {
@@ -149,11 +149,11 @@ exports.hudUpdate = function (req, res) {
                             }
                         }
                         
-                        body.version = build
+                        //body.version = build
                         db.findOneAndUpdate({UUID: req.body.UUID}, { $set: body }, function(err, data) {
                             
                             body.response.UUID = body.UUID
-                            body.response.version = body.version
+                            body.response.version = build
                             resolve(console.log(body.name+' updated their HUD.'))
                             })
                     }
@@ -183,7 +183,7 @@ exports.hudUpdate = function (req, res) {
 
                     //console.log("promise resolved")
                     body.response.UUID = body.UUID
-                    body.response.version = body.version
+                    body.response.version = build
                     resolve(res.send({...body.response, ...body.values}))
                 })
 
