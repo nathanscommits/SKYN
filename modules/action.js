@@ -73,7 +73,7 @@ module.exports = function(body) {
         }
     } else {
         body.states.timeInSun-=2
-        body.values.tan-=0.1
+        if(body.states.timeInSun<=0)body.values.tan-=0.1
     }
 
     body.states.sunscreen -= 2
