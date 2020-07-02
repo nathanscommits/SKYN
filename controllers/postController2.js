@@ -90,8 +90,8 @@ exports.hudUpdate = function (req, res) {
             )
 
                 .then(function(data){
-                    console.log("no data found")
-                    if(!data) throw "no data to process"
+                    console.log(data)
+                    if(!data) reject("no data to process")
                     if(data.response.version == build) {
                         body.values = data.values
                         body.states = data.states
