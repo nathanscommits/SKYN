@@ -270,7 +270,7 @@ exports.prizeGen = function (req, res) {
             response.error = "You need a SKYN HUD for that."
             res.send(response)
         }
-        else if((ud.coins - price) >= 0) // CHECK THEY HAVE ENOUGH MONEY
+        else if((ud.values.coins - price) >= 0) // CHECK THEY HAVE ENOUGH MONEY
         {
             if(ud.version.substring(0,4) != build.substring(0,4)) // check they have right hud update
             {
@@ -280,7 +280,9 @@ exports.prizeGen = function (req, res) {
             }
             //take users money
             db.findOneAndUpdate({UUID: req.body.UUID}, {$set: {
-                coins: (ud.coins - price)
+                values: {
+                    coins: (ud.values.coins - price)
+                }
             }}, function(err, data) {
                 db.findOne({vender: "vender"}, function(err, ud){
                     if(err)
