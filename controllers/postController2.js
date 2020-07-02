@@ -82,16 +82,16 @@ exports.hudUpdate = function (req, res) {
 
             db.findOneAndUpdate(
                 {UUID: req.body.UUID},
-                { $setOnInsert: body },
+                { $setOnInsert: body, },
                 {
                     returnOriginal: false,
-                    upsert: true
+                    upsert: true,
                 }
             )
 
                 .then(function(data){
-                    console.log(data)
-                    if(!data) reject("no data to process")
+                    //console.log(data)
+                    if(!data) reject(console.log("no data to process"))
                     if(data.response.version == build) {
                         body.values = data.values
                         body.states = data.states
@@ -101,7 +101,7 @@ exports.hudUpdate = function (req, res) {
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
                     } else if(data.response.version != build) {
-                        body.response.psay = "SKYN HUD was updated from "+data.version+" to "+build
+                        body.response.psay = "SKYN HUD was updated from "+data.response.version+" to "+build
                         console.log(data)
                         try {
                             if(data.values.coins > 0) body.values.coins = data.values.coins
