@@ -272,7 +272,7 @@ exports.prizeGen = function (req, res) {
         }
         else if((ud.values.coins - price) >= 0) // CHECK THEY HAVE ENOUGH MONEY
         {
-            if(ud.version.substring(0,4) != build.substring(0,4)) // check they have right hud update
+            if(ud.version != "0.12") // check they have right hud update
             {
                 response.error =  "You need to update your HUD first."
                 res.send(response)
