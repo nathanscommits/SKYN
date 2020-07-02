@@ -62,8 +62,11 @@ module.exports = function(body) {
         if(body.states.sunscreen <= 0) body.states.timeInSun+=2
         body.values.tan+=0.1
         if(body.states.timeInSun>=1200) {
-            body.response.anim = anims.sunny
-            body.response.sound = sound.play(body.info.voice, "sizzle")
+            let chance = 100 * Math.random() | 0
+            if(chance<10) {
+                body.response.anim = anims.sunny
+                body.response.sound = sound.play(body.info.voice, "sizzle")
+            }
             body.values.thirst -= 1
         }
     } else {
