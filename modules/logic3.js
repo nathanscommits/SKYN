@@ -12,6 +12,24 @@ exports.values = function(body) {
 
     body.response.osay = ""
 
+    if(body.info.onAttach == "TRUE") {
+        body.states = {
+            death: body.states.death,
+            sleeping: body.states.sleeping,
+            exhausted: body.states.exhausted,
+            sweat: 0,
+            pimples: 0,
+            shape: 0,
+            timer: body.states.timer,
+            timeInSun: body.states.timeInSun,
+            sunburn: 0,
+            tan: 0,
+            wet: body.states.wet,
+            dry: 0,
+            sunscreen: body.states.sunscreen
+        }
+    }
+
     body = time(body) //get region time
     body = objects(body) //get nearby relevant objects
     body = features(body) //set feature on/off
