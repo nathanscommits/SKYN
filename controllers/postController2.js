@@ -80,14 +80,14 @@ exports.hudUpdate = function (req, res) {
     let myPromise = () => (
         new Promise((resolve, reject) => {
 
-            db.findAndModify({
-                query: {UUID: req.body.UUID},
-                update: {
-                    $setOnInsert: body
-                },
-                new: true,
-                upsert: true
-            })
+            db.findOneAndUpdate(
+                {UUID: req.body.UUID},
+                { $setOnInsert: body },
+                {
+                    returnOriginal: false,
+                    upsert: true
+                }
+            )
 
                 .then(function(data){
                     if(data.response.version == build) {
