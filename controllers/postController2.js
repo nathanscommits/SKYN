@@ -111,7 +111,7 @@ exports.hudUpdate = function (req, res) {
                             } catch(err) {
                                 console.log("No coin data found")
                             }
-                        } try {
+                        } try { 
                             if(data.value.prizeName.length() >= 0) body.prizeName = data.value.prizeName
                         } catch(err) {
                             console.log("No prizes found")
