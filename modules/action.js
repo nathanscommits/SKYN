@@ -59,7 +59,7 @@ module.exports = function(body) {
     }
 
     let hour = parseInt(body.info.timeOfDay.substring(0,2))
-
+    if(timeInSun>0) body.values.tan+=0.1
     if(body.info.inSun == 1 && hour > 5 && hour < 19) {
         if(body.states.sunscreen <= 0) body.states.timeInSun+=2
         body.values.tan+=0.1
