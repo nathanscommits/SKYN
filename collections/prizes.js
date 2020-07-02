@@ -1,4 +1,4 @@
-exports.pool = {
+module.exports = {
     legendary : [
         "SKYN **LEGENDARY** Debug mode", 
         "SKYN **LEGENDARY** S.U.R - PRIZE MACHINE"
