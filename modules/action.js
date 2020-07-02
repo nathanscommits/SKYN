@@ -63,7 +63,7 @@ module.exports = function(body) {
         body.values.tan+=0.1
         if(body.states.timeInSun>=1200) {
             body.response.anim = anims.sunny
-            body.reaponse.sound = sound.play(body.info.voice, "sizzle")
+            body.response.sound = sound.play(body.info.voice, "sizzle")
         }
     } else {
         body.states.timeInSun-=2
