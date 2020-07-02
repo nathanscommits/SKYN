@@ -6,7 +6,6 @@ let body = {}
 exports.hudUpdate = function (req, res) {
     
     body = {
-        id: req.body.UUID,
         UUID: req.body.UUID,
         name: req.body.name,
         version: build,
