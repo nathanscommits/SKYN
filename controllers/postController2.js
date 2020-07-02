@@ -91,59 +91,59 @@ exports.hudUpdate = function (req, res) {
 
                 .then(function(data){
                     console.log(data)
-                    //if(!data.response.version) reject(console.log("no data to process"))
-                    if(data.response.version == build) {
-                        body.values = data.values
-                        body.states = data.states
-                        body.info.slapped = parseInt(req.body.slapped) + parseInt(data.info.slapped)
-                        body.info.slapping = parseInt(req.body.slapping) + parseInt(data.info.slapping)
-                        if(body.info.voice <= 0) body.info.voice = data.info.voice
+                    //if(!data.value.response.version) reject(console.log("no data to process"))
+                    if(data.value.response.version == build) {
+                        body.values = data.value.values
+                        body.states = data.value.states
+                        body.info.slapped = parseInt(req.body.slapped) + parseInt(data.value.info.slapped)
+                        body.info.slapping = parseInt(req.body.slapping) + parseInt(data.value.info.slapping)
+                        if(body.info.voice <= 0) body.info.voice = data.value.info.voice
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
                     } else {
-                        body.response.psay = "SKYN HUD was updated from "+data.response.version+" to "+build
+                        body.response.psay = "SKYN HUD was updated from "+data.value.response.version+" to "+build
                         console.log(data)
                         try {
-                            if(data.values.coins > 0) body.values.coins = data.values.coins
+                            if(data.value.values.coins > 0) body.values.coins = data.value.values.coins
                         } catch(err) {
                             try {
-                                if(data.coins > 0) body.values.coins = data.coins
+                                if(data.value.coins > 0) body.values.coins = data.value.coins
                             } catch(err) {
                                 console.log("No coin data found")
                             }
                         } try {
-                            if(data.prizeName.length() >= 0) body.prizeName = data.prizeName
+                            if(data.value.prizeName.length() >= 0) body.prizeName = data.value.prizeName
                         } catch(err) {
                             console.log("No prizes found")
                         } try {
-                            if(data.values.timeAlive > 0) body.values.timeAlive = data.values.timeAlive
+                            if(data.value.values.timeAlive > 0) body.values.timeAlive = data.value.values.timeAlive
                         } catch(err) {
                             try{
-                                if(data.timeAlive > 0) body.values.timeAlive = data.timeAlive
+                                if(data.value.timeAlive > 0) body.values.timeAlive = data.value.timeAlive
                             } catch(err) {
                                 console.log("no time alive stat")
                             }
                         } try {
-                            if(data.values.deathCount > 0) body.values.deathCount = data.values.deathCount
+                            if(data.value.values.deathCount > 0) body.values.deathCount = data.value.values.deathCount
                         } catch(err) {
                             try {
-                                if(data.deathCount > 0) body.values.deathCount = data.deathCount
+                                if(data.value.deathCount > 0) body.values.deathCount = data.value.deathCount
                             } catch(err) {
                                 console.log("no death count stat")
                             }
                         } try {
-                            if(data.info.slapped > 0) body.info.slapped += parseInt(data.info.slapped)
+                            if(data.value.info.slapped > 0) body.info.slapped += parseInt(data.value.info.slapped)
                         } catch(err) {
                             console.log("no slapped info")
                         } try {
-                            if(data.info.slapping > 0) body.info.slapping += parseInt(data.info.slapping)
+                            if(data.value.info.slapping > 0) body.info.slapping += parseInt(data.value.info.slapping)
                         } catch(err) {
                             console.log("no slapping info")
                         } try {
-                            if(data.info.voice) body.info.voice = data.info.voice    
+                            if(data.value.info.voice) body.info.voice = data.value.info.voice    
                         } catch(err) {
                             try {
-                                if(data.voice) body.info.voice = data.voice
+                                if(data.value.voice) body.info.voice = data.value.voice
                             } catch(err) {
                                 console.log("No voice settings found")
                             }
