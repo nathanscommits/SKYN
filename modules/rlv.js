@@ -1,9 +1,9 @@
 const anims = require('../modules/anims')
 const sound = require('../modules/sounds')
-let essr_folder = "~SKYN ESSR DLC/"
+let rlv_folder = "~SKYN_HUD/"
 function rlv(osay, method, file) {
-    if(osay.substring(0,1) == "@") osay += ","+method+":"+essr_folder+"~"+file+"=force"
-    else osay += "@"+method+":"+essr_folder+"~"+file+"=force"
+    if(osay.substring(0,1) == "@") osay += ","+method+":"+rlv_folder+"~"+file+"=force"
+    else osay += "@"+method+":"+rlv_folder+"~"+file+"=force"
     return osay
 }
 module.exports = function(body) {
@@ -24,8 +24,8 @@ module.exports = function(body) {
     else if(body.values.fat>=87 && body.values.shape!=7) // super body.values.fat
         body.values.shape=7
     if(shape_changed!=body.values.shape)
-        if(body.response.osay.substring(0,1) == "@") body.response.osay += ",attach:"+essr_folder+"Weight00" + body.values.shape + "=force"
-        else body.response.osay += "@attach:"+essr_folder+"Weight00" + body.values.shape + "=force"
+        if(body.response.osay.substring(0,1) == "@") body.response.osay += ",attach:"+rlv_folder+"Weight00" + body.values.shape + "=force"
+        else body.response.osay += "@attach:"+rlv_folder+"Weight00" + body.values.shape + "=force"
 
     //pimples
     if(body.values.pimples>=50 && body.states.pimples !=1) {
@@ -56,21 +56,21 @@ module.exports = function(body) {
     //sweat
     if(body.info.features.substring(1,2)=="1") { //sweat is off
         if(body.states.sweatSwitch!=1 && body.values.energy<=((body.values.fitness/4)*3) && body.values.energy>(body.values.fitness/2)) {
-            if(body.response.osay.substring(0,1) == "@") body.response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force"
-            else body.response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat001=force"
+            if(body.response.osay.substring(0,1) == "@") body.response.osay += ",detach:"+rlv_folder+"~SKYN_Sweat002=force,detach:"+rlv_folder+"~SKYN_Sweat003=force,attachover:"+rlv_folder+"~SKYN_Sweat001=force"
+            else body.response.osay += "@detach:"+rlv_folder+"~SKYN_Sweat002=force,detach:"+rlv_folder+"~SKYN_Sweat003=force,attachover:"+rlv_folder+"~SKYN_Sweat001=force"
             body.states.sweatSwitch=1
         } else if(body.states.sweatSwitch!=2 && body.values.energy>(body.values.fitness/4) && body.values.energy<=(body.values.fitness/2)) {
-            if(body.response.osay.substring(0,1) == "@") body.response.osay += ",detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force"
-            else body.response.osay += "@detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force,attachover:"+essr_folder+"~SKYN_Sweat002=force"
+            if(body.response.osay.substring(0,1) == "@") body.response.osay += ",detach:"+rlv_folder+"~SKYN_Sweat001=force,detach:"+rlv_folder+"~SKYN_Sweat003=force,attachover:"+rlv_folder+"~SKYN_Sweat002=force"
+            else body.response.osay += "@detach:"+rlv_folder+"~SKYN_Sweat001=force,detach:"+rlv_folder+"~SKYN_Sweat003=force,attachover:"+rlv_folder+"~SKYN_Sweat002=force"
             body.states.sweatSwitch=2
         } else if(body.states.sweatSwitch!=3 && body.values.energy<=(body.values.fitness/4)) {
-            if(body.response.osay.substring(0,1) == "@")  body.response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force"
-            else body.response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,attachover:"+essr_folder+"~SKYN_Sweat003=force"
+            if(body.response.osay.substring(0,1) == "@")  body.response.osay += ",detach:"+rlv_folder+"~SKYN_Sweat002=force,detach:"+rlv_folder+"~SKYN_Sweat001=force,attachover:"+rlv_folder+"~SKYN_Sweat003=force"
+            else body.response.osay += "@detach:"+rlv_folder+"~SKYN_Sweat002=force,detach:"+rlv_folder+"~SKYN_Sweat001=force,attachover:"+rlv_folder+"~SKYN_Sweat003=force"
             body.states.sweatSwitch=3
         } else if (body.states.sweatSwitch!=0 && body.values.energy>=body.values.fitness-10)  {
             body.states.sweatSwitch=0
-            if(body.response.osay.substring(0,1) == "@") body.response.osay += ",detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force"
-            else body.response.osay += "@detach:"+essr_folder+"~SKYN_Sweat002=force,detach:"+essr_folder+"~SKYN_Sweat001=force,detach:"+essr_folder+"~SKYN_Sweat003=force"
+            if(body.response.osay.substring(0,1) == "@") body.response.osay += ",detach:"+rlv_folder+"~SKYN_Sweat002=force,detach:"+rlv_folder+"~SKYN_Sweat001=force,detach:"+rlv_folder+"~SKYN_Sweat003=force"
+            else body.response.osay += "@detach:"+rlv_folder+"~SKYN_Sweat002=force,detach:"+rlv_folder+"~SKYN_Sweat001=force,detach:"+rlv_folder+"~SKYN_Sweat003=force"
         }
     }
     

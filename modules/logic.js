@@ -13,7 +13,7 @@ exports.values = function(body) {
     body.response.osay = ""
 
     if(body.info.onAttach == 1) {
-        body.response.osay = "@detachall:~SKYN ESSR DLC=force"
+        body.response.osay = "@detachall:~SKYN_HUD=force"
         body.states = {
             death: body.states.death,
             sleeping: body.states.sleeping,
