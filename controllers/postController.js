@@ -93,7 +93,8 @@ exports.hudUpdate = function (req, res) {
             .then(function(data){
                 //console.log(data)
                 //if(!data.value.response.version) reject(console.log("no data to process"))
-                if(data.value.response.version == build) {
+               try {
+                    if(data.value.response.version == build) {
                     body.values = data.value.values
                     body.states = data.value.states
                     body.info.slapped = parseInt(req.body.slapped) + parseInt(data.value.info.slapped)
@@ -101,7 +102,9 @@ exports.hudUpdate = function (req, res) {
                     if(body.info.voice <= 0) body.info.voice = data.value.info.voice
                     if(body=logic.values(body)) resolve("logic passed")
                     else reject("failed to process logic")
-                } else {
+                } 
+               }
+               catch{
                     body.response.psay = "SKYN HUD was updated from "+data.value.response.version+" to "+build
                     try{
                         if(data.value.values.fitness >=100) {
