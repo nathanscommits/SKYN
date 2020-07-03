@@ -2,12 +2,10 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.12.11"
+const build = "0.12.12"
 
 exports.hudUpdate = function (req, res) {
-    if(req.body.name == "Cakes Gothly") {
         console.log(req.body)
-    }
     console.log(req.body.name)
     let body = {
         UUID: req.body.UUID,
