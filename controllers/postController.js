@@ -318,7 +318,7 @@ exports.refund = function(req, res) {
         else
         {
             db.findOneAndUpdate({UUID: req.body.UUID}, {$set: {
-                "values.coins": (ud.coins + i)
+                "values.coins": (ud.values.coins + i)
             }}, function(err, data) {
                 res.send("Coins refunded.")
             })
