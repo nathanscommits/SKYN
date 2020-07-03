@@ -2,207 +2,199 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.10.1"
-
+const build = "0.12"
 
 exports.hudUpdate = function (req, res) {
-    let body = req.body
-    let response = {}
-    response.osay = "";
-    response.UUID = body.UUID
-
-    //read database
-    db.findOne({UUID: body.UUID}, function(err, ud){
-        //update new or old people
-        if(ud == null || body.version.substring(0,4)!=build.substring(0,4)) //create new user
-        {
-            body.version = build
-            body.fat = 50
-            body.thirst = 50
-            body.hunger = 50
-            body.sleep = 50
-            body.health = 100
-            body.pimples = 0
-            body.energy = 100
-            body.deathCount = 0
-            body.sweatSwitch = 0
-            body.fatigueSwitch = 0
-            body.shape = 0
-            body.pimpleStage = 0
-            body.sleepSwitch = 0
-            body.slapped = 0
-            body.slapping = 0
-            
-            if(ud == null) //new user
-            {
-                console.log('New User '+body.name+' added.')
-                body.voice = 0
-                body.coins = 0
-                body.fitness = 100
-                body.timeAlive = 2
-                db.insertOne(body, function(){
-                    response.version = body.version
-                    response.osay = "Successfully added to the database"
-                    console.log("Added in post1 line 46")
-                    res.send(response)
-                })
-                
-                return;
-            }
-            else{ // new hud update
-                body.voice = parseFloat(ud.voice)
-                body.coins = parseFloat(ud.coins)
-                body.fitness = parseFloat(ud.fitness)
-                body.timeAlive = parseFloat(ud.timeAlive)
-                body.totalCoins = parseFloat(ud.totalCoins)
-                db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
-                    version: body.version,
-                    coins: parseFloat(body.coins),
-                    totalCoins: parseFloat(body.totalCoins),
-                    fitness: parseFloat(body.fitness),
-                    fat: parseFloat(body.fat),
-                    timeAlive: parseFloat(body.timeAlive),
-                    thirst: parseFloat(body.thirst),
-                    hunger: parseFloat(body.hunger),
-                    sleep: parseFloat(body.sleep),
-                    health: parseFloat(body.health),
-                    pimples: parseFloat(body.pimples),
-                    energy: parseFloat(body.energy),
-                    deathCount: parseFloat(body.deathCount),
-                    sweatSwitch: body.sweatSwitch,
-                    fatigueSwitch: body.fatigueSwitch,
-                    shape: body.shape,
-                    pimpleStage: body.pimpleStage,
-                    sleepSwitch: body.sleepSwitch,
-                    voice: body.voice
-                }}, function(err, data) {
-                    console.log(body.name+' updated their HUD.')
-                    response.version = body.version
-                    response.coins = ud.coins
-                    response.fitness = ud.fitness   
-                    response.fat = ud.fat
-                    response.timeAlive = ud.timeAlive
-                    response.thirst = ud.thirst
-                    response.hunger = ud.hunger
-                    response.sleep = ud.sleep
-                    response.health = ud.health
-                    response.pimples = ud.pimples
-                    response.energy = ud.energy
-                    response.deathCount = ud.deathCount
-                    response.voice = ud.voice
-                    response.osay = "New update made."
-                    res.send(response)
-                   
-                })
-                return;
-            }
-        }
-
-        if(body.features.substring(0,1)=="1") //all features on
-        {  
-            if(body.features.substring(2,3)=="0") //food is off
-            {
-                ud.hunger+=2;
-                ud.thirst+=2;
-            }
-            if(body.features.substring(3,4)=="0") //sleep is off
-            {
-                ud.sleep-=2;
-            }
-            if(body.features.substring(4,5)=="0") //energy is off
-            {
-                ud.energy+=100;
-            }
-            //change values
-            logic.values(ud, body, response)
-            //coin finder
-            if(body.features=="11111")
-            {
-                if(body.coin_find == true)
-                {
-                    let rand = 100 * Math.random() | 0
-                    if(rand<5)
-                    {
-                        ud.coins += 100
-                        response.psay = "You found 100 coins just laying there!"
-                    } 
-                }
-            }            
-        }
-        if(body.voice == 0) body.voice = ud.voice
-        //save values
-        let slapped = ud.slapped
-        let slapping = ud.slapping
-        if(parseInt(body.slapped)!=0) slapped = (ud.slapped+parseInt(body.slapped))
-        if(parseInt(body.slapping)!=0) slapping = (ud.slapping+parseInt(body.slapping))
-        if(parseFloat(ud.fitness)==NaN) ud.fitness = 100;
-        if(parseFloat(ud.fat)==NaN) ud.fat = 50;
-        if(parseFloat(ud.timeAlive)==NaN) ud.timeAlive = 2;
-        if(parseFloat(ud.thirst)==NaN) ud.thirst = 100;
-        if(parseFloat(ud.hunger)==NaN) ud.hunger = 100;
-        if(parseFloat(ud.sleep)==NaN) ud.sleep = 0;
-        if(parseFloat(ud.health)==NaN) ud.health = 100;
-        if(parseFloat(ud.pimples)==NaN) ud.fitness = 0;
-        if(parseFloat(ud.deathCount)==NaN) ud.deathCount = 0;
-        
-        db.findOneAndUpdate({UUID: ud.UUID}, {$set: {
-            version: body.version,
-            coins: parseFloat(ud.coins),
-            fitness: parseFloat(ud.fitness),
-            fat: parseFloat(ud.fat),
-            timeAlive: parseFloat(ud.timeAlive),
-            thirst: parseFloat(ud.thirst),
-            hunger: parseFloat(ud.hunger),
-            sleep: parseFloat(ud.sleep),
-            health: parseFloat(ud.health),
-            pimples: parseFloat(ud.pimples),
-            energy: parseFloat(ud.energy),
-            deathCount: parseFloat(ud.deathCount),
-            sweatSwitch: ud.sweatSwitch,
-            fatigueSwitch: ud.fatigueSwitch,
-            shape: ud.shape,
-            pimpleStage: ud.pimpleStage,
-            sleepSwitch: ud.sleepSwitch,
-            voice: body.voice,
-            debug: body.debug,
-            features: body.features,
-            slapped: slapped,
-            slapping: slapping
-        }}, function(err, data) {
     
-            //send response
-            if(body.debug == true)
-            {
-                //if(ud.energy && ud.hunger && ud.coins && ud.thirst && ud.sleep &&ud.fitness && ud.fat &&ud.pimples &&ud.health)
-                response.alert = "Energy: "+parseFloat(ud.energy).toFixed(2)+
-                                "\n Fitness: "+parseFloat(ud.fitness).toFixed(2)+
-                                "\n Hunger: "+parseFloat(ud.hunger).toFixed(2)+
-                                "\n Thirst: "+parseFloat(ud.thirst).toFixed(2)+
-                                "\n Sleep: "+parseFloat(ud.sleep).toFixed(2)+
-                                "\n Health: "+parseFloat(ud.health).toFixed(2)+
-                                "\n Coins: "+parseFloat(ud.coins).toFixed(2)+
-                                "\n Fat: "+parseFloat(ud.fat).toFixed(2)+
-                                "\n Pimples: "+parseFloat(ud.pimples).toFixed(2)
-            
-            }
-            else response.alert = ""
-            response.version = body.version
-            response.coins = ud.coins
-            response.fitness = ud.fitness   
-            response.fat = ud.fat
-            response.timeAlive = ud.timeAlive
-            response.thirst = ud.thirst
-            response.hunger = ud.hunger
-            response.sleep = ud.sleep
-            response.health = ud.health
-            response.pimples = ud.pimples
-            response.energy = ud.energy
-            response.deathCount = ud.deathCount
-            if(body.voice != 0)response.voice = body.voice
-            //console.log(response)
-            res.send(response)
+    let body = {
+        UUID: req.body.UUID,
+        name: req.body.name,
+        version: build,
+        info:{
+            listen: req.body.listen,
+            voice: req.body.voice,
+            features: req.body.features,
+            attached: req.body.attached,
+            action: req.body.action,
+            consumed: req.body.consumed,
+            debug: req.body.debug, 
+            coin_find: req.body.coin_find,
+            slapped: req.body.slapped,
+            slapping: req.body.slapping,
+            timeOfDay: req.body.timeOfDay,
+            inSun: req.body.inSun,
+            water: req.body.water,
+            pos: req.body.position,
+            submerged: req.body.submerged,
+            warm_object: req.body.warm_object,
+            wet_object: req.body.wet_object,
+            warm_object_range: req.body.warm_object_range,
+            wet_object_range: req.body.wet_object_range,
+            simName: req.body.simName,
+            wind: req.body.wind,
+            onAttach: req.body.onAttach
+        },
+        response: {
+            osay: "",
+            psay: "",
+            csay: "",
+            hover : "",
+            anim: "",
+            sound: "",
+            rlv: "",
+            loop: "",
+            version: build,
+            announce: ""
+        },
+        values: {
+            energy: 100,
+            fitness: 100,
+            hunger: 50,
+            thirst: 50,
+            fat: 50,
+            sleep: 50,
+            health: 100,
+            coins: 0,
+            pimples: 0,
+            timeAlive: 0,
+            deathCount: 0,
+            tan: 0,
+            oxygen: 100
+        },
+        states: {
+            death: 0,
+            sleeping: 0,
+            exhausted: 0,
+            sweat: 0,
+            pimples: 0,
+            shape: 0,
+            timer: 0,
+            timeInSun: 0,
+            sunburn: 0,
+            tan: 0,
+            wet: 0,
+            dry: 0,
+            sunscreen: 0
+        }
+    }
+
+    let myPromise = () => (
+        new Promise((resolve, reject) => {
+
+            db.findOneAndUpdate(
+                {UUID: req.body.UUID},
+                { $setOnInsert: body, },
+                {
+                    returnOriginal: false,
+                    upsert: true,
+                }
+            )
+
+            .then(function(data){
+                //console.log(data)
+                //if(!data.value.response.version) reject(console.log("no data to process"))
+                if(data.value.response.version == build) {
+                    body.values = data.value.values
+                    body.states = data.value.states
+                    body.info.slapped = parseInt(req.body.slapped) + parseInt(data.value.info.slapped)
+                    body.info.slapping = parseInt(req.body.slapping) + parseInt(data.value.info.slapping)
+                    if(body.info.voice <= 0) body.info.voice = data.value.info.voice
+                    if(body=logic.values(body)) resolve("logic passed")
+                    else reject("failed to process logic")
+                } else {
+                    body.response.psay = "SKYN HUD was updated from "+data.value.response.version+" to "+build
+                    console.log(data) 
+                    try {
+                        if(data.value.values.coins > 0) body.values.coins = data.value.values.coins
+                    } catch(err) {
+                        try {
+                            if(data.value.coins > 0) body.values.coins = data.value.coins
+                        } catch(err) {
+                            console.log("No coin data found")
+                        }
+                    } try { 
+                        if(data.value.prizeName.length() >= 0) body.prizeName = data.value.prizeName
+                    } catch(err) {
+                        console.log("No prizes found")
+                    } try {
+                        if(data.value.values.timeAlive > 0) body.values.timeAlive = data.value.values.timeAlive
+                    } catch(err) {
+                        try{
+                            if(data.value.timeAlive > 0) body.values.timeAlive = data.value.timeAlive
+                        } catch(err) {
+                            console.log("no time alive stat")
+                        }
+                    } try {
+                        if(data.value.values.deathCount > 0) body.values.deathCount = data.value.values.deathCount
+                    } catch(err) {
+                        try {
+                            if(data.value.deathCount > 0) body.values.deathCount = data.value.deathCount
+                        } catch(err) {
+                            console.log("no death count stat")
+                        }
+                    } try {
+                        if(data.value.info.slapped > 0) body.info.slapped += parseInt(data.value.info.slapped)
+                    } catch(err) {
+                        console.log("no slapped info")
+                    } try {
+                        if(data.value.info.slapping > 0) body.info.slapping += parseInt(data.value.info.slapping)
+                    } catch(err) {
+                        console.log("no slapping info")
+                    } try {
+                        if(data.value.info.voice) body.info.voice = data.value.info.voice    
+                    } catch(err) {
+                        try {
+                            if(data.value.voice) body.info.voice = data.value.voice
+                        } catch(err) {
+                            console.log("No voice settings found")
+                        }
+                    }
+                    
+                    //body.version = build
+                    db.findOneAndUpdate({UUID: req.body.UUID}, { $set: body }, function(err, data) {
+                        
+                        body.response.UUID = body.UUID
+                        body.response.version = build
+                        resolve(console.log(body.name+' updated their HUD.'))
+                        })
+                }
+            })
+
+            .then(data => db.findOneAndUpdate({ UUID: req.body.UUID }, { $set: body }, { upsert:true } ))
+
+            .then(function(data){
+                if (body.info.debug == true)
+                    body.response.hover = "Energy: " + parseFloat(body.values.energy).toFixed(2) +
+                        "\n Fitness: " + parseFloat(body.values.fitness).toFixed(2) +
+                        "\n Hunger: " + parseFloat(body.values.hunger).toFixed(2) +
+                        "\n Thirst: " + parseFloat(body.values.thirst).toFixed(2) +
+                        "\n Sleep: " + parseFloat(body.values.sleep).toFixed(2) +
+                        "\n Health: " + parseFloat(body.values.health).toFixed(2) +
+                        "\n Oxygen: " + parseFloat(body.values.oxygen).toFixed(0) +
+                        "\n Coins: " + parseFloat(body.values.coins).toFixed(2) +
+                        "\n Fat: " + parseFloat(body.values.fat).toFixed(2) +
+                        "\n Pimples: " + parseFloat(body.values.pimples).toFixed(0)+
+                        "\n Slapped: " + parseFloat(body.info.slapped).toFixed(0)+
+                        "\n Slapping: " + parseFloat(body.info.slapping).toFixed(0)+
+                        //"\n Voice: " + parseFloat(body.info.voice).toFixed(0)+
+                        // "\n Deaths: " + parseFloat(body.values.deathCount).toFixed(0)+
+                        "\n Tan: " + body.values.tan.toFixed(0)+
+                        "\n timeInSun: " + body.states.timeInSun.toFixed(0)
+                else body.response.hover = ""
+
+                //console.log("promise resolved")
+                body.response.UUID = body.UUID
+                body.response.version = build
+                resolve(res.send({...body.response, ...body.values}))
+            })
+
+            .catch( err => { 
+                console.log("Something went wrong. " + err)
+                res.send("Something went wrong")
+            })
         })
-    })
+    )
+    myPromise()
 }
 
 exports.userInfo = function (req, res) {
@@ -246,19 +238,19 @@ exports.prizeGen = function (req, res) {
 
     if(price == 100)
     {
-        if(key<=1) response.key = pool.legendary[pool.legendary.length * Math.random() | 0]
-        else if(key<=10) response.key = pool.rare[pool.rare.length * Math.random() | 0]
+        if(key<=0.5) response.key = pool.legendary[pool.legendary.length * Math.random() | 0]
+        else if(key<=5) response.key = pool.rare[pool.rare.length * Math.random() | 0]
         else response.key = pool.common[pool.common.length * Math.random() | 0]
     }
     else if(price == 500)
     {
-        if(key<=5) response.key = pool.legendary[pool.legendary.length * Math.random() | 0]
-        else if(key<=20) response.key = pool.rare[pool.rare.length * Math.random() | 0]
+        if(key<=3) response.key = pool.legendary[pool.legendary.length * Math.random() | 0]
+        else if(key<=27) response.key = pool.rare[pool.rare.length * Math.random() | 0]
         else response.key = pool.common[pool.common.length * Math.random() | 0]
     }
     else if(price == 5000)
     {
-        if(key<=10) response.key = pool.legendary[pool.legendary.length * Math.random() | 0]
+        if(key<=20) response.key = pool.legendary[pool.legendary.length * Math.random() | 0]
         else response.key = pool.rare[pool.rare.length * Math.random() | 0]
     }
     
@@ -272,7 +264,7 @@ exports.prizeGen = function (req, res) {
         }
         else if((ud.values.coins - price) >= 0) // CHECK THEY HAVE ENOUGH MONEY
         {
-            if(ud.version != "0.12") // check they have right hud update
+            if(ud.version != build) // check they have right hud update
             {
                 response.error =  "You need to update your HUD first."
                 res.send(response)
@@ -325,7 +317,6 @@ exports.refund = function(req, res) {
         }
     })
 }
-
 
 exports.savePrize = function(req, res) {
     //refund 50% of price

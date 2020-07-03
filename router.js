@@ -19,40 +19,36 @@ router.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
 })
 router.get('/leaderboard', function(req, res){
-    //this.res.render('leaderboard', userController)
     userController.leaderboard(req, res)
 })
 
-router.post("/3489h40", (req, res) => {
+/*router.post("/3489h40", (req, res) => {
     postController.hudUpdate(req, res)
-})
+})*/
 
 router.post("/hudUpdate010uhe8", (req, res) => {
-    postController2.hudUpdate(req, res)
+    postController.hudUpdate(req, res)      //HUD update
 })
 
 router.post("/29uf9374hs", (req, res) => {
-    postController.userInfo(req, res)
+    postController.userInfo(req, res)       //User info
 })
 
 
 router.post('/834h98h3', (req,res) => {
-    postController.prizeGen(req, res)
+    postController.prizeGen(req, res)      //Generate prize
 })
 
 router.post('/329yfh3', (req,res) => {
-    //give item
-    postController.venderGiver(req, res)
+    postController.venderGiver(req, res)   //give item
 })
 
 router.post('/38ufg423', (req,res) => {
-    //refund item
-    postController.refund(req, res)
+    postController.refund(req, res)        //refund item
 })
 
 router.post('/7fh839d', (req,res) => {
-    //save user prize list
-    postController.savePrize(req, res)
+    postController.savePrize(req, res)    //save user prize list
 })
 
 
