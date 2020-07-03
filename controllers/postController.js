@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.12.5"
+const build = "0.12.6"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -103,6 +103,14 @@ exports.hudUpdate = function (req, res) {
                     else reject("failed to process logic")
                 } else {
                     body.response.psay = "SKYN HUD was updated from "+data.value.response.version+" to "+build
+                    try{
+                        if(data.values.fitness >100) {
+                            body.values.fitness = data.values.fitness
+                            body.values.energy = data.values.fitness
+                        }
+                    } catch{
+                        console.log("No fitness data found")
+                    }
                     try {
                         if(data.value.values.coins > 0) body.values.coins = data.value.values.coins
                     } catch(err) {
