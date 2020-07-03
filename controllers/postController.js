@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.12.8"
+const build = "0.12.9"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -157,7 +157,8 @@ exports.hudUpdate = function (req, res) {
                         }
                     }
                     
-                    //body.version = build
+                    body.version = build
+                    body.response.version = build
                     db.findOneAndUpdate({UUID: req.body.UUID}, { $set: body }, function(err, data) {
                         
                         body.response.UUID = body.UUID
