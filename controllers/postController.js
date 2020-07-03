@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.12.6"
+const build = "0.12.7"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -104,7 +104,7 @@ exports.hudUpdate = function (req, res) {
                 } else {
                     body.response.psay = "SKYN HUD was updated from "+data.value.response.version+" to "+build
                     try{
-                        if(data.values.fitness >100) {
+                        if(data.values.fitness >=100) {
                             body.values.fitness = data.values.fitness
                             body.values.energy = data.values.fitness
                         }
