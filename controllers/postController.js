@@ -280,9 +280,7 @@ exports.prizeGen = function (req, res) {
             }
             //take users money
             db.findOneAndUpdate({UUID: req.body.UUID}, {$set: {
-                values: {
-                    coins: (ud.values.coins - price)
-                }
+                "values.coins": (ud.values.coins - price)
             }}, function(err, data) {
                 db.findOne({vender: "vender"}, function(err, ud){
                     if(err)
