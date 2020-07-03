@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.12.9"
+const build = "0.12.10"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -95,17 +95,16 @@ exports.hudUpdate = function (req, res) {
                 //if(!data.value.response.version) reject(console.log("no data to process"))
                try {
                     if(data.value.response.version == build) {
-                    body.values = data.value.values
-                    body.states = data.value.states
-                    body.info.slapped = parseInt(req.body.slapped) + parseInt(data.value.info.slapped)
-                    body.info.slapping = parseInt(req.body.slapping) + parseInt(data.value.info.slapping)
-                    if(body.info.voice <= 0) body.info.voice = data.value.info.voice
-                    if(body=logic.values(body)) resolve("logic passed")
-                    else reject("failed to process logic")
-                } 
-               }
-               catch{
-                    body.response.psay = "SKYN HUD was updated from "+data.value.response.version+" to "+build
+                        body.values = data.value.values
+                        body.states = data.value.states
+                        body.info.slapped = parseInt(req.body.slapped) + parseInt(data.value.info.slapped)
+                        body.info.slapping = parseInt(req.body.slapping) + parseInt(data.value.info.slapping)
+                        if(body.info.voice <= 0) body.info.voice = data.value.info.voice
+                        if(body=logic.values(body)) resolve("logic passed")
+                        else reject("failed to process logic")
+                    } 
+               } catch{
+                    body.response.psay = "SKYN HUD was updated to "+build
                     try{
                         if(data.value.values.fitness >=100) {
                             body.values.fitness = data.value.values.fitness
