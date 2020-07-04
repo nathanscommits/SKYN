@@ -69,7 +69,7 @@ module.exports = function(body) {
                 body.response.anim = anims.sunny
                 body.response.sound = sound.play(body.info.voice, "sizzle")
             }
-            if(body.info.features.substring(2,3)=="1")body.values.thirst -= 1
+            if(body.info.features.substring(2,3)=="1" && body.info.features.substring(6,7)=="1")body.values.thirst -= 1
         }
     } else {
         body.states.timeInSun-=2

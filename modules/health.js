@@ -8,12 +8,12 @@ module.exports = function (body) {
     if(body.values.hunger<=0) body.values.health-=1
     if(body.values.thirst<=0) body.values.health-=1
     else if(body.values.hunger>0) body.values.health+=1 //passive body.values.health regain
-    if(body.values.oxygen<=0) {
+    if(body.values.oxygen<=0 && body.info.features.substring(5,6)=="1") {
         body.values.health-=1
         body.response.anim = anims.drowning
         body.response.sound = sound.play(body.info.voice, "drowning")
     }
-    if(body.states.timeInSun >= 1200) body.values.health-=1;
+    if(body.states.timeInSun >= 1200 && body.info.features.substring(6,7)=="1") body.values.health-=1;
     
     
     if(body.values.health <= 0) { //dieing

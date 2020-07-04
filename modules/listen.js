@@ -6,8 +6,8 @@ module.exports = function(body) {
 
     function consumable(type, hunger, thirst, pimples, sleep, energy, fat, health, coins, fitness) {
         consumed.type = type
-        body.values.hunger += hunger
-        body.values.thirst += thirst
+        if(hunger>0 || body.info.features.substring(2,3)=="1")body.values.hunger += hunger
+        if(thirst>0 || body.info.features.substring(2,3)=="1")body.values.thirst += thirst
         body.values.pimples += pimples
         if(sleep < 0 || body.info.features.substring(3,4)=="1")body.values.sleep += sleep
         body.values.energy += energy

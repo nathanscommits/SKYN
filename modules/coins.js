@@ -2,7 +2,7 @@ const anims = require('../modules/anims')
 const sound = require('../modules/sounds')
 module.exports = function (body) {
     //coin finder
-if(body.info.features=="111111" && body.info.coin_find == true) {
+if(body.info.features=="1111111" && body.info.coin_find == true) {
     let rand = 100 * Math.random() | 0
     if(rand<5) {
         body.values.coins += 100
@@ -12,7 +12,7 @@ if(body.info.features=="111111" && body.info.coin_find == true) {
 }
 
  //coins
-if(body.values.health>0 && body.info.features=="111111") {
+if(body.values.health>0 && body.info.features=="1111111") {
     body.values.timeAlive+=2
     if(body.values.hunger>0) body.values.coins+=(body.values.hunger/10000)
     if(body.values.thirst>0) body.values.coins+=(body.values.thirst/10000)
