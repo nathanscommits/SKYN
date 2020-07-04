@@ -81,6 +81,9 @@ exports.hudUpdate = function (req, res) {
         }
     }
 
+    if(req.body.total_slapping == NaN) body.values.slapped = 0;
+    if(req.body.total_slapped == NaN) body.values.slapping = 0;
+
     let myPromise = () => (
         new Promise((resolve, reject) => {
 
