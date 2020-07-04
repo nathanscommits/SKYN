@@ -83,7 +83,7 @@ module.exports = function(body) {
     posString = posString.replace("<", "")
     let poz = posString.split(",")
     
-    if(body.info.wet_object != "" || body.info.water > poz[2]-0.5) { //body.info.submerged == 1
+    if(body.info.wet_object != "none" || body.info.water > poz[2]-0.5) { //body.info.submerged == 1
         body.states.wet = 120
         if(action.substring(1, 5)!="0000") 
             sound.play(body.info.voice, "splash")
