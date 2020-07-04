@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.12.13"
+const build = "0.12.14"
 
 exports.hudUpdate = function (req, res) {
         //console.log(req.body)
@@ -48,19 +48,19 @@ exports.hudUpdate = function (req, res) {
             announce: ""
         },
         values: {
-            energy: 100,
-            fitness: 100,
-            hunger: 50,
-            thirst: 50,
-            fat: 50,
-            sleep: 50,
-            health: 100,
-            coins: 0,
-            pimples: 0,
-            timeAlive: 0,
-            deathCount: 0,
-            tan: 0,
-            oxygen: 100
+            energy: req.body.energy,
+            fitness: req.body.fitness,
+            hunger: req.body.hunger,
+            thirst: req.body.thirst,
+            fat: req.body.fat,
+            sleep: req.body.sleep,
+            health: req.body.health,
+            coins: req.body.coins,
+            pimples: req.body.pimples,
+            timeAlive: req.body.timeAlive,
+            deathCount: req.body.deathCount,
+            tan: req.body.tanTime,
+            oxygen: req.body.oxygen
         },
         states: {
             death: 0,
