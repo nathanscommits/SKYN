@@ -111,6 +111,7 @@ exports.hudUpdate = function (req, res) {
                } catch{
                    db.remove({UUID: req.body.UUID})
                    .then( function(rem) {
+                    console.log(body.name+" updated their hud.")
                     body.response.psay = "SKYN HUD was updated to "+build
                     try{
                         if(data.value.values.fitness >=100) {
