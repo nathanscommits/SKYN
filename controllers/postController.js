@@ -81,8 +81,8 @@ exports.hudUpdate = function (req, res) {
         }
     }
 
-    if(req.body.total_slapping == NaN) body.values.slapped = 0;
-    if(req.body.total_slapped == NaN) body.values.slapping = 0;
+    if(isNaN(req.body.total_slapping)) body.values.slapped = 0;
+    if(isNaN(req.body.total_slapped)) body.values.slapping = 0;
 
     let myPromise = () => (
         new Promise((resolve, reject) => {
@@ -105,8 +105,8 @@ exports.hudUpdate = function (req, res) {
                         body.states = data.value.states
                         body.values.slapped = parseInt(req.body.slapped) + parseInt(data.value.values.slapped)
                         body.values.slapping = parseInt(req.body.slapping) + parseInt(data.value.values.slapping)
-                        if(body.values.slapped == NaN) body.values.slapped = 1
-                        if(body.values.slapping == NaN) body.values.slapping = 0
+                        if(isNaN(body.values.slapped)) body.values.slapped = 1
+                        if(isNaN(body.values.slapping)) body.values.slapping = 0
                         if(body.info.voice <= 0) body.info.voice = data.value.info.voice
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
