@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.12.16"
+const build = "0.12.18"
 
 exports.hudUpdate = function (req, res) {
         //console.log(req.body)
@@ -60,7 +60,9 @@ exports.hudUpdate = function (req, res) {
             timeAlive: req.body.timeAlive,
             deathCount: req.body.deathCount,
             tan: req.body.tanTime,
-            oxygen: req.body.oxygen
+            oxygen: req.body.oxygen,
+            slapped: req.body.total_slapping,
+            slapping: req.body.total_slapped
         },
         states: {
             death: 0,
@@ -98,8 +100,8 @@ exports.hudUpdate = function (req, res) {
                     if(data.value.response.version == build) {
                         body.values = data.value.values
                         body.states = data.value.states
-                        body.info.slapped = parseInt(req.body.slapped) + parseInt(data.value.info.slapped)
-                        body.info.slapping = parseInt(req.body.slapping) + parseInt(data.value.info.slapping)
+                        body.values.slapped = parseInt(req.body.slapped) + parseInt(data.value.values.slapped)
+                        body.values.slapping = parseInt(req.body.slapping) + parseInt(data.value.values.slapping)
                         if(body.info.voice <= 0) body.info.voice = data.value.info.voice
                         if(body=logic.values(body)) resolve("logic passed")
                         else reject("failed to process logic")
@@ -145,11 +147,11 @@ exports.hudUpdate = function (req, res) {
                             console.log("no death count stat")
                         }
                     } try {
-                        if(data.value.info.slapped > 0) body.info.slapped += parseInt(data.value.info.slapped)
+                        if(data.value.values.slapped > 0) body.values.slapped += parseInt(data.value.values.slapped)
                     } catch(err) {
                         console.log("no slapped info")
                     } try {
-                        if(data.value.info.slapping > 0) body.info.slapping += parseInt(data.value.info.slapping)
+                        if(data.value.values.slapping > 0) body.values.slapping += parseInt(data.value.values.slapping)
                     } catch(err) {
                         console.log("no slapping info")
                     } try {
@@ -191,8 +193,8 @@ exports.hudUpdate = function (req, res) {
                         "\n Coins: " + parseFloat(body.values.coins).toFixed(2) +
                         "\n Fat: " + parseFloat(body.values.fat).toFixed(2) +
                         "\n Pimples: " + parseFloat(body.values.pimples).toFixed(0)+
-                        "\n Slapped: " + parseFloat(body.info.slapped).toFixed(0)+
-                        "\n Slapping: " + parseFloat(body.info.slapping).toFixed(0)+
+                        "\n Slapped: " + parseFloat(body.values.slapped).toFixed(0)+
+                        "\n Slapping: " + parseFloat(body.values.slapping).toFixed(0)+
                         //"\n Voice: " + parseFloat(body.info.voice).toFixed(0)+
                         // "\n Deaths: " + parseFloat(body.values.deathCount).toFixed(0)+
                         "\n Tan: " + body.values.tan.toFixed(0)+
