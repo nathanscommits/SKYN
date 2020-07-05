@@ -47,10 +47,10 @@ module.exports = function(body) {
                 else //chair sleeping
                     body.response.loop = anims.csleeps
             }   
-        } else //sitting but not sleeping
+        } else if(body.info.features.substring(3,4)=="1") //sitting but not sleeping
             body.values.sleep+=0.05 //get body.values.sleepy if not body.values.sleeping while sitting
     }
-    else // not sitting
+    else if(body.info.features.substring(3,4)=="1") // not sitting
         body.values.sleep+=0.1 //not sitting, sleepy! you could do 1/energy to make it based off of energy loss
 
     if(body.values.energy<body.values.fitness || body.values.oxygen < 100) {

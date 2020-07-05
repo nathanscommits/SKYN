@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "0.12.19"
+const build = "1.0.3"
 
 exports.hudUpdate = function (req, res) {
         //console.log(req.body)
@@ -81,8 +81,8 @@ exports.hudUpdate = function (req, res) {
         }
     }
 
-    if(isNaN(req.body.total_slapping)) body.values.slapped = 0;
-    if(isNaN(req.body.total_slapped)) body.values.slapping = 0;
+    //if(isNaN(req.body.total_slapping)) body.values.slapped = 0;
+    //if(isNaN(req.body.total_slapped)) body.values.slapping = 0;
 
     let myPromise = () => (
         new Promise((resolve, reject) => {
@@ -114,7 +114,6 @@ exports.hudUpdate = function (req, res) {
                } catch{
                    db.remove({UUID: req.body.UUID})
                    .then( function(rem) {
-                    console.log(body.name+" updated their hud.")
                     body.response.psay = "SKYN HUD was updated to "+build
                     try{
                         if(data.value.values.fitness >=100) {
@@ -153,11 +152,11 @@ exports.hudUpdate = function (req, res) {
                             console.log("no death count stat")
                         }
                     } try {
-                        if(data.value.values.slapped > 0) body.values.slapped += parseInt(data.value.values.slapped)
+                        if(data.value.values.slapped > 0) body.values.slapped = data.value.values.slapped 
                     } catch(err) {
                         console.log("no slapped info")
                     } try {
-                        if(data.value.values.slapping > 0) body.values.slapping += parseInt(data.value.values.slapping)
+                        if(data.value.values.slapping > 0) body.values.slapping = data.value.values.slapping
                     } catch(err) {
                         console.log("no slapping info")
                     } try {
