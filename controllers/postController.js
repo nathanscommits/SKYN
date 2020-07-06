@@ -2,10 +2,9 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "1.0.4"
+const build = "1.0.5"
 
 exports.hudUpdate = function (req, res) {
-        //console.log(req.body)
     console.log(req.body.name)
     let body = {
         UUID: req.body.UUID,
@@ -81,9 +80,6 @@ exports.hudUpdate = function (req, res) {
         }
     }
 
-    //if(isNaN(req.body.total_slapping)) body.values.slapped = 0;
-    //if(isNaN(req.body.total_slapped)) body.values.slapping = 0;
-
     let myPromise = () => (
         new Promise((resolve, reject) => {
 
@@ -97,8 +93,6 @@ exports.hudUpdate = function (req, res) {
             )
 
             .then(function(data){
-                //console.log(data)
-                //if(!data.value.response.version) reject(console.log("no data to process"))
                try {
                     if(data.value.response.version == build) {
                         body.values = data.value.values
