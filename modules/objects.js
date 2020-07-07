@@ -1,4 +1,5 @@
 module.exports = function (body) {
+    let blacklist = ["balaclava", "weed", "extinguisher"]
     let warmObjects = [
         "fire","heater","radiator","lava","flame","kiln","stove","boiler"
     ]   

@@ -86,7 +86,7 @@ exports.hudUpdate = function (req, res) {
             db.findOne({UUID: req.body.UUID})
             .then(function (data) {
                 data.value = data
-                if(data.value!=null) {
+                if(data.value.response.version == build) {
                     body.prizeName = data.value.prizeName
                     //console.log(data)
                     return data;
