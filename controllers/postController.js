@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "1.0.10"
+const build = "1.0.11"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -85,9 +85,10 @@ exports.hudUpdate = function (req, res) {
         new Promise((resolve, reject) => {
             db.findOne({UUID: req.body.UUID})
             .then(function (data) {
-                if(data!=null) {
-                    body.prizeName = data.prizeName
-                    console.log(data)
+                data.value = data
+                if(data.value!=null) {
+                    body.prizeName = data.value.prizeName
+                    //console.log(data)
                     return data;
                 }
                 else db.findOneAndUpdate(
