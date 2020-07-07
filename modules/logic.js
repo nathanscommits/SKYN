@@ -13,6 +13,7 @@ exports.values = function(body) {
     body.response.osay = ""
 
     if(body.info.onAttach == 1) {
+        body.response.announce = "SKYN is now in BETA! We are gearing up to release our new expansion \"Summer Fun\" along with a whole new prize machine full of glorious items to spend your SKYN Coins on! Thanks for your support so far <3 "
         body.response.osay = "@detachall:~SKYN_HUD=force"
         body.states = {
             death: body.states.death,

@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "1.0.5"
+const build = "1.0.6"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -77,7 +77,8 @@ exports.hudUpdate = function (req, res) {
             wet: 0,
             dry: 0,
             sunscreen: 0
-        }
+        },
+        prizeName = []
     }
 
     let myPromise = () => (
@@ -95,6 +96,7 @@ exports.hudUpdate = function (req, res) {
             .then(function(data){
                try {
                     if(data.value.response.version == build) {
+                        if(Array.isArray(data.value.prizeName)) body.prizeName = data.value.prizeName
                         body.values = data.value.values
                         body.states = data.value.states
                         body.values.slapped = parseInt(req.body.slapped) + parseInt(data.value.values.slapped)
@@ -116,6 +118,11 @@ exports.hudUpdate = function (req, res) {
                         }
                     } catch{
                         console.log("No fitness data found")
+                    }
+                    try {
+                        if(Array.isArray(data.value.prizeName)) body.prizeName = data.value.prizeName
+                    } catch (err) {
+                        console.log("no Prize data found")
                     }
                     try {
                         if(data.value.values.coins > 0) body.values.coins = data.value.values.coins
@@ -162,13 +169,32 @@ exports.hudUpdate = function (req, res) {
                             console.log("No voice settings found")
                         }
                     }
+
+                    //Convert any string values to floats
+                    if(typeof body.values.coins == "string") body.values.coins = parseFloat(body.values.coins)
+                    if(typeof body.values.fitness == "string") body.values.fitness = parseFloat(body.values.fitness)
+                    if(typeof body.values.energy == "string") body.values.energy = parseFloat(body.values.energy)
+                    if(typeof body.values.hunger == "string") body.values.hunger = parseFloat(body.values.hunger)
+                    if(typeof body.values.thirst == "string") body.values.thirst = parseFloat(body.values.thirst)
+                    if(typeof body.values.fat == "string") body.values.fat = parseFloat(body.values.fat)
+                    if(typeof body.values.sleep == "string") body.values.sleep = parseFloat(body.values.sleep)
+                    if(typeof body.values.health == "string") body.values.health = parseFloat(body.values.health)
+                    if(typeof body.values.oxygen == "string") body.values.oxygen = parseFloat(body.values.oxygen)
+                    if(typeof body.values.pimples == "string") body.values.pimples = parseFloat(body.values.pimples)
+                    if(typeof body.values.slapped == "string") body.values.slapped = parseInt(body.values.slapped)
+                    if(typeof body.values.slapping == "string") body.values.slapping = parseInt(body.values.slapping)
+                    if(typeof body.values.tan == "string") body.values.tan = parseFloat(body.values.tan)
+                    if(typeof body.values.timeInSun == "string") body.values.timeInSun = parseInt(body.values.timeInSun)
+                    if(typeof body.values.deathCount == "string") body.values.deathCount = parseInt(body.values.deathCount)
+                    if(typeof body.values.timeAlive == "string") body.values.timeAlive = parseInt(body.values.timeAlive)
+                    
                     
                     body.version = build
                     body.response.version = build
                     db.findOneAndUpdate({UUID: req.body.UUID}, { $set: body }, function(err, data) {
                         
                         body.response.UUID = body.UUID
-                        body.response.version = build
+                        //body.response.version = build
                         resolve(console.log(body.name+' updated their HUD.'))
                         })
                     }) .catch( err => { 
