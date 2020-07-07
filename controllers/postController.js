@@ -96,7 +96,10 @@ exports.hudUpdate = function (req, res) {
             .then(function(data){
                try {
                     if(data.value.response.version == build) {
-                        if(Array.isArray(data.value.prizeName)) body.prizeName = data.value.prizeName
+                        if(Array.isArray(data.value.prizeName)) {
+                            body.prizeName = data.value.prizeName
+                            console.log(body.prizeName)
+                        }
                         body.values = data.value.values
                         body.states = data.value.states
                         body.values.slapped = parseInt(req.body.slapped) + parseInt(data.value.values.slapped)
