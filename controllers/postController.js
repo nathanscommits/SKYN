@@ -86,7 +86,7 @@ exports.hudUpdate = function (req, res) {
             db.findOne()
             .then(function (data) {
                 if(data!=null) {
-                    body.prizeName = data.value.prizeName
+                    body.prizeName = data.prizeName
                     console.log(data)
                     return data;
                 }
