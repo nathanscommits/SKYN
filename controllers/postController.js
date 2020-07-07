@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "1.0.7"
+const build = "1.0.8"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -124,6 +124,7 @@ exports.hudUpdate = function (req, res) {
                     }
                     try {
                         if(Array.isArray(data.value.prizeName)) body.prizeName = data.value.prizeName
+                        console.log(data.value.prizeName)
                     } catch (err) {
                         console.log("no Prize data found")
                     }
