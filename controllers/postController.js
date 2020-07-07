@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "1.0.9"
+const build = "1.0.10"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -83,15 +83,22 @@ exports.hudUpdate = function (req, res) {
 
     let myPromise = () => (
         new Promise((resolve, reject) => {
-
-            db.findOneAndUpdate(
-                {UUID: req.body.UUID},
-                { $setOnInsert: body, },
-                {
-                    returnOriginal: false,
-                    upsert: true,
+            db.findOne()
+            .then(function (data) {
+                if(data!=null) {
+                    body.prizeName = data.value.prizeName
+                    console.log(data)
+                    return data;
                 }
-            )
+                else db.findOneAndUpdate(
+                    {UUID: req.body.UUID},
+                    { $setOnInsert: body, },
+                    {
+                        returnOriginal: false,
+                        upsert: true,
+                    }
+                )
+            })
 
             .then(function(data){
                try {
@@ -111,8 +118,8 @@ exports.hudUpdate = function (req, res) {
                         else reject("failed to process logic")
                     } 
                } catch{
-                   //db.remove({UUID: req.body.UUID})
-                   //.then( function(rem) {
+                   db.remove({UUID: req.body.UUID})
+                   .then( function(rem) {
                     body.response.psay = "SKYN HUD was updated to "+build
                     try{
                         if(data.value.values.fitness >=100) {
@@ -201,10 +208,10 @@ exports.hudUpdate = function (req, res) {
                         //body.response.version = build
                         resolve(console.log(body.name+' updated their HUD.'))
                         })
-                    /*}) .catch( err => { 
+                    }) .catch( err => { 
                         console.log("Something went wrong inside the update promise. " + err)
                         res.send("Something went wrong")
-                    }) */
+                    })
                 }
             })
 
