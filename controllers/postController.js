@@ -78,7 +78,7 @@ exports.hudUpdate = function (req, res) {
             dry: 0,
             sunscreen: 0
         },
-        prizeName = []
+        prizeName: []
     }
 
     let myPromise = () => (
