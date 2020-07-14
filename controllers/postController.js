@@ -10,6 +10,7 @@ exports.hudUpdate = function (req, res) {
         UUID: req.body.UUID,
         name: req.body.name,
         version: build,
+        totalCoins: req.body.totalBalance,
         info:{
             listen: req.body.listen,
             voice: req.body.voice,
@@ -44,7 +45,8 @@ exports.hudUpdate = function (req, res) {
             rlv: "",
             loop: "",
             version: build,
-            announce: ""
+            announce: "",
+            totalBalance: req.body.totalBalance
         },
         values: {
             energy: req.body.energy,
@@ -181,10 +183,15 @@ exports.hudUpdate = function (req, res) {
                         } catch(err) {
                             console.log("No voice settings found")
                         }
+                    } try {
+                        if(data.totalCoins) body.totalCoins = data.totalCoins
+                    } catch(err) {
+                        console.log("No total coins on record")
                     }
 
                     //Convert any string values to floats
                     if(typeof body.values.coins == "string") body.values.coins = parseFloat(body.values.coins)
+                    if(typeof body.totalCoins == "string") body.totalCoins = parseFloat(body.totalCoins)
                     if(typeof body.values.fitness == "string") body.values.fitness = parseFloat(body.values.fitness)
                     if(typeof body.values.energy == "string") body.values.energy = parseFloat(body.values.energy)
                     if(typeof body.values.hunger == "string") body.values.hunger = parseFloat(body.values.hunger)
@@ -242,6 +249,7 @@ exports.hudUpdate = function (req, res) {
                 //console.log("promise resolved")
                 body.response.UUID = body.UUID
                 body.response.version = build
+                body.response.totalBalance = body.totalCoins
                 resolve(res.send({...body.response, ...body.values}))
             })
 

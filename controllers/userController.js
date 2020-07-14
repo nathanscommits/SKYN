@@ -1,4 +1,5 @@
-const db = require('../db')
+const db = require('../db');
+const { Template } = require('ejs');
 
 exports.leaderboard = function (req, res) {
     let topten = ''
@@ -9,10 +10,18 @@ exports.leaderboard = function (req, res) {
         for (let i in leaderboard)
         {  
             if(rank>9) break; 
-            if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins' && leaderboard[i].version.substring(0,1) == "1")
+            let user_version = leaderboard[i].version
+            let total_balance = parseInt(leaderboard[i].totalCoins)
+            if(typeof user_version !== "undefined") user_version = user_version.substring(0,1)
+            console.log(
+                leaderboard[i].name+ " "+
+                user_version+ " "+
+                total_balance + " " + rank
+                )
+            if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins' && user_version == "1" && total_balance > 0)
             {
                 rank ++;
-                topten = topten.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].totalCoins), '</th></tr>');  
+                topten = topten.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', total_balance, '</th></tr>');  
             }
         }
         res.render('leaderboard', {totalCoins: topten})
