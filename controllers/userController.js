@@ -9,7 +9,7 @@ exports.leaderboard = function (req, res) {
         for (let i in leaderboard)
         {  
             if(rank>9) break; 
-            if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins')
+            if(leaderboard[i].name != 'Pixel Tyran' && leaderboard[i].name != 'Sharky Piggins' && leadeboard[i].version.substring(0,1) == "1")
             {
                 rank ++;
                 topten = topten.concat('<tr><th>Rank ', rank,'</th><th>', leaderboard[i].name, '</th><th>', parseInt(leaderboard[i].totalCoins), '</th></tr>');  
