@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "1.0.12"
+const build = "1.0.13"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)
@@ -65,6 +65,7 @@ exports.hudUpdate = function (req, res) {
         },
         states: {
             death: 0,
+            tired: 0,
             sleeping: 0,
             exhausted: 0,
             sweat: 0,

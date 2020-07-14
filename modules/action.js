@@ -10,9 +10,10 @@ module.exports = function(body) {
     let action = body.info.action
 
     if(action.substring(5, 6)=="0") { //not sleeping
-        if(body.info.attached.includes("SKYN_SleepParticles")) {
+        if(body.states.sleeping != 0) {
             body.response.osay = rlv(body.response.osay, "detach", "SKYN_SleepParticles")
             body.response.loop = "endAnim"
+            body.states.sleeping = 0
         }
     }
     if(action.substring(1, 2)=="1") body.values.energy-=8 //flying
@@ -40,8 +41,9 @@ module.exports = function(body) {
             body.values.energy+=(body.values.fitness/20) //resting even more
             body.response.sound = sound.play(body.info.voice, "snore")
             //particles
-            if(!body.info.attached.includes("SKYN_SleepParticles")) {
+            if(body.states.sleeping !=1) {
                 body.response.osay = rlv(body.response.osay, "attachover", "SKYN_SleepParticles")
+                body.states.sleeping = 1
                 if(action.substring(5,6)=="1") //ground sleeping
                     body.response.loop = anims.sleeps[anims.sleeps.length * Math.random() | 0]
                 else //chair sleeping
