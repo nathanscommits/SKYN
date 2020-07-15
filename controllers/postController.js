@@ -46,6 +46,7 @@ exports.hudUpdate = function (req, res) {
             loop: "",
             version: build,
             announce: "",
+            popup: "",
             totalBalance: req.body.totalBalance
         },
         values: {
@@ -226,7 +227,10 @@ exports.hudUpdate = function (req, res) {
 
             .then(data => db.findOneAndUpdate({ UUID: req.body.UUID }, { $set: body }, { upsert:true } ))
 
+            .then(data => db.findOne({UUID: "announce"}))
+
             .then(function(data){
+                body.response.popup = data.popup
                 if (body.info.debug == true)
                     body.response.hover = "Energy: " + parseFloat(body.values.energy).toFixed(2) +
                         "\n Fitness: " + parseFloat(body.values.fitness).toFixed(2) +
