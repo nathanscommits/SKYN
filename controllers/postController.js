@@ -2,7 +2,7 @@ const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
 
-const build = "1.0.13"
+const build = "1.0.14"
 
 exports.hudUpdate = function (req, res) {
     console.log(req.body.name)

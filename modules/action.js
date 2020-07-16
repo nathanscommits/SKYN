@@ -65,13 +65,13 @@ module.exports = function(body) {
     if(body.info.inSun == 1 && hour > 5 && hour < 19) {
         if(body.states.sunscreen <= 0) body.states.timeInSun+=2
         body.values.tan+=0.1
-        if(body.states.timeInSun>=1200) {
+        if(body.states.timeInSun>=1200  && body.info.features.substring(6,7)=="1") {
             let chance = 100 * Math.random() | 0
             if(chance<10) {
                 body.response.anim = anims.sunny
                 body.response.sound = sound.play(body.info.voice, "sizzle")
             }
-            if(body.info.features.substring(2,3)=="1" && body.info.features.substring(6,7)=="1")body.values.thirst -= 1
+            if(body.info.features.substring(2,3)=="1")body.values.thirst -= 1
         }
     } else {
         body.states.timeInSun-=2
