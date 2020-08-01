@@ -64,7 +64,10 @@ exports.hudUpdate = function (req, res) {
             tan: req.body.tanTime,
             oxygen: req.body.oxygen,
             slapped: req.body.total_slapping,
-            slapping: req.body.total_slapped
+            slapping: req.body.total_slapped,
+            dirt: req.body.dirt,
+            hair: req.body.hair,
+            sick: req.body.sick
         },
         states: {
             death: 0,
@@ -80,18 +83,47 @@ exports.hudUpdate = function (req, res) {
             tan: 0,
             wet: 0,
             dry: 0,
-            sunscreen: 0
+            sunscreen: 0,
+            hair: 0,
+            dirt: 0
         },
         prizeName: []
+    }
+
+    function isEmpty(obj) {
+        for(var key in obj) {
+            if(obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
     }
 
     let myPromise = () => (
         new Promise((resolve, reject) => {
             db.findOne({UUID: req.body.UUID})
             .then(function (data) {
+
                 data.value = data
-                if(data.value.response.version == build) {
-                    body.prizeName = data.value.prizeName
+                
+                if(!ifEmpty(data.value)) {
+                    body.values = data.value.values
+                    body.states = data.value.states
+                    body.values.slapped = parseInt(req.body.slapped) + parseInt(data.value.values.slapped)
+                    body.values.slapping = parseInt(req.body.slapping) + parseInt(data.value.values.slapping)
+                    if(isNaN(body.values.slapped)) body.values.slapped = 1
+                    if(isNaN(body.values.slapping)) body.values.slapping = 0
+                    if(body.info.voice <= 0) body.info.voice = data.value.info.voice
+                    if(Array.isArray(data.value.prizeName)) {
+                        body.prizeName = data.value.prizeName
+                        //console.log(body.prizeName)
+                    }
+                }
+
+                return data;
+
+                //this should run all the try catch blocks before updating
+                /*if(data.value.response.version == build) {
+                   // body.prizeName = data.value.prizeName
                     //console.log(data)
                     return data;
                 }
@@ -102,24 +134,13 @@ exports.hudUpdate = function (req, res) {
                         returnOriginal: false,
                         upsert: true,
                     }
-                )
+                )*/
             })
 
             .then(function(data){
                try {
                     if(data.value.response.version == build) {
-                        if(Array.isArray(data.value.prizeName)) {
-                            body.prizeName = data.value.prizeName
-                            console.log(body.prizeName)
-                        }
-                        body.values = data.value.values
-                        body.states = data.value.states
-                        body.values.slapped = parseInt(req.body.slapped) + parseInt(data.value.values.slapped)
-                        body.values.slapping = parseInt(req.body.slapping) + parseInt(data.value.values.slapping)
-                        if(isNaN(body.values.slapped)) body.values.slapped = 1
-                        if(isNaN(body.values.slapping)) body.values.slapping = 0
-                        if(body.info.voice <= 0) body.info.voice = data.value.info.voice
-                        if(body=logic.values(body)) resolve("logic passed")
+                        if(body=logic.values(body)) resolve("logic passed") 
                         else reject("failed to process logic")
                     } 
                } catch{

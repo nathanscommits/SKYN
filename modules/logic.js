@@ -66,6 +66,12 @@ exports.values = function(body) {
     if(body.values.oxygen<0) body.values.oxygen = 0
     else if(body.values.oxygen>100) body.values.oxygen = 100
     if(body.states.sunscreen < 0) body.states.sunscreen = 0
+    if(body.values.dirt < 0) body.values.dirt = 0
+    else if(body.values.dirt > 100) body.values.dirt = 100
+    if(body.values.hair < 0) body.values.hair = 0
+    else if(body.values.hair > 100) body.values.hair = 100
+    if(body.values.sick < 0) body.values.sick = 0
+    else if(body.values.sick > 100) body.values.sick = 100
 
     return body
 }

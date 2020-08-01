@@ -1,4 +1,6 @@
 module.exports = function (body) {
+
+    //move these lists to the database so dont need to restart server to edit them
     let blacklist = ["balaclava", "weed", "extinguisher"]
     let warmObjects = [
         "fire","heater","radiator","lava","flame","kiln","stove","boiler"

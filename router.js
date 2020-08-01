@@ -18,6 +18,9 @@ router.get('/tutorial', function (req, res){
 router.get('/HUD_guide', function (req, res){
     res.render('HUD_guide')
 })
+router.get('/wet-list', function (req, res){
+    res.render('wet-list')
+})
 router.get('/leaderboard', function(req, res){
     userController.leaderboard(req, res)
 })
