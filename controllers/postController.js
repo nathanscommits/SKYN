@@ -105,7 +105,7 @@ exports.hudUpdate = function (req, res) {
 
                 data.value = data
                 
-                if(!ifEmpty(data.value)) {
+                if(!isEmpty(data.value)) {
                     body.values = data.value.values
                     body.states = data.value.states
                     body.values.slapped = parseInt(req.body.slapped) + parseInt(data.value.values.slapped)
