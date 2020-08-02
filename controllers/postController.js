@@ -1,6 +1,7 @@
 const db = require('../db')
 const logic = require('../modules/logic')
 const pool = require('../collections/prizes')
+const { insertOne } = require('../db')
 
 const build = "1.0.14"
 
@@ -102,6 +103,12 @@ exports.hudUpdate = function (req, res) {
         new Promise((resolve, reject) => {
             db.findOne({UUID: req.body.UUID})
             .then(function (data) {
+
+                if(!data)
+                {
+                    db.insertOne(body)
+                    return body;
+                }
 
                 data.value = data
                 
